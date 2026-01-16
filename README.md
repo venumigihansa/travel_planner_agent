@@ -1,4 +1,4 @@
-# Travel Planner Agent (Python-only Stack)
+# Travel Planner Agent
 
 This repo contains the minimal, clean Python + React stack needed to run the travel planner agent:
 
