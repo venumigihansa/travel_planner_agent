@@ -1,0 +1,74 @@
+# Lab 02 Travel Planner (Python-only Stack)
+
+This repo contains the minimal, clean Python + React stack needed to run the Lab 02 travel planner:
+
+- **AI Agent (BFF)**: `ai_backends/agent/python_migration/`
+- **Business APIs (Python)**: `o2-business-apis-python/` (booking + search)
+- **Frontend**: `frontend/`
+- **Policy ingest (optional)**: `ai_backends/ingest/python/` + `ai_backends/ingest/policies/`
+- **Postgres schema**: `resources/create_tables.sql`
+
+## Prerequisites
+- Python 3.10+
+- Node.js 22+
+- PostgreSQL (for personalization)
+- Pinecone index (for hotel policy retrieval)
+
+## Quick Start (local)
+
+### 0) Optional: Postgres personalization table
+```bash
+psql -d travel_planner -f resources/create_tables.sql
+```
+
+### 1) Start business APIs
+```bash
+cd o2-business-apis-python/booking-api
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app:app --host 0.0.0.0 --port 9081
+```
+
+```bash
+cd o2-business-apis-python/search-api
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app:app --host 0.0.0.0 --port 9083
+```
+
+### 2) Start the AI agent (BFF)
+Follow `ai_backends/agent/python_migration/README.md` to set up `.env` and run:
+
+```bash
+cd ai_backends/agent/python_migration
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app:app --host 0.0.0.0 --port 9090
+```
+
+### 3) Start the frontend
+Follow `frontend/README.md` to set up `.env`, then:
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+## Optional: Seed Pinecone policies
+If you need to populate Pinecone from scratch:
+
+```bash
+cd ai_backends/ingest/python
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python ingest.py
+```
+
+## Notes
+- `.env` files are intentionally excluded from this repo. Create them from the READMEs in each folder.
+- The agent expects booking/search APIs at `http://localhost:9081` and `http://localhost:9083` by default.
