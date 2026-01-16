@@ -1,6 +1,6 @@
-# Lab 02 Travel Planner (Python-only Stack)
+# Travel Planner Agent (Python-only Stack)
 
-This repo contains the minimal, clean Python + React stack needed to run the Lab 02 travel planner:
+This repo contains the minimal, clean Python + React stack needed to run the travel planner agent:
 
 - **AI Agent (BFF)**: `ai_backends/agent/python_migration/`
 - **Business APIs (Python)**: `o2-business-apis-python/` (booking + search)
