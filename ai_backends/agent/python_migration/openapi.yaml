@@ -1,0 +1,52 @@
+openapi: 3.0.3
+info:
+  title: Travel Planner Agent API
+  version: 1.0.0
+servers:
+  - url: http://localhost:9090
+paths:
+  /travelPlanner/chat:
+    post:
+      summary: Chat with the travel planner agent
+      operationId: travelPlannerChat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatRequest"
+            examples:
+              default:
+                value:
+                  message: "Plan a 3-day trip to Paris."
+                  sessionId: "session_123"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+              examples:
+                default:
+                  value:
+                    message: "Here is a 3-day Paris itinerary..."
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      properties:
+        message:
+          type: string
+        sessionId:
+          type: string
+          nullable: true
+      required:
+        - message
+    ChatResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
