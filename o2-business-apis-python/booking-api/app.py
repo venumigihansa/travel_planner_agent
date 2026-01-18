@@ -2,22 +2,21 @@ from __future__ import annotations
 
 import base64
 import json
+import logging
+import os
 import uuid
 from typing import Any
 
+import psycopg
+from psycopg.types.json import Json
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
-from data_mappings import bookings as _bookings
-from data_mappings import hotels as _hotels
-from data_mappings import reviews as _reviews
-from data_mappings import rooms as _rooms
+logger = logging.getLogger(__name__)
 
+load_dotenv()
 
-hotels: list[dict[str, Any]] = list(_hotels)
-rooms: list[dict[str, Any]] = list(_rooms)
-reviews: list[dict[str, Any]] = list(_reviews)
-bookings: list[dict[str, Any]] = list(_bookings)
 users: list[dict[str, Any]] = []
 
 
@@ -44,53 +43,29 @@ def _get_current_timestamp() -> str:
     return "2024-01-15T10:30:00Z"
 
 
-def _find_hotel(hotel_id: str) -> dict[str, Any] | None:
-    for hotel in hotels:
-        if hotel.get("hotelId") == hotel_id:
-            return hotel
-    return None
-
-
-def _find_room(room_id: str) -> dict[str, Any] | None:
-    for room in rooms:
-        if room.get("roomId") == room_id:
-            return room
-    return None
-
-
-def _get_available_rooms(hotel_id: str) -> list[dict[str, Any]]:
-    return [
-        room
-        for room in rooms
-        if room.get("hotelId") == hotel_id and room.get("availableCount", 0) > 0
-    ]
-
-
-def _calculate_booking_pricing(
-    room_rate: float, check_in_date: str, check_out_date: str, number_of_rooms: int
-) -> dict[str, Any]:
-    number_of_nights = 3
-    subtotal = room_rate * number_of_nights * number_of_rooms
-    taxes = subtotal * 0.12
-    service_fees = subtotal * 0.05
-    total_amount = subtotal + taxes + service_fees
-    return {
-        "roomRate": room_rate,
-        "numberOfNights": number_of_nights,
-        "subtotal": subtotal,
-        "taxes": taxes,
-        "serviceFees": service_fees,
-        "totalAmount": total_amount,
-        "currency": "USD",
-    }
-
-
 def _generate_booking_id() -> str:
-    return f"BK{str(len(bookings) + 1).zfill(6)}"
+    return f"BK{uuid.uuid4().hex[:8].upper()}"
 
 
 def _generate_confirmation_number() -> str:
     return f"CONF{uuid.uuid4()}"
+
+
+def _require_env(name: str) -> str:
+    value = os.getenv(name)
+    if not value:
+        raise ValueError(f"Missing required env var: {name}")
+    return value
+
+
+def _get_db_connection() -> psycopg.Connection[Any]:
+    return psycopg.connect(
+        host=os.getenv("PG_HOST", "localhost"),
+        port=int(os.getenv("PG_PORT", "5432")),
+        dbname=_require_env("PG_DATABASE"),
+        user=_require_env("PG_USER"),
+        password=os.getenv("PG_PASSWORD") or None,
+    )
 
 
 def _decode_jwt_payload(token: str) -> dict[str, Any]:
@@ -191,27 +166,7 @@ def get_profile(request: Request):
 
 @app.post("/bookings", status_code=201)
 def create_booking(payload: dict[str, Any]):
-    hotel = _find_hotel(payload.get("hotelId", ""))
-    if not hotel:
-        return _error_response("Hotel not found", "HOTEL_NOT_FOUND")
-
     pricing: list[dict[str, Any]] = []
-    for room_request in payload.get("rooms", []):
-        room = _find_room(room_request.get("roomId", ""))
-        if not room:
-            return _error_response("Room not found", "ROOM_NOT_FOUND")
-        requested_count = room_request.get("numberOfRooms", 0)
-        if room.get("availableCount", 0) < requested_count:
-            return _error_response("Room not available for the requested dates", "ROOM_NOT_AVAILABLE")
-
-        pricing.append(
-            _calculate_booking_pricing(
-                room.get("pricePerNight", 0),
-                payload.get("checkInDate", ""),
-                payload.get("checkOutDate", ""),
-                payload.get("numberOfRooms", 0),
-            )
-        )
 
     booking_id = _generate_booking_id()
     confirmation_number = _generate_confirmation_number()
@@ -219,6 +174,7 @@ def create_booking(payload: dict[str, Any]):
     new_booking = {
         "bookingId": booking_id,
         "hotelId": payload.get("hotelId"),
+        "hotelName": payload.get("hotelName"),
         "rooms": payload.get("rooms"),
         "userId": payload.get("userId"),
         "checkInDate": payload.get("checkInDate"),
@@ -232,7 +188,39 @@ def create_booking(payload: dict[str, Any]):
         "specialRequests": payload.get("specialRequests"),
     }
 
-    bookings.append(new_booking)
+    try:
+        with _get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO bookings (
+                        booking_id,
+                        user_id,
+                        hotel_id,
+                        hotel_name,
+                        check_in_date,
+                        check_out_date,
+                        booking_status,
+                        confirmation_number,
+                        details
+                    )
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        booking_id,
+                        payload.get("userId"),
+                        payload.get("hotelId"),
+                        payload.get("hotelName"),
+                        payload.get("checkInDate"),
+                        payload.get("checkOutDate"),
+                        new_booking.get("bookingStatus"),
+                        confirmation_number,
+                        Json(new_booking),
+                    ),
+                )
+    except Exception:
+        logger.exception("create_booking: failed to persist booking")
+        return _error_response("Booking persistence failed", "BOOKING_PERSIST_FAILED")
 
     return {
         "bookingId": booking_id,
@@ -249,7 +237,18 @@ def get_bookings(request: Request):
         return error
 
     user_id = context["userId"]
-    return [booking for booking in bookings if booking.get("userId") == user_id]
+    try:
+        with _get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT details FROM bookings WHERE user_id = %s ORDER BY booking_date DESC",
+                    (user_id,),
+                )
+                rows = cur.fetchall()
+        return [row[0] for row in rows]
+    except Exception:
+        logger.exception("get_bookings: failed to fetch bookings")
+        return _error_response("Database unavailable", "DB_UNAVAILABLE")
 
 
 @app.get("/bookings/{booking_id}")
@@ -259,10 +258,17 @@ def get_booking(booking_id: str, request: Request):
         return error
 
     user_id = context["userId"]
-    for booking in bookings:
-        if booking.get("bookingId") == booking_id:
-            if booking.get("userId") != user_id:
-                return _error_response("Unauthorized access to booking", "UNAUTHORIZED")
-            return booking
-
-    return _error_response("Booking not found", "BOOKING_NOT_FOUND")
+    try:
+        with _get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT details FROM bookings WHERE booking_id = %s AND user_id = %s",
+                    (booking_id, user_id),
+                )
+                row = cur.fetchone()
+        if not row:
+            return _error_response("Booking not found", "BOOKING_NOT_FOUND")
+        return row[0]
+    except Exception:
+        logger.exception("get_booking: failed to fetch booking")
+        return _error_response("Database unavailable", "DB_UNAVAILABLE")

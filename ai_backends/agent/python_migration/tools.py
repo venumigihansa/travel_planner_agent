@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import logging
 from typing import Any
+import json
+
 
 import psycopg
 import requests
@@ -40,6 +42,7 @@ class SpecialRequests(BaseModel):
 class BookingRequest(BaseModel):
     userId: str = Field(..., description="User ID for the booking.")
     hotelId: str = Field(..., description="Hotel ID to book.")
+    hotelName: str | None = Field(None, description="Hotel name, if available.")
     rooms: list[RoomConfiguration] = Field(..., description="Room configuration(s) to book.")
     checkInDate: str = Field(..., description="Check-in date in YYYY-MM-DD format.")
     checkOutDate: str = Field(..., description="Check-out date in YYYY-MM-DD format.")
@@ -73,8 +76,8 @@ def _policy_llm(settings: Settings) -> ChatOpenAI:
 
 def build_tools(settings: Settings):
     @tool
-    def get_user_profile_tool(user_id: str | None = None) -> str:
-        """Fetch personalization profile from Postgres."""
+    def get_user_profile_tool(user_id: str | None = None, include_bookings: bool = True) -> str:
+        """Fetch personalization profile (and optionally bookings) from Postgres."""
         user_id = user_id or settings.user_id
         logger.info("get_user_profile_tool called: user_id=%s", user_id)
         try:
@@ -91,10 +94,27 @@ def build_tools(settings: Settings):
                         (user_id,),
                     )
                     row = cur.fetchone()
+                    bookings = []
+                    if include_bookings:
+                        cur.execute(
+                            "SELECT details FROM bookings WHERE user_id = %s ORDER BY booking_date DESC",
+                            (user_id,),
+                        )
+                        bookings = [record[0] for record in cur.fetchall()]
             if row and row[0]:
                 logger.info("get_user_profile_tool found personalization data.")
+                if include_bookings:
+                    return json.dumps(
+                        {"activity_analysis": row[0], "bookings": bookings},
+                        ensure_ascii=True,
+                    )
                 return row[0]
             logger.info("get_user_profile_tool found no personalization data.")
+            if include_bookings:
+                return json.dumps(
+                    {"activity_analysis": None, "bookings": bookings},
+                    ensure_ascii=True,
+                )
             return "No personalization found for this user."
         except Exception:
             logger.exception("get_user_profile_tool failed; continuing without personalization.")
@@ -219,6 +239,7 @@ def build_tools(settings: Settings):
         numberOfRooms: int,
         primaryGuest: GuestDetails,
         specialRequests: SpecialRequests | None = None,
+        hotelName: str | None = None,
     ) -> dict[str, Any]:
         """Create a booking via the booking API."""
         logger.info(
@@ -232,6 +253,7 @@ def build_tools(settings: Settings):
         payload = {
             "userId": userId,
             "hotelId": hotelId,
+            "hotelName": hotelName,
             "rooms": [room.model_dump() for room in rooms],
             "checkInDate": checkInDate,
             "checkOutDate": checkOutDate,

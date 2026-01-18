@@ -28,7 +28,9 @@ SYSTEM_PROMPT = (
     "- If booking details are missing (hotelId, roomId, dates, guests, or primary guest contact info), "
     "ask a concise follow-up question instead of making up data.\n"
     "- Do not claim a booking failed unless the booking tool returns an error.\n"
+    "- If a booking attempt fails, ask a concise follow-up to retry with corrected details or an alternative hotel.\n"
     "- After a successful booking tool response, provide the final user response and do not call more tools."
+    "\n- When listing past bookings, use hotelName when available; otherwise fall back to hotelId."
 )
 
 

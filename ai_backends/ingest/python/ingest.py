@@ -163,17 +163,25 @@ class PolicyIngestion:
             print(f"Error processing {folder_path}: {str(e)}")
             raise
     
-    def ingest_all_policies(self, policies_dir: str = "/Users/venumi/AI Team/apim agent/Lab-02-building-travel-planner/ai_backends/ingest/policies"):
+    def _default_policy_dirs(self) -> List[Path]:
+        repo_root = Path(__file__).resolve().parents[3]
+        return [repo_root / "resources/policy_pdfs"]
+
+    def ingest_all_policies(self, policies_dir: str | None = None):
         """Main method to ingest all policy documents"""
-        policies_path = Path(policies_dir)
-        
-        if not policies_path.exists():
-            raise Exception(f"Policies directory not found: {policies_dir}")
-        
-        # Iterate through all subdirectories
-        for entry in policies_path.iterdir():
-            if entry.is_dir():
-                self.process_policy_folder(entry)
+        raw_dirs = policies_dir or os.getenv("POLICIES_DIRS", "")
+        if raw_dirs:
+            policies_paths = [Path(p.strip()) for p in raw_dirs.split(",") if p.strip()]
+        else:
+            policies_paths = self._default_policy_dirs()
+
+        for policies_path in policies_paths:
+            if not policies_path.exists():
+                print(f"Warning: policies directory not found: {policies_path}")
+                continue
+            for entry in policies_path.iterdir():
+                if entry.is_dir():
+                    self.process_policy_folder(entry)
 
 
 def main():
