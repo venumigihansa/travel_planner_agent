@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
+import { SignedIn, SignedOut, SignIn, SignUp, UserButton, useAuth, useUser } from '@clerk/clerk-react';
 import AIAssistant from './components/AIAssistant';
+import InterestsModal from './components/InterestsModal';
+import { createUserProfileService } from './services/userProfileService';
 import './App.css';
 
 // Magic wand icon for AI Assistant
@@ -19,8 +22,104 @@ const MagicIcon = () => (
   </svg>
 );
 
-function AppContent() {
+const bestAvailableName = (user) => {
+  if (!user) {
+    return null;
+  }
+  if (user.fullName) {
+    return user.fullName;
+  }
+  const combined = [user.firstName, user.lastName].filter(Boolean).join(' ').trim();
+  if (combined) {
+    return combined;
+  }
+  if (user.username) {
+    return user.username;
+  }
+  return user.primaryEmailAddress?.emailAddress || null;
+};
+
+const AuthScreen = () => {
+  const [showSignUp, setShowSignUp] = useState(false);
+
+  return (
+    <div className="auth-shell">
+      <div className="auth-card">
+        <div className="auth-copy">
+          <h1>O2 Trips</h1>
+          <p>Sign in to personalize your next stay and get tailored hotel picks.</p>
+          <button
+            type="button"
+            className="auth-toggle"
+            onClick={() => setShowSignUp((prev) => !prev)}
+          >
+            {showSignUp ? 'Already have an account? Sign in' : 'New here? Create an account'}
+          </button>
+        </div>
+        <div className="auth-widget">
+          {showSignUp ? (
+            <SignUp routing="virtual" />
+          ) : (
+            <SignIn routing="virtual" />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SignedInApp = () => {
   const location = useLocation();
+  const { user, isLoaded } = useUser();
+  const { getToken } = useAuth();
+  const profileService = useMemo(() => createUserProfileService(getToken), [getToken]);
+  const [profile, setProfile] = useState({ interests: [], username: null });
+  const [showInterestsModal, setShowInterestsModal] = useState(false);
+  const initRef = useRef(null);
+
+  useEffect(() => {
+    if (!isLoaded || !user) {
+      return;
+    }
+    if (initRef.current === user.id) {
+      return;
+    }
+    initRef.current = user.id;
+    const initializeProfile = async () => {
+      try {
+        const username = bestAvailableName(user);
+        await profileService.createOrUpdateUser({ userId: user.id, username });
+        const fetched = await profileService.fetchUserProfile(user.id);
+        setProfile(fetched);
+        if (!fetched.interests || fetched.interests.length === 0) {
+          setShowInterestsModal(true);
+        }
+      } catch (error) {
+        console.error('Failed to initialize user profile:', error);
+      }
+    };
+    initializeProfile();
+  }, [isLoaded, profileService, user]);
+
+  const handleSaveInterests = async (interests) => {
+    if (!user) {
+      return;
+    }
+    try {
+      const updated = await profileService.updateInterests(user.id, interests);
+      setProfile(updated);
+      setShowInterestsModal(false);
+    } catch (error) {
+      console.error('Failed to save interests:', error);
+    }
+  };
+
+  const handleSkipInterests = () => {
+    setShowInterestsModal(false);
+  };
+
+  const displayName = profile.username || bestAvailableName(user) || 'Traveler';
+  const avatarLetter = displayName ? displayName.charAt(0).toUpperCase() : 'T';
 
   return (
     <div className="app">
@@ -44,12 +143,13 @@ function AppContent() {
 
           <div className="user-header">
             <div className="user-info">
-              <div className="user-avatar">G</div>
+              <div className="user-avatar">{avatarLetter}</div>
               <div className="user-details">
                 <span className="welcome-text">Welcome,</span>
-                <span className="user-name">Guest Traveler</span>
+                <span className="user-name">{displayName}</span>
               </div>
             </div>
+            <UserButton />
           </div>
         </div>
       </header>
@@ -57,15 +157,15 @@ function AppContent() {
       <nav className="app-nav">
         <div className="nav-content">
           <div className="nav-links">
-            <Link 
-              to="/assistant" 
+            <Link
+              to="/assistant"
               className={`nav-link ${location.pathname === '/assistant' ? 'active' : ''}`}
             >
               <MagicIcon />
               <span>AI Assistant</span>
             </Link>
           </div>
-          
+
           <div className="nav-indicator">
             <div className="indicator-line"></div>
           </div>
@@ -76,11 +176,34 @@ function AppContent() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Navigate to="/assistant" replace />} />
-            <Route path="/assistant" element={<AIAssistant />} />
+            <Route
+              path="/assistant"
+              element={<AIAssistant userId={user?.id} userName={displayName} />}
+            />
           </Routes>
         </div>
       </main>
+
+      <InterestsModal
+        isOpen={showInterestsModal}
+        initialInterests={profile.interests}
+        onSave={handleSaveInterests}
+        onSkip={handleSkipInterests}
+      />
     </div>
+  );
+};
+
+function AppContent() {
+  return (
+    <>
+      <SignedOut>
+        <AuthScreen />
+      </SignedOut>
+      <SignedIn>
+        <SignedInApp />
+      </SignedIn>
+    </>
   );
 }
 

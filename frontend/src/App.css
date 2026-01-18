@@ -6663,3 +6663,150 @@ body {
     padding: 0 0.5rem;
   }
 }
+
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background: radial-gradient(circle at top left, #fff1e6 0%, #f8fafc 50%, #e2e8f0 100%);
+}
+
+.auth-card {
+  width: min(980px, 100%);
+  background: var(--white);
+  border-radius: 24px;
+  padding: 2.5rem;
+  display: grid;
+  gap: 2rem;
+  box-shadow: var(--shadow-heavy);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+}
+
+.auth-copy h1 {
+  font-size: 2.6rem;
+  margin-bottom: 0.5rem;
+  color: var(--wso2-blue);
+}
+
+.auth-copy p {
+  font-size: 1.1rem;
+  color: var(--wso2-dark-gray);
+  margin-bottom: 1.5rem;
+}
+
+.auth-toggle {
+  display: inline-flex;
+  color: var(--wso2-orange-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-widget {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 25, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 200;
+}
+
+.modal-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  width: min(720px, 100%);
+  box-shadow: var(--shadow-heavy);
+}
+
+.modal-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-card p {
+  margin-bottom: 1.5rem;
+  color: var(--wso2-dark-gray);
+}
+
+.chip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.chip {
+  border: 1px solid rgba(15, 20, 25, 0.15);
+  background: var(--wso2-gray);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  color: var(--wso2-dark-gray);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chip.selected {
+  background: var(--wso2-orange);
+  border-color: var(--wso2-orange);
+  color: var(--white);
+  box-shadow: var(--shadow-light);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button.primary {
+  background: var(--wso2-blue);
+  color: var(--white);
+}
+
+.button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button.secondary {
+  background: var(--wso2-gray);
+  color: var(--wso2-dark-gray);
+}
+
+@media (max-width: 900px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+  }
+
+  .user-header {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-card {
+    padding: 1.5rem;
+  }
+}

@@ -37,7 +37,12 @@ PG_PORT=5432
 PG_DATABASE=travel_planner
 PG_USER=postgres
 PG_PASSWORD=...
+CLERK_JWKS_URL=https://<your-clerk-domain>/.well-known/jwks.json
+CLERK_ISSUER=https://<your-clerk-domain>
+CLERK_AUDIENCE=...
 ```
+
+Get the Clerk domain and publishable key from the Clerk dashboard (API Keys). Set `CLERK_JWKS_URL` to your instance JWKS URL (usually `https://<your-clerk-domain>/.well-known/jwks.json`). Use `CLERK_ISSUER` to match the token issuer, and set `CLERK_AUDIENCE` only if your tokens include an audience claim.
 
 ## Run
 

@@ -21,7 +21,7 @@ export const resetChatSession = () => {
 };
 
 export const ChatService = {
-  async sendMessage(message) {
+  async sendMessage(message, context = {}) {
     try {
       const sessionId = getSessionId();
       
@@ -32,7 +32,9 @@ export const ChatService = {
         },
         body: JSON.stringify({ 
           message,
-          sessionId
+          sessionId,
+          userId: context.userId || null,
+          userName: context.userName || null
         }),
         signal: AbortSignal.timeout(chatConfig.timeout)
       });

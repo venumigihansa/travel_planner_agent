@@ -75,6 +75,31 @@ def _policy_llm(settings: Settings) -> ChatOpenAI:
 
 
 def build_tools(settings: Settings):
+    def _resolve_hotel_id(hotel_id: str | None, hotel_name: str | None) -> str | None:
+        candidate_name = hotel_name or hotel_id
+        if hotel_id and hotel_id.strip() and " " not in hotel_id:
+            return hotel_id
+        if not candidate_name:
+            return None
+        logger.info("Resolving hotel id from name: %s", candidate_name)
+        search_url = f"{settings.hotel_search_api_url}/hotels/search"
+        response = requests.get(
+            search_url,
+            params={"destination": candidate_name, "page": 1, "pageSize": 10},
+            timeout=30,
+        )
+        response.raise_for_status()
+        hotels = (response.json() or {}).get("hotels", [])
+        match = next(
+            (
+                hotel
+                for hotel in hotels
+                if candidate_name.lower() in str(hotel.get("hotelName", "")).lower()
+            ),
+            None,
+        )
+        return match.get("hotelId") if match else None
+
     @tool
     def get_user_profile_tool(user_id: str | None = None, include_bookings: bool = True) -> str:
         """Fetch personalization profile (and optionally bookings) from Postgres."""
@@ -90,7 +115,7 @@ def build_tools(settings: Settings):
             ) as conn:
                 with conn.cursor() as cur:
                     cur.execute(
-                        "SELECT activity_analysis FROM user_activities WHERE user_id = %s",
+                        "SELECT username, interests FROM user_activities WHERE user_id = %s",
                         (user_id,),
                     )
                     row = cur.fetchone()
@@ -101,18 +126,22 @@ def build_tools(settings: Settings):
                             (user_id,),
                         )
                         bookings = [record[0] for record in cur.fetchall()]
-            if row and row[0]:
+            if row:
+                username, interests = row
                 logger.info("get_user_profile_tool found personalization data.")
                 if include_bookings:
                     return json.dumps(
-                        {"activity_analysis": row[0], "bookings": bookings},
+                        {"username": username, "interests": interests or [], "bookings": bookings},
                         ensure_ascii=True,
                     )
-                return row[0]
+                return json.dumps(
+                    {"username": username, "interests": interests or []},
+                    ensure_ascii=True,
+                )
             logger.info("get_user_profile_tool found no personalization data.")
             if include_bookings:
                 return json.dumps(
-                    {"activity_analysis": None, "bookings": bookings},
+                    {"username": None, "interests": [], "bookings": bookings},
                     ensure_ascii=True,
                 )
             return "No personalization found for this user."
@@ -207,11 +236,15 @@ def build_tools(settings: Settings):
         guests: int,
         hotel_id: str,
         room_count: int,
+        hotel_name: str | None = None,
     ) -> dict[str, Any]:
         """Check availability before recommending a hotel."""
+        resolved_id = _resolve_hotel_id(hotel_id, hotel_name)
+        if not resolved_id:
+            return {"error": "Hotel not found. Provide a valid hotel_id or hotel_name."}
         logger.info(
             "check_hotel_availability_tool called: hotel_id=%s check_in_date=%s check_out_date=%s guests=%s room_count=%s",
-            hotel_id,
+            resolved_id,
             check_in_date,
             check_out_date,
             guests,
@@ -223,7 +256,7 @@ def build_tools(settings: Settings):
             "guests": guests,
             "roomCount": room_count,
         }
-        url = f"{settings.hotel_search_api_url}/hotels/{hotel_id}/availability"
+        url = f"{settings.hotel_search_api_url}/hotels/{resolved_id}/availability"
         response = requests.get(url, params=params, timeout=30)
         response.raise_for_status()
         return response.json()

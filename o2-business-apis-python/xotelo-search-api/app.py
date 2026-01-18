@@ -169,13 +169,22 @@ def _apply_filters(
     filtered = items[:]
 
     if destination:
-        lower_destination = destination.lower()
+        destination_tokens = [
+            part.strip().lower()
+            for part in destination.split(",")
+            if part.strip()
+        ]
+        if not destination_tokens:
+            destination_tokens = [destination.lower()]
         filtered = [
             hotel
             for hotel in filtered
-            if lower_destination in str(hotel.get("city", "")).lower()
-            or lower_destination in str(hotel.get("country", "")).lower()
-            or lower_destination in str(hotel.get("hotelName", "")).lower()
+            if any(
+                token in str(hotel.get("city", "")).lower()
+                or token in str(hotel.get("country", "")).lower()
+                or token in str(hotel.get("hotelName", "")).lower()
+                for token in destination_tokens
+            )
         ]
 
     # Only apply price filtering if we have actual pricing data (lowestPrice > 0)

@@ -8,3 +8,4 @@ requests==2.32.3
 pinecone-client==3.2.2
 python-dotenv==1.0.1
 psycopg[binary]==3.2.3
+PyJWT[crypto]==2.9.0
