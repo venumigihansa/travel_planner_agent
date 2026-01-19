@@ -178,15 +178,21 @@ def _apply_filters(
 
     if destination:
         tokens = [t.strip().lower() for t in destination.split(",") if t.strip()]
-        filtered = [
-            h for h in filtered
-            if any(
-                token in str(h.get("city", "")).lower()
-                or token in str(h.get("country", "")).lower()
-                or token in str(h.get("hotelName", "")).lower()
-                for token in tokens
-            )
-        ]
+        def _searchable_text(hotel: dict[str, Any]) -> str:
+            return " ".join(
+                str(value)
+                for value in (
+                    hotel.get("city"),
+                    hotel.get("country"),
+                    hotel.get("hotelName"),
+                    hotel.get("name"),
+                    hotel.get("place_name"),
+                    hotel.get("short_place_name"),
+                )
+                if value
+            ).lower()
+
+        filtered = [h for h in filtered if any(token in _searchable_text(h) for token in tokens)]
 
     if min_price is not None or max_price is not None:
         tmp = []
