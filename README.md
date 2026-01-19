@@ -31,11 +31,11 @@ uvicorn app:app --host 0.0.0.0 --port 9081
 ```
 
 ```bash
-cd o2-business-apis-python/search-api
+cd o2-business-apis-python/xotelo-search-api
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn app:app --host 0.0.0.0 --port 9083
+uvicorn app:app --host 0.0.0.0 --port 9084
 ```
 
 ### 2) Start the AI agent (BFF)
@@ -71,5 +71,5 @@ python ingest.py
 
 ## Notes
 - `.env` files are intentionally excluded from this repo. Create them from the READMEs in each folder.
-- The agent expects booking/search APIs at `http://localhost:9081` and `http://localhost:9083` by default.
+- The agent expects booking/search APIs at `http://localhost:9081` and `http://localhost:9084` by default.
 - Clerk authentication is required for user profile endpoints; configure `CLERK_JWKS_URL` (and optional `CLERK_ISSUER`/`CLERK_AUDIENCE`) in the agent `.env`, plus `REACT_APP_CLERK_PUBLISHABLE_KEY` in the frontend.
