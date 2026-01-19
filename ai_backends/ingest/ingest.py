@@ -11,7 +11,7 @@ from openai import OpenAI
 load_dotenv()
 
 class DocumentChunker:
-    """Handles recursive document chunking similar to Ballerina's ai:chunkDocumentRecursively"""
+    """Handles recursive document chunking with overlap"""
     
     def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
         self.chunk_size = chunk_size

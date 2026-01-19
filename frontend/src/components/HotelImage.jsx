@@ -5,11 +5,11 @@ const HotelImage = ({ hotel, className = '', showId = false }) => {
     // if (hotel.images && hotel.images.length > 0 && hotel.images[0]) {
     //   return hotel.images[0];
     // }
-    return `https://raw.githubusercontent.com/wso2con/2025-CMB-AI-tutorial/refs/heads/main/Lab-02-building-travel-planner/o2-business-apis/data/images/${hotel.hotelId}.jpeg`;
+    return `https://raw.githubusercontent.com/wso2con/2025-CMB-AI-tutorial/refs/heads/main/Lab-02-building-travel-planner/services/data/images/${hotel.hotelId}.jpeg`;
   };
 
   const handleImageError = (e, hotel) => {
-    const placeholderUrl = `https://raw.githubusercontent.com/wso2con/2025-CMB-AI-tutorial/refs/heads/main/Lab-02-building-travel-planner/o2-business-apis/data/images/${hotel.hotelId}.jpeg`;
+    const placeholderUrl = `https://raw.githubusercontent.com/wso2con/2025-CMB-AI-tutorial/refs/heads/main/Lab-02-building-travel-planner/services/data/images/${hotel.hotelId}.jpeg`;
     if (e.target.src !== placeholderUrl) {
       e.target.src = placeholderUrl;
     } else {

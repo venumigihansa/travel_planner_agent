@@ -1,2 +1,0 @@
-ALTER TABLE user_activities ADD COLUMN IF NOT EXISTS username TEXT;
-ALTER TABLE user_activities ADD COLUMN IF NOT EXISTS interests TEXT[] NOT NULL DEFAULT '{}';

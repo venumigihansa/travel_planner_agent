@@ -19,7 +19,7 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 XOTELO_API_HOST = "xotelo-hotel-prices.p.rapidapi.com"
 XOTELO_BASE_URL = f"https://{XOTELO_API_HOST}/api"
 REPO_ROOT = Path(__file__).resolve().parents[2]
-XOTELO_ENV_PATH = REPO_ROOT / "o2-business-apis-python/xotelo-search-api/.env"
+XOTELO_ENV_PATH = REPO_ROOT / "services/search-api/.env"
 OUTPUT_ROOT = REPO_ROOT / "resources/policy_pdfs"
 
 

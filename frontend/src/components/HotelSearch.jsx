@@ -56,7 +56,7 @@ const HotelSearch = () => {
 
   // Function to get hotel image URL
   const getHotelImageUrl = (hotel) => {
-    return `https://raw.githubusercontent.com/wso2con/2025-CMB-AI-tutorial/refs/heads/main/Lab-02-building-travel-planner/o2-business-apis/data/images/${hotel.hotelId}.jpeg`;
+    return `https://raw.githubusercontent.com/wso2con/2025-CMB-AI-tutorial/refs/heads/main/Lab-02-building-travel-planner/services/data/images/${hotel.hotelId}.jpeg`;
   };
 
   // Load initial hotels when component mounts

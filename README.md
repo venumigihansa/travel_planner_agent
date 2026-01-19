@@ -2,10 +2,10 @@
 
 This repo contains the minimal, clean Python + React stack needed to run the travel planner agent:
 
-- **AI Agent (BFF)**: `ai_backends/agent/python_migration/`
-- **Business APIs (Python)**: `o2-business-apis-python/` (booking + search)
+- **AI Agent (BFF)**: `ai_backends/agent/`
+- **Business APIs (Python)**: `services/` (booking + search)
 - **Frontend**: `frontend/`
-- **Policy ingest (optional)**: `ai_backends/ingest/python/` + `ai_backends/ingest/policies/`
+- **Policy ingest (optional)**: `ai_backends/ingest/` + `ai_backends/ingest/policies/`
 - **Postgres schema**: `resources/create_tables.sql`
 
 ## Prerequisites
@@ -23,7 +23,7 @@ psql -d travel_planner -f resources/create_tables.sql
 
 ### 1) Start business APIs
 ```bash
-cd o2-business-apis-python/booking-api
+cd services/booking-api
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -31,7 +31,7 @@ uvicorn app:app --host 0.0.0.0 --port 9081
 ```
 
 ```bash
-cd o2-business-apis-python/xotelo-search-api
+cd services/search-api
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -39,10 +39,10 @@ uvicorn app:app --host 0.0.0.0 --port 9084
 ```
 
 ### 2) Start the AI agent (BFF)
-Follow `ai_backends/agent/python_migration/README.md` to set up `.env` and run:
+Follow `ai_backends/agent/README.md` to set up `.env` and run:
 
 ```bash
-cd ai_backends/agent/python_migration
+cd ai_backends/agent
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -62,7 +62,7 @@ npm start
 If you need to populate Pinecone from scratch:
 
 ```bash
-cd ai_backends/ingest/python
+cd ai_backends/ingest
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

@@ -1,4 +1,4 @@
-"""Auto-generated from Ballerina data mappings."""
+"""Auto-generated from upstream data mappings."""
 
 hotels = [{'hotelId': 'hotel_srilanka_knuckles_001',
   'hotelName': 'Knuckles Wilderness Lodge',

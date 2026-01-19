@@ -1,17 +1,17 @@
-# Python LangGraph Migration (OpenAI)
+# Python LangGraph Agent (OpenAI)
 
-This folder contains a Python LangGraph migration of the Ballerina travel planner agent.
+This folder contains the Python LangGraph travel planner agent.
 
-## Features Parity
+## Features
 - Tool-calling agent for hotel search, booking, and policy queries
 - Pinecone policy retrieval with OpenAI embeddings
 - `/travelPlanner/chat` endpoint for the React frontend
-- CORS settings mirroring the Ballerina service
+- CORS settings for local frontend access
 
 ## Setup
 
 ```bash
-cd ai_backends/agent/python_migration
+cd ai_backends/agent
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -51,7 +51,7 @@ uvicorn app:app --host 0.0.0.0 --port 9090
 ```
 
 ## Notes
-- `query_hotel_policy_tool` expects Pinecone metadata with a `content` field and `hotelId` filter, matching the ingest pipeline in `ai_backends/ingest/python/ingest.py`.
+- `query_hotel_policy_tool` expects Pinecone metadata with a `content` field and `hotelId` filter, matching the ingest pipeline in `ai_backends/ingest/ingest.py`.
 - The weather tool is a placeholder. Provide `WEATHER_MCP_URL` if you expose an HTTP wrapper for the MCP server.
 - PostgreSQL is used for personalization. Initialize the `user_activities` table with `resources/create_tables.sql` in the repo root.
-- Set `HOTEL_SEARCH_API_URL` and `BOOKING_API_URL` to either the Ballerina services (`o2-business-apis/`) or the Python services (`o2-business-apis-python/`).
+- Set `HOTEL_SEARCH_API_URL` and `BOOKING_API_URL` to the `services/` endpoints in this repo.

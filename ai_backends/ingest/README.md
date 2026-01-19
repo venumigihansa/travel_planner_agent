@@ -1,6 +1,6 @@
 # Python Ingest
 
-This is a Python equivalent of the Ballerina ingest flow. It reads `./policies/**/policies.pdf`
+This is the Python ingest flow. It reads `./policies/**/policies.pdf`
 with `./policies/**/metadata.json`, chunks the text, generates embeddings, and upserts to Pinecone.
 
 ## Setup
