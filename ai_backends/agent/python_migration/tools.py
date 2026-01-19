@@ -216,7 +216,7 @@ def build_tools(settings: Settings):
         }
         params = {k: v for k, v in params.items() if v is not None}
         url = f"{settings.hotel_search_api_url}/hotels/search"
-        response = requests.get(url, params=params, timeout=30)
+        response = requests.get(url, params=params, timeout=60)
         response.raise_for_status()
         return response.json()
 

@@ -1,12 +1,15 @@
 import apiConfig from '../config/api';
 
-export const useHotelService = () => {
-  const request = async ({ url, method = 'GET', data }) => {
+export const createHotelService = (options = {}) => {
+  const { getToken } = options;
+
+  const request = async ({ url, method = 'GET', data, headers }) => {
     const response = await fetch(url, {
       method,
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...headers
       },
       body: data ? JSON.stringify(data) : undefined
     });
@@ -21,6 +24,19 @@ export const useHotelService = () => {
     }
 
     return response.json();
+  };
+
+  const buildBookingHeaders = async () => {
+    if (!getToken) {
+      return {};
+    }
+    const token = await getToken();
+    if (!token) {
+      throw new Error('Missing authentication token');
+    }
+    return {
+      'x-jwt-assertion': token
+    };
   };
 
   const searchHotels = async (searchParams) => {
@@ -56,34 +72,39 @@ export const useHotelService = () => {
 
   const createBooking = async (bookingData) => {
     return request({
-      url: `${apiConfig.baseUrl}${apiConfig.endpoints.bookings}`,
+      url: `${apiConfig.bookingBaseUrl}${apiConfig.endpoints.bookings}`,
       method: 'POST',
-      data: bookingData
+      data: bookingData,
+      headers: await buildBookingHeaders()
     });
   };
 
   const getBookings = async () => {
     return request({
-      url: `${apiConfig.baseUrl}${apiConfig.endpoints.bookings}`
+      url: `${apiConfig.bookingBaseUrl}${apiConfig.endpoints.bookings}`,
+      headers: await buildBookingHeaders()
     });
   };
 
   const getBookingDetails = async (bookingId) => {
     return request({
-      url: `${apiConfig.baseUrl}${apiConfig.endpoints.bookingDetails.replace('{bookingId}', bookingId)}`
+      url: `${apiConfig.bookingBaseUrl}${apiConfig.endpoints.bookingDetails.replace('{bookingId}', bookingId)}`,
+      headers: await buildBookingHeaders()
     });
   };
 
   const cancelBooking = async (bookingId) => {
     return request({
-      url: `${apiConfig.baseUrl}${apiConfig.endpoints.cancelBooking.replace('{bookingId}', bookingId)}`,
-      method: 'PUT'
+      url: `${apiConfig.bookingBaseUrl}${apiConfig.endpoints.cancelBooking.replace('{bookingId}', bookingId)}`,
+      method: 'PUT',
+      headers: await buildBookingHeaders()
     });
   };
 
   const getHotelApiProfile = async () => {
     return request({
-      url: `${apiConfig.baseUrl}${apiConfig.endpoints.profile}`
+      url: `${apiConfig.bookingBaseUrl}${apiConfig.endpoints.profile}`,
+      headers: await buildBookingHeaders()
     });
   };
 

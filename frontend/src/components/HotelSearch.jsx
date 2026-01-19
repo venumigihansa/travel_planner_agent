@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHotelService } from '../services/hotelService';
+import { createHotelService } from '../services/hotelService';
 
 const HotelSearch = () => {
   const [searchParams, setSearchParams] = useState({
@@ -31,7 +31,7 @@ const HotelSearch = () => {
     propertyType: true
   });
 
-  const hotelService = useHotelService();
+  const hotelService = createHotelService();
 
   // Common amenities for filter
   const commonAmenities = [

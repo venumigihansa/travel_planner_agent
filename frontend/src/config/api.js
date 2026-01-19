@@ -1,5 +1,8 @@
+const baseUrl = process.env.REACT_APP_HOTEL_API_BASE_URL || "http://localhost:9090";
+
 const apiConfig = {
-  baseUrl: process.env.REACT_APP_HOTEL_API_BASE_URL || "http://localhost:9090",
+  baseUrl,
+  bookingBaseUrl: process.env.REACT_APP_BOOKING_API_BASE_URL || baseUrl,
   endpoints: {
     profile: "/auth/profile",
     hotelSearch: "/hotels/search",

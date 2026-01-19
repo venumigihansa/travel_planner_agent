@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import uuid
+from datetime import date
 from typing import Any
 
 import psycopg
@@ -12,6 +13,7 @@ from psycopg.types.json import Json
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +68,83 @@ def _get_db_connection() -> psycopg.Connection[Any]:
         user=_require_env("PG_USER"),
         password=os.getenv("PG_PASSWORD") or None,
     )
+
+
+def _calculate_nights(check_in: str | None, check_out: str | None) -> int:
+    if not check_in or not check_out:
+        return 0
+    try:
+        start = date.fromisoformat(check_in)
+        end = date.fromisoformat(check_out)
+        return max((end - start).days, 0)
+    except Exception:
+        return 0
+
+
+def _fetch_room_rates(
+    hotel_id: str | None, check_in: str | None, check_out: str | None, guests: int | None
+) -> list[dict[str, Any]]:
+    if not hotel_id or not check_in or not check_out:
+        return []
+    base_url = os.getenv("HOTEL_SEARCH_API_URL", "http://localhost:9084").rstrip("/")
+    try:
+        response = requests.get(
+            f"{base_url}/hotels/{hotel_id}",
+            params={"checkInDate": check_in, "checkOutDate": check_out, "guests": guests or 1},
+            timeout=30,
+        )
+        response.raise_for_status()
+        return (response.json() or {}).get("rooms") or []
+    except Exception:
+        logger.exception("pricing lookup failed for hotel_id=%s", hotel_id)
+        return []
+
+
+def _build_pricing(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    nights = _calculate_nights(payload.get("checkInDate"), payload.get("checkOutDate"))
+    if nights <= 0:
+        return []
+
+    requested_rooms = payload.get("rooms") or []
+    if not requested_rooms:
+        return []
+
+    rooms = _fetch_room_rates(
+        payload.get("hotelId"),
+        payload.get("checkInDate"),
+        payload.get("checkOutDate"),
+        payload.get("numberOfGuests"),
+    )
+    rate_map = {
+        room.get("roomId"): room.get("pricePerNight")
+        for room in rooms
+        if room.get("roomId")
+    }
+
+    total_per_night = 0.0
+    for room in requested_rooms:
+        room_id = room.get("roomId")
+        count = room.get("numberOfRooms") or 1
+        rate = rate_map.get(room_id)
+        if rate is None:
+            continue
+        try:
+            total_per_night += float(rate) * int(count)
+        except (TypeError, ValueError):
+            continue
+
+    if total_per_night <= 0:
+        return []
+
+    total_amount = round(total_per_night * nights, 2)
+    return [
+        {
+            "roomRate": round(total_per_night, 2),
+            "totalAmount": total_amount,
+            "nights": nights,
+            "currency": "USD",
+        }
+    ]
 
 
 def _decode_jwt_payload(token: str) -> dict[str, Any]:
@@ -166,7 +245,7 @@ def get_profile(request: Request):
 
 @app.post("/bookings", status_code=201)
 def create_booking(payload: dict[str, Any]):
-    pricing: list[dict[str, Any]] = []
+    pricing = _build_pricing(payload)
 
     booking_id = _generate_booking_id()
     confirmation_number = _generate_confirmation_number()

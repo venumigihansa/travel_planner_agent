@@ -1,20 +1,71 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChatService } from '../services/chatService';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { ChatService, resetChatSession } from '../services/chatService';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+const DEFAULT_MESSAGE = { 
+  role: 'assistant', 
+  content: '# Welcome to your Travel Planner! 👋\n\nI\'m your AI travel assistant, ready to help you plan your next adventure. I can help with finding destinations, recommending hotels, suggesting activities, and providing travel tips.\n\n**How can I assist with your travel plans today?**'
+};
+
+const buildStorageKey = (userId, suffix) => `travel_ai_${suffix}_${userId || 'anon'}`;
+
+const loadStoredMessages = (key) => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const raw = window.localStorage.getItem(key);
+  if (!raw) {
+    return null;
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+const loadStoredView = (key) => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const raw = window.localStorage.getItem(key);
+  if (raw === null) {
+    return null;
+  }
+  return raw === 'true';
+};
+
 const AIAssistant = ({ userId, userName }) => {
-  const [messages, setMessages] = useState([
-    { 
-      role: 'assistant', 
-      content: '# Welcome to your Travel Planner! 👋\n\nI\'m your AI travel assistant, ready to help you plan your next adventure. I can help with finding destinations, recommending hotels, suggesting activities, and providing travel tips.\n\n**How can I assist with your travel plans today?**'
-    }
-  ]);
+  const messageStorageKey = useMemo(() => buildStorageKey(userId, 'messages'), [userId]);
+  const viewStorageKey = useMemo(() => buildStorageKey(userId, 'view'), [userId]);
+  const [messages, setMessages] = useState(() => {
+    const stored = loadStoredMessages(messageStorageKey);
+    return stored && stored.length ? stored : [DEFAULT_MESSAGE];
+  });
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [chatView, setChatView] = useState(false);
+  const [chatView, setChatView] = useState(() => {
+    const stored = loadStoredView(viewStorageKey);
+    return typeof stored === 'boolean' ? stored : false;
+  });
   const messagesEndRef = useRef(null);
   const [error, setError] = useState(null);
+  const lastUserIdRef = useRef(userId);
+
+  useEffect(() => {
+    if (lastUserIdRef.current === userId) {
+      return;
+    }
+    lastUserIdRef.current = userId;
+    const stored = loadStoredMessages(messageStorageKey);
+    setMessages(stored && stored.length ? stored : [DEFAULT_MESSAGE]);
+    const storedView = loadStoredView(viewStorageKey);
+    if (typeof storedView === 'boolean') {
+      setChatView(storedView);
+    }
+  }, [messageStorageKey, userId, viewStorageKey]);
 
   // Scroll to bottom of messages on new message
   useEffect(() => {
@@ -22,6 +73,20 @@ const AIAssistant = ({ userId, userName }) => {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.localStorage.setItem(messageStorageKey, JSON.stringify(messages));
+  }, [messageStorageKey, messages]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.localStorage.setItem(viewStorageKey, String(chatView));
+  }, [chatView, viewStorageKey]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,6 +141,15 @@ const AIAssistant = ({ userId, userName }) => {
   // Exit chat view
   const exitChatView = () => {
     setChatView(false);
+  };
+
+  const handleNewChat = () => {
+    resetChatSession();
+    setMessages([DEFAULT_MESSAGE]);
+    setInput('');
+    setIsTyping(false);
+    setError(null);
+    setChatView(true);
   };
 
   return (
@@ -144,28 +218,10 @@ const AIAssistant = ({ userId, userName }) => {
                 <div className="chat-title">Travel Planner</div>
               </div>
             </div>
-            <div className="feature-icons">
-              <div className="feature-chip">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" strokeWidth="2" />
-                  <path d="M3.6001 9H20.4001" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="feature-chip">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 7V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="feature-chip">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 6L21 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <div className="feature-chip">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20.0001 12V17C20.0001 18.6569 18.6569 20 17.0001 20H7.00006C5.34321 20 4.00006 18.6569 4.00006 17V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
+            <div className="chat-header-right">
+              <button type="button" className="new-chat-button" onClick={handleNewChat}>
+                New chat
+              </button>
             </div>
           </div>
 
@@ -204,11 +260,13 @@ const AIAssistant = ({ userId, userName }) => {
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
                             components={{
-                              img: ({node, ...props}) => (
-                                <img className="markdown-image" {...props} />
+                              img: ({ node, ...props }) => (
+                                <img className="markdown-image" alt={props.alt || ''} {...props} />
                               ),
-                              a: ({node, ...props}) => (
-                                <a target="_blank" rel="noopener noreferrer" {...props} />
+                              a: ({ node, ...props }) => (
+                                <a target="_blank" rel="noopener noreferrer" {...props}>
+                                  {props.children}
+                                </a>
                               )
                             }}
                           >

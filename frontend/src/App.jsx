@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { SignedIn, SignedOut, SignIn, SignUp, UserButton, useAuth, useUser } from '@clerk/clerk-react';
 import AIAssistant from './components/AIAssistant';
+import UserBookings from './components/UserBookings';
 import InterestsModal from './components/InterestsModal';
 import { createUserProfileService } from './services/userProfileService';
 import './App.css';
@@ -19,6 +20,16 @@ const MagicIcon = () => (
     <path d="M3.92871 18.4246L5.81792 16.5354" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     <path d="M16.2426 15.7574L5.94975 5.46457C5.7545 5.26932 5.7545 4.95274 5.94975 4.75749L7.75736 2.94989C7.95261 2.75463 8.26919 2.75463 8.46444 2.94989L18.7574 13.2428C18.9526 13.438 18.9526 13.7546 18.7574 13.9498L16.9498 15.7574C16.7545 15.9527 16.4379 15.9527 16.2426 15.7574Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     <path d="M9.87866 7.87866L16.2426 14.2426" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const BookingIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 7H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9 12H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9 16H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
@@ -164,6 +175,13 @@ const SignedInApp = () => {
               <MagicIcon />
               <span>AI Assistant</span>
             </Link>
+            <Link
+              to="/bookings"
+              className={`nav-link ${location.pathname === '/bookings' ? 'active' : ''}`}
+            >
+              <BookingIcon />
+              <span>My Bookings</span>
+            </Link>
           </div>
 
           <div className="nav-indicator">
@@ -180,6 +198,7 @@ const SignedInApp = () => {
               path="/assistant"
               element={<AIAssistant userId={user?.id} userName={displayName} />}
             />
+            <Route path="/bookings" element={<UserBookings />} />
           </Routes>
         </div>
       </main>
