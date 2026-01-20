@@ -102,6 +102,8 @@ def _fetch_room_rates(
 
 
 def _build_pricing(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    if os.getenv("BOOKING_DISABLE_PRICING_LOOKUP", "").lower() in {"1", "true", "yes"}:
+        return []
     nights = _calculate_nights(payload.get("checkInDate"), payload.get("checkOutDate"))
     if nights <= 0:
         return []
