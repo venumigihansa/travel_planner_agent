@@ -252,7 +252,13 @@ def health():
 
 
 @app.post("/bookings", status_code=201)
-def create_booking(payload: dict[str, Any]):
+def create_booking(payload: dict[str, Any], request: Request):
+    user_id = payload.get("userId")
+    error, context = _extract_auth_context(request)
+    if context:
+        user_id = context.get("userId")
+    if not user_id:
+        return _error_response("Authentication required", "AUTH_REQUIRED")
     pricing = _build_pricing(payload)
 
     booking_id = _generate_booking_id()
@@ -263,7 +269,7 @@ def create_booking(payload: dict[str, Any]):
         "hotelId": payload.get("hotelId"),
         "hotelName": payload.get("hotelName"),
         "rooms": payload.get("rooms"),
-        "userId": payload.get("userId"),
+        "userId": user_id,
         "checkInDate": payload.get("checkInDate"),
         "checkOutDate": payload.get("checkOutDate"),
         "numberOfGuests": payload.get("numberOfGuests"),
@@ -295,7 +301,7 @@ def create_booking(payload: dict[str, Any]):
                     """,
                     (
                         booking_id,
-                        payload.get("userId"),
+                        user_id,
                         payload.get("hotelId"),
                         payload.get("hotelName"),
                         payload.get("checkInDate"),
