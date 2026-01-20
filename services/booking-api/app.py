@@ -5,7 +5,7 @@ import json
 import logging
 import os
 import uuid
-from datetime import date
+from datetime import date, datetime, timezone
 from typing import Any
 
 import psycopg
@@ -25,11 +25,11 @@ users: list[dict[str, Any]] = []
 app = FastAPI(title="Hotel Booking API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3001"],
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["Content-Type", "Authorization", "Accept", "x-jwt-assertion"],
-    max_age=84900,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    max_age=86400,
 )
 
 
@@ -42,7 +42,7 @@ def _error_response(message: str, code: str) -> dict[str, Any]:
 
 
 def _get_current_timestamp() -> str:
-    return "2024-01-15T10:30:00Z"
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _generate_booking_id() -> str:
@@ -67,6 +67,7 @@ def _get_db_connection() -> psycopg.Connection[Any]:
         dbname=_require_env("PG_DATABASE"),
         user=_require_env("PG_USER"),
         password=os.getenv("PG_PASSWORD") or None,
+        sslmode=os.getenv("PG_SSLMODE", "require"),
     )
 
 
@@ -241,6 +242,11 @@ def get_profile(request: Request):
 
     user = _find_or_create_user(context["userId"], context["userClaims"])
     return user
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 @app.post("/bookings", status_code=201)
