@@ -118,6 +118,32 @@ def _parse_float(value: Any) -> float:
         return 0.0
 
 
+def _build_rooms_from_rates(
+    hotel_id: str,
+    rates: list[dict[str, Any]],
+    guests: int,
+) -> list[dict[str, Any]]:
+    rooms_out: list[dict[str, Any]] = []
+    for rate in rates:
+        rate_code = rate.get("code") or "OTA"
+        rate_name = rate.get("name") or "OTA"
+        rooms_out.append(
+            {
+                "roomId": f"{hotel_id}_{rate_code}",
+                "hotelId": hotel_id,
+                "roomType": "Standard Room",
+                "roomName": f"Room via {rate_name}",
+                "description": f"Book through {rate_name}",
+                "maxOccupancy": guests,
+                "pricePerNight": _parse_float(rate.get("rate")),
+                "images": [],
+                "amenities": [],
+                "availableCount": 1,
+            }
+        )
+    return rooms_out
+
+
 def _find_hotel(hotel_id: str, hotels: list[dict[str, Any]]) -> dict[str, Any] | None:
     for hotel in hotels:
         if hotel.get("hotelId") == hotel_id:
@@ -279,4 +305,106 @@ def search_hotels(
             "pageSize": pageSize,
             "dataSource": "xotelo" if used_xotelo else "mock",
         },
+    }
+
+
+@app.get("/hotels/{hotel_id}")
+def get_hotel_details(
+    hotel_id: str,
+    checkInDate: str | None = None,
+    checkOutDate: str | None = None,
+    guests: int = 2,
+):
+    if _xotelo_enabled() and checkInDate and checkOutDate:
+        try:
+            rates_payload = _xotelo_get(
+                "rates",
+                params={
+                    "hotel_key": hotel_id,
+                    "chk_in": checkInDate,
+                    "chk_out": checkOutDate,
+                    "adults": guests,
+                    "rooms": 1,
+                },
+            )
+            rates = (rates_payload.get("result") or {}).get("rates") or []
+            rooms_out = _build_rooms_from_rates(hotel_id, rates, guests)
+            logger.info("get_hotel_details: using xotelo data")
+            return {
+                "hotel": {
+                    "hotelId": hotel_id,
+                    "hotelName": "Unknown Hotel",
+                    "description": "",
+                    "city": "",
+                    "country": "",
+                },
+                "rooms": rooms_out,
+                "recentReviews": [],
+                "nearbyAttractions": [],
+            }
+        except Exception:
+            logger.exception("get_hotel_details: xotelo failed, falling back")
+
+    hotels, rooms, reviews, nearby_attractions = _load_mock_data()
+    hotel = _find_hotel(hotel_id, hotels)
+    if not hotel:
+        return Response(status_code=404)
+
+    hotel_rooms = _get_available_rooms(hotel_id, rooms)
+    hotel_reviews = _get_hotel_reviews(hotel_id, reviews)
+
+    logger.info("get_hotel_details: using mock data")
+    return {
+        "hotel": hotel,
+        "rooms": hotel_rooms,
+        "recentReviews": hotel_reviews,
+        "nearbyAttractions": nearby_attractions,
+    }
+
+
+@app.get("/hotels/{hotel_id}/availability")
+def check_availability(
+    hotel_id: str,
+    checkInDate: str,
+    checkOutDate: str,
+    guests: int = 2,
+    roomCount: int = 1,
+):
+    if _xotelo_enabled():
+        try:
+            rates_payload = _xotelo_get(
+                "rates",
+                params={
+                    "hotel_key": hotel_id,
+                    "chk_in": checkInDate,
+                    "chk_out": checkOutDate,
+                    "adults": guests,
+                    "rooms": roomCount,
+                },
+            )
+            rates = (rates_payload.get("result") or {}).get("rates") or []
+            rooms_out = _build_rooms_from_rates(hotel_id, rates, guests)
+            logger.info("check_availability: using xotelo data")
+            return {
+                "hotelId": hotel_id,
+                "checkInDate": checkInDate,
+                "checkOutDate": checkOutDate,
+                "availableRooms": rooms_out,
+                "totalAvailable": len(rooms_out),
+            }
+        except Exception:
+            logger.exception("check_availability: xotelo failed, falling back")
+
+    hotels, rooms, _, _ = _load_mock_data()
+    if not _find_hotel(hotel_id, hotels):
+        return Response(status_code=404)
+
+    available_rooms = _get_available_rooms(hotel_id, rooms)
+    logger.info("check_availability: using mock data")
+    return {
+        "hotelId": hotel_id,
+        "checkInDate": checkInDate,
+        "checkOutDate": checkOutDate,
+        "availableRooms": available_rooms,
+        "totalAvailable": len(available_rooms),
     }
