@@ -28,8 +28,7 @@ USER_NAME=John Smith
 PINECONE_API_KEY=...
 PINECONE_SERVICE_URL=https://your-index.svc.your-region.pinecone.io
 PINECONE_INDEX_NAME=travelagent3
-HOTEL_SEARCH_API_URL=http://localhost:9084
-BOOKING_API_URL=http://localhost:9081
+XOTELO_API_KEY=...
 WEATHER_API_KEY=...
 WEATHER_API_BASE_URL=http://api.weatherapi.com/v1
 PG_HOST=localhost
@@ -54,4 +53,4 @@ uvicorn app:app --host 0.0.0.0 --port 9090
 - `query_hotel_policy_tool` expects Pinecone metadata with a `content` field and `hotelId` filter, matching the ingest pipeline in `ai_backends/ingest/ingest.py`.
 - The weather tool is a placeholder. Provide `WEATHER_MCP_URL` if you expose an HTTP wrapper for the MCP server.
 - PostgreSQL is used for personalization. Initialize the `user_activities` table with `resources/create_tables.sql` in the repo root.
-- Set `HOTEL_SEARCH_API_URL` and `BOOKING_API_URL` to the `services/` endpoints in this repo.
+- Hotel search and booking now run inside the agent service; bookings are stored in memory for the running process.

@@ -10,6 +10,8 @@ from pydantic import BaseModel
 
 from config import Settings
 from graph import build_graph
+from booking.booking_routes import router as booking_router
+from hotel.hotel_routes import router as hotel_router
 from profile_routes import router as profile_router
 
 _root_logger = logging.getLogger()
@@ -48,6 +50,8 @@ app.add_middleware(
     max_age=84900,
 )
 app.include_router(profile_router)
+app.include_router(booking_router)
+app.include_router(hotel_router)
 
 
 def _wrap_user_message(user_message: str, user_id: str | None, user_name: str | None) -> str:

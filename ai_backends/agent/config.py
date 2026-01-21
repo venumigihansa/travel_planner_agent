@@ -15,8 +15,7 @@ class Settings:
     pinecone_api_key: str
     pinecone_service_url: str
     pinecone_index_name: str
-    hotel_search_api_url: str
-    booking_api_url: str
+    xotelo_api_key: str | None
     weather_api_key: str | None
     weather_api_base_url: str
     pg_host: str
@@ -42,8 +41,7 @@ class Settings:
             pinecone_api_key=required("PINECONE_API_KEY"),
             pinecone_service_url=required("PINECONE_SERVICE_URL"),
             pinecone_index_name=os.getenv("PINECONE_INDEX_NAME", "hotel-policies"),
-            hotel_search_api_url=required("HOTEL_SEARCH_API_URL"),
-            booking_api_url=required("BOOKING_API_URL"),
+            xotelo_api_key=os.getenv("XOTELO_API_KEY"),
             weather_api_key=os.getenv("WEATHER_API_KEY"),
             weather_api_base_url=os.getenv("WEATHER_API_BASE_URL", "http://api.weatherapi.com/v1"),
             pg_host=required("PG_HOST"),

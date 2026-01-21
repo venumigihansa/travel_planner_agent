@@ -14,6 +14,14 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from pydantic import BaseModel, Field
 
 from config import Settings
+from booking.booking_store import get_bookings
+from hotel.hotel_search import (
+    HotelSearchError,
+    XoteloConfigError,
+    check_availability,
+    get_hotel_details,
+    search_hotels,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -82,14 +90,17 @@ def build_tools(settings: Settings):
         if not candidate_name:
             return None
         logger.info("Resolving hotel id from name: %s", candidate_name)
-        search_url = f"{settings.hotel_search_api_url}/hotels/search"
-        response = requests.get(
-            search_url,
-            params={"destination": candidate_name, "page": 1, "pageSize": 10},
-            timeout=30,
-        )
-        response.raise_for_status()
-        hotels = (response.json() or {}).get("hotels", [])
+        try:
+            payload = search_hotels(
+                settings.xotelo_api_key,
+                destination=candidate_name,
+                page=1,
+                page_size=10,
+            )
+        except (HotelSearchError, XoteloConfigError):
+            logger.exception("Failed to resolve hotel id from name")
+            return None
+        hotels = (payload or {}).get("hotels", [])
         match = next(
             (
                 hotel
@@ -121,11 +132,7 @@ def build_tools(settings: Settings):
                     row = cur.fetchone()
                     bookings = []
                     if include_bookings:
-                        cur.execute(
-                            "SELECT details FROM bookings WHERE user_id = %s ORDER BY booking_date DESC",
-                            (user_id,),
-                        )
-                        bookings = [record[0] for record in cur.fetchall()]
+                        bookings = get_bookings(user_id)
             if row:
                 username, interests = row
                 logger.info("get_user_profile_tool found personalization data.")
@@ -147,6 +154,12 @@ def build_tools(settings: Settings):
             return "No personalization found for this user."
         except Exception:
             logger.exception("get_user_profile_tool failed; continuing without personalization.")
+            if include_bookings:
+                bookings = get_bookings(user_id)
+                return json.dumps(
+                    {"username": None, "interests": [], "bookings": bookings},
+                    ensure_ascii=True,
+                )
             return "Personalization unavailable; continue without it."
 
     @tool
@@ -215,19 +228,39 @@ def build_tools(settings: Settings):
             "sortBy": sort_by,
         }
         params = {k: v for k, v in params.items() if v is not None}
-        url = f"{settings.hotel_search_api_url}/hotels/search"
-        response = requests.get(url, params=params, timeout=60)
-        response.raise_for_status()
-        return response.json()
+        try:
+            return search_hotels(
+                settings.xotelo_api_key,
+                destination=params.get("destination"),
+                check_in_date=params.get("checkInDate"),
+                check_out_date=params.get("checkOutDate"),
+                guests=params.get("guests", 1),
+                rooms=params.get("rooms", 1),
+                min_price=params.get("minPrice"),
+                max_price=params.get("maxPrice"),
+                min_rating=params.get("minRating"),
+                amenities=params.get("amenities"),
+                sort_by=params.get("sortBy"),
+                page=params.get("page", 1),
+                page_size=params.get("pageSize", 10),
+            )
+        except XoteloConfigError as exc:
+            return {"error": str(exc)}
+        except HotelSearchError:
+            logger.exception("search_hotels_tool failed")
+            return {"error": "Hotel search failed."}
 
     @tool
     def get_hotel_info_tool(hotel_id: str) -> dict[str, Any]:
         """Retrieve detailed information about a hotel."""
         logger.info("get_hotel_info_tool called: hotel_id=%s", hotel_id)
-        url = f"{settings.hotel_search_api_url}/hotels/{hotel_id}"
-        response = requests.get(url, timeout=30)
-        response.raise_for_status()
-        return response.json()
+        try:
+            return get_hotel_details(settings.xotelo_api_key, hotel_id=hotel_id)
+        except XoteloConfigError as exc:
+            return {"error": str(exc)}
+        except HotelSearchError:
+            logger.exception("get_hotel_info_tool failed")
+            return {"error": "Hotel details unavailable."}
 
     @tool
     def check_hotel_availability_tool(
@@ -256,10 +289,20 @@ def build_tools(settings: Settings):
             "guests": guests,
             "roomCount": room_count,
         }
-        url = f"{settings.hotel_search_api_url}/hotels/{resolved_id}/availability"
-        response = requests.get(url, params=params, timeout=30)
-        response.raise_for_status()
-        return response.json()
+        try:
+            return check_availability(
+                settings.xotelo_api_key,
+                hotel_id=resolved_id,
+                check_in_date=params["checkInDate"],
+                check_out_date=params["checkOutDate"],
+                guests=params["guests"],
+                room_count=params["roomCount"],
+            )
+        except XoteloConfigError as exc:
+            return {"error": str(exc)}
+        except HotelSearchError:
+            logger.exception("check_hotel_availability_tool failed")
+            return {"error": "Hotel availability unavailable."}
 
     @tool(args_schema=BookingRequest)
     def create_booking_tool(
@@ -295,10 +338,9 @@ def build_tools(settings: Settings):
             "primaryGuest": primaryGuest.model_dump(),
             "specialRequests": specialRequests.model_dump() if specialRequests else None,
         }
-        url = f"{settings.booking_api_url}/bookings"
-        response = requests.post(url, json=payload, timeout=30)
-        response.raise_for_status()
-        return response.json()
+        from booking.booking_store import create_booking
+
+        return create_booking(payload, userId, settings.xotelo_api_key)
 
     @tool
     def get_weather_forecast_tool(location: str, date: str | None = None) -> str:
