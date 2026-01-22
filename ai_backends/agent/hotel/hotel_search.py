@@ -117,6 +117,7 @@ def _build_rooms_from_rates(
     for rate in rates:
         rate_code = rate.get("code") or "OTA"
         rate_name = rate.get("name") or "OTA"
+        booking_url = rate.get("link") or rate.get("url") or ""
         rooms_out.append(
             {
                 "roomId": f"{hotel_id}_{rate_code}",
@@ -126,6 +127,7 @@ def _build_rooms_from_rates(
                 "description": f"Book through {rate_name}",
                 "maxOccupancy": guests,
                 "pricePerNight": _parse_float(rate.get("rate")),
+                "bookingUrl": booking_url,
                 "images": [],
                 "amenities": [],
                 "availableCount": 1,

@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 
 interface SearchHeroProps {
   onSearch?: (query: string) => void;
+  compact?: boolean;
 }
 
-export function SearchHero({ onSearch }: SearchHeroProps) {
+export function SearchHero({ onSearch, compact = false }: SearchHeroProps) {
   const [query, setQuery] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
@@ -17,7 +18,11 @@ export function SearchHero({ onSearch }: SearchHeroProps) {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-primary text-white py-8 px-6 shadow-2xl shadow-primary/20">
+    <div
+      className={`relative overflow-hidden rounded-3xl bg-primary text-white shadow-2xl shadow-primary/20 ${
+        compact ? "py-5 px-5" : "py-8 px-6"
+      }`}
+    >
       <div className="relative z-10 max-w-3xl mx-auto space-y-6">
         <form 
           onSubmit={handleSearch}
@@ -29,7 +34,9 @@ export function SearchHero({ onSearch }: SearchHeroProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Ask me where you want to go..."
-              className="w-full h-14 pl-6 pr-14 rounded-2xl bg-white text-foreground placeholder:text-muted-foreground shadow-xl focus:outline-none focus:ring-4 focus:ring-accent/30 transition-all text-base md:text-lg font-medium"
+              className={`w-full pl-6 pr-14 rounded-2xl bg-white text-foreground placeholder:text-muted-foreground shadow-xl focus:outline-none focus:ring-4 focus:ring-accent/30 transition-all font-medium ${
+                compact ? "h-12 text-base" : "h-14 text-base md:text-lg"
+              }`}
             />
             <button 
               type="submit"

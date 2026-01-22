@@ -18,11 +18,8 @@ class Settings:
     xotelo_api_key: str | None
     weather_api_key: str | None
     weather_api_base_url: str
-    pg_host: str
-    pg_port: int
-    pg_database: str
-    pg_user: str
-    pg_password: str | None
+    serper_api_key: str | None
+    nominatim_base_url: str | None
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -37,16 +34,13 @@ class Settings:
             openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
             openai_embedding_model=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
             user_id=required("USER_ID"),
-            user_name=os.getenv("USER_NAME", "John Smith"),
+            user_name=os.getenv("USER_NAME", "venumi"),
             pinecone_api_key=required("PINECONE_API_KEY"),
             pinecone_service_url=required("PINECONE_SERVICE_URL"),
             pinecone_index_name=os.getenv("PINECONE_INDEX_NAME", "hotel-policies"),
             xotelo_api_key=os.getenv("XOTELO_API_KEY"),
             weather_api_key=os.getenv("WEATHER_API_KEY"),
             weather_api_base_url=os.getenv("WEATHER_API_BASE_URL", "http://api.weatherapi.com/v1"),
-            pg_host=required("PG_HOST"),
-            pg_port=int(os.getenv("PG_PORT", "5432")),
-            pg_database=required("PG_DATABASE"),
-            pg_user=required("PG_USER"),
-            pg_password=os.getenv("PG_PASSWORD"),
+            serper_api_key=os.getenv("SERPER_API_KEY"),
+            nominatim_base_url=os.getenv("NOMINATIM_BASE_URL", "https://nominatim.openstreetmap.org"),
         )

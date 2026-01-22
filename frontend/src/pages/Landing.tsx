@@ -1,13 +1,11 @@
 import { Navbar } from "components/Navbar";
 import { Footer } from "components/Footer";
-import { useHotels } from "hooks/use-hotels";
 import { motion } from "framer-motion";
 import { Button } from "components/ui/button";
 import { useLocation } from "wouter";
-import { ArrowRight, Sparkles, MapPin, Star } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Landing() {
-  const { data: hotels } = useHotels();
   const [, setLocation] = useLocation();
 
   const trendingLocations = [
@@ -82,52 +80,6 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Featured Hotels */}
-        <section className="py-20 bg-secondary/20">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <h2 className="text-4xl font-display font-bold mb-2">Editor's Choice</h2>
-                <p className="text-muted-foreground">Hand-picked luxury stays around the world</p>
-              </div>
-              <Button variant="ghost" className="text-primary font-semibold" onClick={() => setLocation("/assistant")}>
-                View all in chat
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {hotels?.slice(0, 3).map((hotel) => (
-                <motion.div
-                  key={hotel.id}
-                  whileHover={{ y: -10 }}
-                  className="bg-card rounded-3xl overflow-hidden shadow-xl border border-border/50 group"
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <img src={hotel.imageUrl} alt={hotel.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-bold">{hotel.rating}</span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-1 text-muted-foreground text-sm mb-2">
-                      <MapPin className="w-3 h-3" />
-                      {hotel.location}
-                    </div>
-                    <h3 className="text-xl font-bold mb-4 font-display line-clamp-1">{hotel.name}</h3>
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <span className="text-2xl font-bold text-primary">${hotel.pricePerNight}</span>
-                        <span className="text-muted-foreground text-sm"> / night</span>
-                      </div>
-                      <Button onClick={() => setLocation(`/hotels/${hotel.id}`)} variant="outline" className="rounded-xl">View Details</Button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

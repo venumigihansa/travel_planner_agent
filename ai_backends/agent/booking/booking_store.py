@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timezone
+import json
 import logging
+import os
 import threading
 import uuid
 from typing import Any
@@ -11,7 +13,34 @@ from hotel.hotel_search import build_rooms_from_rates, fetch_room_rates, XoteloC
 logger = logging.getLogger(__name__)
 
 _store_lock = threading.Lock()
-_bookings_by_user: dict[str, list[dict[str, Any]]] = {}
+_STORE_PATH = os.getenv(
+    "BOOKING_STORE_PATH",
+    os.path.join(os.path.dirname(__file__), "..", "data", "bookings.json"),
+)
+
+
+def _load_store() -> dict[str, list[dict[str, Any]]]:
+    if not os.path.exists(_STORE_PATH):
+        return {}
+    try:
+        with open(_STORE_PATH, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        if isinstance(data, dict):
+            return data
+    except (OSError, json.JSONDecodeError):
+        logger.exception("failed to load booking store")
+    return {}
+
+
+def _save_store(store: dict[str, list[dict[str, Any]]]) -> None:
+    os.makedirs(os.path.dirname(_STORE_PATH), exist_ok=True)
+    tmp_path = f"{_STORE_PATH}.tmp"
+    with open(tmp_path, "w", encoding="utf-8") as handle:
+        json.dump(store, handle, ensure_ascii=True, indent=2)
+    os.replace(tmp_path, _STORE_PATH)
+
+
+_bookings_by_user: dict[str, list[dict[str, Any]]] = _load_store()
 
 
 def _get_current_timestamp() -> str:
@@ -123,6 +152,7 @@ def create_booking(payload: dict[str, Any], user_id: str, api_key: str | None) -
 
     with _store_lock:
         _bookings_by_user.setdefault(user_id, []).insert(0, new_booking)
+        _save_store(_bookings_by_user)
 
     return {
         "bookingId": booking_id,
@@ -135,6 +165,38 @@ def create_booking(payload: dict[str, Any], user_id: str, api_key: str | None) -
 def get_bookings(user_id: str) -> list[dict[str, Any]]:
     with _store_lock:
         return [dict(b) for b in _bookings_by_user.get(user_id, [])]
+
+
+def record_booking_summary(user_id: str, summary: dict[str, Any]) -> dict[str, Any] | None:
+    booking_id = summary.get("bookingId") or _generate_booking_id()
+    confirmation_number = summary.get("confirmationNumber") or _generate_confirmation_number()
+    new_booking = {
+        "bookingId": booking_id,
+        "hotelId": summary.get("hotelId"),
+        "hotelName": summary.get("hotelName"),
+        "rooms": summary.get("rooms"),
+        "roomType": summary.get("roomType"),
+        "provider": summary.get("provider"),
+        "userId": user_id,
+        "checkInDate": summary.get("checkInDate"),
+        "checkOutDate": summary.get("checkOutDate"),
+        "numberOfGuests": summary.get("numberOfGuests"),
+        "numberOfRooms": summary.get("numberOfRooms"),
+        "pricing": summary.get("pricing") or [],
+        "bookingStatus": summary.get("bookingStatus") or "CONFIRMED",
+        "bookingDate": summary.get("bookingDate") or _get_current_timestamp(),
+        "confirmationNumber": confirmation_number,
+        "specialRequests": summary.get("specialRequests"),
+    }
+
+    with _store_lock:
+        bookings = _bookings_by_user.setdefault(user_id, [])
+        for booking in bookings:
+            if booking.get("bookingId") == booking_id:
+                return dict(booking)
+        bookings.insert(0, new_booking)
+        _save_store(_bookings_by_user)
+    return dict(new_booking)
 
 
 def get_booking(user_id: str, booking_id: str) -> dict[str, Any] | None:
@@ -152,5 +214,6 @@ def cancel_booking(user_id: str, booking_id: str) -> dict[str, Any] | None:
             if booking.get("bookingId") == booking_id:
                 booking["bookingStatus"] = "CANCELLED"
                 booking["cancellationDate"] = _get_current_timestamp()
+                _save_store(_bookings_by_user)
                 return dict(booking)
     return None

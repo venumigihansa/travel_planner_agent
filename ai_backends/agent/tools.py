@@ -4,8 +4,6 @@ import logging
 from typing import Any
 import json
 
-
-import psycopg
 import requests
 from pinecone import Pinecone
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -14,14 +12,15 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from pydantic import BaseModel, Field
 
 from config import Settings
-from booking.booking_store import get_bookings
 from hotel.hotel_search import (
     HotelSearchError,
     XoteloConfigError,
     check_availability,
+    fetch_room_rates,
     get_hotel_details,
     search_hotels,
 )
+from request_context import get_current_user_id
 
 logger = logging.getLogger(__name__)
 
@@ -62,12 +61,12 @@ class BookingRequest(BaseModel):
     )
 
 
-def _pinecone_index(settings: Settings): #pineconece client initialization
+def _pinecone_index(settings: Settings):
     pc = Pinecone(api_key=settings.pinecone_api_key)
     return pc.Index(settings.pinecone_index_name, host=settings.pinecone_service_url)
 
 
-def _embedder(settings: Settings) -> OpenAIEmbeddings: #embedding client intialization
+def _embedder(settings: Settings) -> OpenAIEmbeddings:
     return OpenAIEmbeddings(
         model=settings.openai_embedding_model,
         api_key=settings.openai_api_key,
@@ -83,6 +82,26 @@ def _policy_llm(settings: Settings) -> ChatOpenAI:
 
 
 def build_tools(settings: Settings):
+    def _require_serper_api_key() -> str:
+        if not settings.serper_api_key:
+            raise ValueError("SERPER_API_KEY is not configured.")
+        return settings.serper_api_key
+
+    def _serper_post(payload: dict[str, Any]) -> dict[str, Any]:
+        api_key = _require_serper_api_key()
+        response = requests.post(
+            "https://google.serper.dev/search",
+            headers={"X-API-KEY": api_key, "Content-Type": "application/json"},
+            json=payload,
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response.json()
+
+    def _pick_first_organic(result: dict[str, Any]) -> dict[str, Any] | None:
+        organic = result.get("organic") or []
+        return organic[0] if organic else None
+
     def _resolve_hotel_id(hotel_id: str | None, hotel_name: str | None) -> str | None:
         candidate_name = hotel_name or hotel_id
         if hotel_id and hotel_id.strip() and " " not in hotel_id:
@@ -112,84 +131,165 @@ def build_tools(settings: Settings):
         return match.get("hotelId") if match else None
 
     @tool
-    def get_user_profile_tool(user_id: str | None = None, include_bookings: bool = True) -> str:
-        """Fetch personalization profile (and optionally bookings) from Postgres."""
-        user_id = user_id or settings.user_id
-        logger.info("get_user_profile_tool called: user_id=%s", user_id)
-        try:
-            with psycopg.connect(
-                host=settings.pg_host,
-                port=settings.pg_port,
-                dbname=settings.pg_database,
-                user=settings.pg_user,
-                password=settings.pg_password or None,
-            ) as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        "SELECT username, interests FROM user_activities WHERE user_id = %s",
-                        (user_id,),
-                    )
-                    row = cur.fetchone()
-                    bookings = []
-                    if include_bookings:
-                        bookings = get_bookings(user_id)
-            if row:
-                username, interests = row
-                logger.info("get_user_profile_tool found personalization data.")
-                if include_bookings:
-                    return json.dumps(
-                        {"username": username, "interests": interests or [], "bookings": bookings},
-                        ensure_ascii=True,
-                    )
-                return json.dumps(
-                    {"username": username, "interests": interests or []},
-                    ensure_ascii=True,
-                )
-            logger.info("get_user_profile_tool found no personalization data.")
-            if include_bookings:
-                return json.dumps(
-                    {"username": None, "interests": [], "bookings": bookings},
-                    ensure_ascii=True,
-                )
-            return "No personalization found for this user."
-        except Exception:
-            logger.exception("get_user_profile_tool failed; continuing without personalization.")
-            if include_bookings:
-                bookings = get_bookings(user_id)
-                return json.dumps(
-                    {"username": None, "interests": [], "bookings": bookings},
-                    ensure_ascii=True,
-                )
-            return "Personalization unavailable; continue without it."
+    def get_user_profile_tool(user_id: str | None = None, user_name: str | None = None) -> dict[str, Any]:
+        """Return basic user personalization details from environment defaults."""
+        resolved_user_id = user_id or settings.user_id
+        resolved_user_name = user_name or settings.user_name
+        return {
+            "userId": resolved_user_id,
+            "username": resolved_user_name,
+            "interests": [],
+            "source": "env",
+        }
 
     @tool
-    def query_hotel_policy_tool(question: str, hotel_id: str) -> str:
-        """Retrieve hotel policy details for a given hotel ID."""
-        index = _pinecone_index(settings)
-        embedder = _embedder(settings)
-        query_vector = embedder.embed_query(question)
-        response = index.query(
-            vector=query_vector,
-            top_k=5,
-            include_metadata=True,
-            filter={"hotelId": {"$eq": hotel_id}},
-        )
-        matches = response.get("matches", [])
-        context_chunks = [m.get("metadata", {}).get("content", "") for m in matches]
-        context = "\n\n".join([c for c in context_chunks if c])
-        if not context:
-            return "No policy information found for that hotel."
-
-        llm = _policy_llm(settings)
-        system = SystemMessage(
-            content=(
-                "You are a hotel policy assistant. Answer only using the provided context. "
-                "If the answer is not in the context, say so."
+    def query_hotel_policy_tool(
+        question: str,
+        hotel_id: str | None = None,
+        hotel_name: str | None = None,
+    ) -> str:
+        """Retrieve hotel policy details; fall back to web search if not found in Pinecone."""
+        resolved_id = _resolve_hotel_id(hotel_id, hotel_name)
+        if resolved_id:
+            index = _pinecone_index(settings)
+            embedder = _embedder(settings)
+            query_vector = embedder.embed_query(question)
+            response = index.query(
+                vector=query_vector,
+                top_k=5,
+                include_metadata=True,
+                filter={"hotelId": {"$eq": resolved_id}},
             )
+            matches = response.get("matches", [])
+            context_chunks = [m.get("metadata", {}).get("content", "") for m in matches]
+            context = "\n\n".join([c for c in context_chunks if c])
+            if context:
+                llm = _policy_llm(settings)
+                system = SystemMessage(
+                    content=(
+                        "You are a hotel policy assistant. Answer only using the provided context. "
+                        "If the answer is not in the context, say so."
+                    )
+                )
+                user = HumanMessage(content=f"Question: {question}\n\nContext:\n{context}")
+                result = llm.invoke([system, user])
+                return json.dumps(
+                    {
+                        "found": True,
+                        "source": "pinecone",
+                        "hotelId": resolved_id,
+                        "answer": result.content,
+                    },
+                    ensure_ascii=True,
+                )
+
+            policy_result = {
+                "found": False,
+                "source": "pinecone",
+                "hotelId": resolved_id,
+                "answer": "",
+            }
+            if policy_result.get("found"):
+                return json.dumps(policy_result, ensure_ascii=True)
+
+        if not hotel_name and not resolved_id:
+            return json.dumps(
+                {
+                    "found": False,
+                    "source": "serper",
+                    "hotelId": resolved_id,
+                    "answer": "",
+                    "note": "Hotel name or ID required for web search.",
+                },
+                ensure_ascii=True,
+            )
+
+        query_name = hotel_name or hotel_id or resolved_id or ""
+        web_result = search_policy_web_tool.invoke({"hotel_name": query_name, "question": question})
+        try:
+            web_payload = json.loads(web_result)
+        except json.JSONDecodeError:
+            return json.dumps(
+                {
+                    "found": False,
+                    "source": "serper",
+                    "hotelId": resolved_id,
+                    "answer": "",
+                    "error": "Failed to parse web search result.",
+                },
+                ensure_ascii=True,
+            )
+
+        return json.dumps(
+            {
+                "found": bool(web_payload.get("found")),
+                "source": web_payload.get("source", "serper"),
+                "hotelId": resolved_id,
+                "answer": web_payload.get("snippet", ""),
+                "title": web_payload.get("title", ""),
+                "url": web_payload.get("url", ""),
+                "query": web_payload.get("query", ""),
+            },
+            ensure_ascii=True,
         )
-        user = HumanMessage(content=f"Question: {question}\n\nContext:\n{context}")
-        result = llm.invoke([system, user])
-        return result.content
+
+    @tool
+    def search_policy_web_tool(hotel_name: str, question: str) -> str:
+        """Search the web for hotel policy pages (Serper)."""
+        query = f"{hotel_name} {question}"
+        try:
+            result = _serper_post({"q": query})
+        except Exception as exc:
+            logger.exception("search_policy_web_tool failed")
+            return json.dumps(
+                {"error": str(exc), "source": "serper", "query": query},
+                ensure_ascii=True,
+            )
+        top = _pick_first_organic(result)
+        if not top:
+            return json.dumps(
+                {"found": False, "source": "serper", "query": query},
+                ensure_ascii=True,
+            )
+        return json.dumps(
+            {
+                "found": True,
+                "source": "serper",
+                "query": query,
+                "title": top.get("title"),
+                "url": top.get("link"),
+                "snippet": top.get("snippet"),
+            },
+            ensure_ascii=True,
+        )
+
+    @tool
+    def geocode_hotel_tool(address: str) -> dict[str, Any]:
+        """Resolve an address to latitude/longitude via Nominatim."""
+        base_url = (settings.nominatim_base_url or "https://nominatim.openstreetmap.org").rstrip("/")
+        try:
+            response = requests.get(
+                f"{base_url}/search",
+                params={"q": address, "format": "json", "limit": 1},
+                headers={"User-Agent": "travel-planner-agent/1.0"},
+                timeout=30,
+            )
+            response.raise_for_status()
+        except Exception as exc:
+            logger.exception("geocode_hotel_tool failed")
+            return {"error": str(exc)}
+        results = response.json()
+        if not results:
+            return {"error": "No geocoding results found."}
+        top = results[0]
+        lat = top.get("lat")
+        lon = top.get("lon")
+        return {
+            "lat": float(lat) if lat else None,
+            "lon": float(lon) if lon else None,
+            "map_url": f"https://www.openstreetmap.org/?mlat={lat}&mlon={lon}#map=18/{lat}/{lon}",
+            "display_name": top.get("display_name"),
+        }
 
     @tool
     def search_hotels_tool(
@@ -251,11 +351,17 @@ def build_tools(settings: Settings):
             return {"error": "Hotel search failed."}
 
     @tool
-    def get_hotel_info_tool(hotel_id: str) -> dict[str, Any]:
+    def get_hotel_info_tool(hotel_id: str | None = None, hotel_name: str | None = None) -> dict[str, Any]:
         """Retrieve detailed information about a hotel."""
-        logger.info("get_hotel_info_tool called: hotel_id=%s", hotel_id)
+        candidate = hotel_id or hotel_name or ""
+        if candidate.lower().startswith("user_"):
+            return {"error": "Invalid hotel_id provided. Ask for a hotel name or destination."}
+        resolved_id = _resolve_hotel_id(hotel_id, hotel_name)
+        if not resolved_id:
+            return {"error": "Hotel not found. Provide a valid hotel_id or hotel_name."}
+        logger.info("get_hotel_info_tool called: hotel_id=%s", resolved_id)
         try:
-            return get_hotel_details(settings.xotelo_api_key, hotel_id=hotel_id)
+            return get_hotel_details(settings.xotelo_api_key, hotel_id=resolved_id)
         except XoteloConfigError as exc:
             return {"error": str(exc)}
         except HotelSearchError:
@@ -275,6 +381,9 @@ def build_tools(settings: Settings):
         resolved_id = _resolve_hotel_id(hotel_id, hotel_name)
         if not resolved_id:
             return {"error": "Hotel not found. Provide a valid hotel_id or hotel_name."}
+        candidate_name = hotel_name
+        if not candidate_name and hotel_id and " " in hotel_id:
+            candidate_name = hotel_id
         logger.info(
             "check_hotel_availability_tool called: hotel_id=%s check_in_date=%s check_out_date=%s guests=%s room_count=%s",
             resolved_id,
@@ -290,7 +399,7 @@ def build_tools(settings: Settings):
             "roomCount": room_count,
         }
         try:
-            return check_availability(
+            availability = check_availability(
                 settings.xotelo_api_key,
                 hotel_id=resolved_id,
                 check_in_date=params["checkInDate"],
@@ -298,6 +407,28 @@ def build_tools(settings: Settings):
                 guests=params["guests"],
                 room_count=params["roomCount"],
             )
+            rooms = availability.get("availableRooms") or []
+            provider_links: dict[str, str] = {}
+            if candidate_name and rooms:
+                for room in rooms:
+                    if room.get("bookingUrl"):
+                        continue
+                    room_name = str(room.get("roomName") or "")
+                    provider = room_name.replace("Room via", "").strip()
+                    if not provider:
+                        continue
+                    if provider not in provider_links:
+                        query = f"{candidate_name} {provider} booking"
+                        try:
+                            result = _serper_post({"q": query})
+                        except Exception:
+                            logger.exception("booking link lookup failed for provider=%s", provider)
+                            provider_links[provider] = ""
+                        else:
+                            top = _pick_first_organic(result)
+                            provider_links[provider] = top.get("link") if top else ""
+                    room["bookingUrl"] = provider_links.get(provider, "")
+            return availability
         except XoteloConfigError as exc:
             return {"error": str(exc)}
         except HotelSearchError:
@@ -318,16 +449,17 @@ def build_tools(settings: Settings):
         hotelName: str | None = None,
     ) -> dict[str, Any]:
         """Create a booking via the booking API."""
+        resolved_user_id = get_current_user_id() or userId
         logger.info(
             "create_booking_tool called: user_id=%s hotel_id=%s check_in_date=%s check_out_date=%s number_of_rooms=%s",
-            userId,
+            resolved_user_id,
             hotelId,
             checkInDate,
             checkOutDate,
             numberOfRooms,
         )
         payload = {
-            "userId": userId,
+            "userId": resolved_user_id,
             "hotelId": hotelId,
             "hotelName": hotelName,
             "rooms": [room.model_dump() for room in rooms],
@@ -340,7 +472,62 @@ def build_tools(settings: Settings):
         }
         from booking.booking_store import create_booking
 
-        return create_booking(payload, userId, settings.xotelo_api_key)
+        return create_booking(payload, resolved_user_id, settings.xotelo_api_key)
+
+    @tool
+    def booking_handoff_tool(
+        hotel_name: str,
+        city: str,
+        check_in_date: str,
+        check_out_date: str,
+        guests: int = 2,
+        room_count: int = 1,
+    ) -> dict[str, Any]:
+        """Provide booking provider links without completing a booking."""
+        resolved_id = _resolve_hotel_id(None, hotel_name)
+        if not resolved_id:
+            return {"error": "Hotel not found. Provide a valid hotel name."}
+        try:
+            rates = fetch_room_rates(
+                settings.xotelo_api_key,
+                hotel_id=resolved_id,
+                check_in_date=check_in_date,
+                check_out_date=check_out_date,
+                guests=guests,
+                room_count=room_count,
+            )
+        except Exception as exc:
+            logger.exception("booking_handoff_tool failed")
+            return {"error": str(exc)}
+
+        deals = []
+        for rate in rates:
+            link = rate.get("link") or rate.get("url")
+            deals.append(
+                {
+                    "provider": rate.get("name") or rate.get("provider"),
+                    "price": rate.get("rate"),
+                    "currency": rate.get("currency"),
+                    "link": link,
+                }
+            )
+
+        official_query = f"{hotel_name} {city} official site"
+        official = None
+        try:
+            official_payload = _serper_post({"q": official_query})
+            top = _pick_first_organic(official_payload)
+            if top:
+                official = {"title": top.get("title"), "url": top.get("link")}
+        except Exception:
+            logger.exception("booking_handoff_tool official site lookup failed")
+
+        return {
+            "hotelId": resolved_id,
+            "hotelName": hotel_name,
+            "officialSite": official,
+            "deals": deals,
+        }
 
     @tool
     def get_weather_forecast_tool(location: str, date: str | None = None) -> str:
@@ -362,9 +549,12 @@ def build_tools(settings: Settings):
     return [
         get_user_profile_tool,
         query_hotel_policy_tool,
+        search_policy_web_tool,
+        geocode_hotel_tool,
         search_hotels_tool,
         get_hotel_info_tool,
         create_booking_tool,
+        booking_handoff_tool,
         check_hotel_availability_tool,
         get_weather_forecast_tool,
     ]
