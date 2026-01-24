@@ -23,8 +23,6 @@ Create `ai_backends/agent/.env` (use `ai_backends/agent/.env.example` as a templ
 OPENAI_API_KEY=...
 OPENAI_MODEL=gpt-4o-mini
 OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-USER_ID=user_john_001
-USER_NAME=John Smith
 PINECONE_API_KEY=...
 PINECONE_SERVICE_URL=https://your-index.svc.your-region.pinecone.io
 PINECONE_INDEX_NAME=hotel-policies
@@ -43,9 +41,9 @@ Defaults if omitted:
 Optional (only if you use profile endpoints):
 
 ```bash
-CLERK_JWKS_URL=...
-CLERK_ISSUER=...
-CLERK_AUDIENCE=...
+ASGARDEO_JWKS_URL=...
+ASGARDEO_ISSUER=...
+ASGARDEO_AUDIENCE=...
 ```
 
 ## Run
@@ -58,4 +56,4 @@ uvicorn app:app --host 0.0.0.0 --port 9090
 - `query_hotel_policy_tool` expects Pinecone metadata with a `content` field and `hotelId` filter, matching the ingest pipeline in `ai_backends/ingest/ingest.py`.
 - `SERPER_API_KEY` is required for the web-search fallback when Pinecone has no policy matches.
 - Hotel search and booking run inside the agent service; booking state is stored in `ai_backends/agent/data`.
-- Profile endpoints (`/users`) require Clerk verification and Postgres; see `resources/create_tables.sql` for the schema.
+- Profile endpoints (`/users`) require Asgardeo verification and Postgres; see `resources/create_tables.sql` for the schema.

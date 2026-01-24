@@ -4,6 +4,7 @@ import { Navbar } from "components/Navbar";
 import { Footer } from "components/Footer";
 import { Button } from "components/ui/button";
 import { Calendar, CheckCircle2, User } from "lucide-react";
+import { useAsgardeo } from "@asgardeo/react";
 
 type Booking = {
   bookingId: string;
@@ -81,19 +82,26 @@ const formatCurrency = (value?: number, currency?: string) => {
 };
 
 export default function BookingSummary() {
+  const { getAccessToken, isSignedIn } = useAsgardeo();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const controller = new AbortController();
     const loadBookings = async () => {
       try {
+        if (!isSignedIn) {
+          setBookings([]);
+          setLoading(false);
+          return;
+        }
         const userId = getOrCreateUserId();
-        const response = await fetch(`${API_BASE_URL}/bookings`, {
-          headers: { "x-user-id": userId },
-          signal: controller.signal,
-        });
+        const token = await getAccessToken();
+        const headers: Record<string, string> = { "x-user-id": userId };
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
+        const response = await fetch(`${API_BASE_URL}/bookings`, { headers });
         if (!response.ok) {
           throw new Error(`Failed to load bookings: ${response.status}`);
         }
@@ -112,8 +120,7 @@ export default function BookingSummary() {
       }
     };
     loadBookings();
-    return () => controller.abort();
-  }, []);
+  }, [getAccessToken, isSignedIn]);
 
   return (
     <div className="min-h-screen flex flex-col bg-muted/20">

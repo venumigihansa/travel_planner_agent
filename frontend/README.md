@@ -15,12 +15,14 @@ Update `frontend/.env` as needed:
 PORT=3001
 REACT_APP_CHAT_API_URL=http://localhost:9090/travelPlanner/chat
 REACT_APP_API_BASE_URL=http://localhost:9090
-REACT_APP_CLERK_PUBLISHABLE_KEY=pk_test_...
+REACT_APP_ASGARDEO_CLIENT_ID=...
+REACT_APP_ASGARDEO_BASE_URL=https://api.asgardeo.io/t/<org>
+REACT_APP_ASGARDEO_SCOPES=openid profile email
 ```
 
 `REACT_APP_CHAT_API_URL` defaults to `http://localhost:9090/travelPlanner/chat`.
 `REACT_APP_API_BASE_URL` is the FastAPI agent base URL for booking/profile endpoints.
-`REACT_APP_CLERK_PUBLISHABLE_KEY` comes from your Clerk dashboard under API Keys.
+`REACT_APP_ASGARDEO_CLIENT_ID` and `REACT_APP_ASGARDEO_BASE_URL` come from your Asgardeo app settings.
 
 ## Run
 

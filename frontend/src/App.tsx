@@ -1,4 +1,5 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import { useAsgardeo } from "@asgardeo/react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "components/ui/toaster";
@@ -8,8 +9,28 @@ import Home from "pages/Home";
 import Landing from "pages/Landing";
 import HotelDetails from "pages/HotelDetails";
 import BookingSummary from "pages/BookingSummary";
+import SignIn from "pages/SignIn";
 
 function Router() {
+  const { isSignedIn, isLoading } = useAsgardeo();
+  const [location] = useLocation();
+  const requiresAuth =
+    location.startsWith("/assistant") ||
+    location.startsWith("/bookings") ||
+    location.startsWith("/book/");
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-muted-foreground">Loading your session...</p>
+      </div>
+    );
+  }
+
+  if (!isSignedIn && requiresAuth) {
+    return <SignIn />;
+  }
+
   return (
     <Switch>
       <Route path="/" component={Landing} />
@@ -17,6 +38,7 @@ function Router() {
       <Route path="/bookings" component={BookingSummary} />
       <Route path="/hotels/:id" component={HotelDetails} />
       <Route path="/book/:hotelId" component={BookingSummary} />
+      <Route path="/signin" component={SignIn} />
       <Route component={NotFound} />
     </Switch>
   );

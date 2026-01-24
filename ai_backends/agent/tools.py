@@ -20,7 +20,6 @@ from hotel.hotel_search import (
     get_hotel_details,
     search_hotels,
 )
-from request_context import get_current_user_id
 
 logger = logging.getLogger(__name__)
 
@@ -132,14 +131,14 @@ def build_tools(settings: Settings):
 
     @tool
     def get_user_profile_tool(user_id: str | None = None, user_name: str | None = None) -> dict[str, Any]:
-        """Return basic user personalization details from environment defaults."""
-        resolved_user_id = user_id or settings.user_id
-        resolved_user_name = user_name or settings.user_name
+        """Return basic user personalization details from the request."""
+        resolved_user_id = user_id
+        resolved_user_name = user_name
         return {
             "userId": resolved_user_id,
             "username": resolved_user_name,
             "interests": [],
-            "source": "env",
+            "source": "request",
         }
 
     @tool
@@ -449,7 +448,7 @@ def build_tools(settings: Settings):
         hotelName: str | None = None,
     ) -> dict[str, Any]:
         """Create a booking via the booking API."""
-        resolved_user_id = get_current_user_id() or userId
+        resolved_user_id = userId
         logger.info(
             "create_booking_tool called: user_id=%s hotel_id=%s check_in_date=%s check_out_date=%s number_of_rooms=%s",
             resolved_user_id,

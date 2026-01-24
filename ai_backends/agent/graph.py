@@ -8,6 +8,8 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, END
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
+from langgraph.checkpoint.memory import InMemorySaver
+
 
 from config import Settings
 from tools import build_tools
@@ -101,4 +103,5 @@ def build_graph(settings: Settings):
     graph.add_edge("tools", "agent")
     graph.set_entry_point("agent")
 
-    return graph.compile()
+    checkpointer = InMemorySaver()
+    return graph.compile(checkpointer=checkpointer)

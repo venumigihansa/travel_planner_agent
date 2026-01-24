@@ -10,8 +10,6 @@ class Settings:
     openai_api_key: str
     openai_model: str
     openai_embedding_model: str
-    user_id: str
-    user_name: str
     pinecone_api_key: str
     pinecone_service_url: str
     pinecone_index_name: str
@@ -33,8 +31,6 @@ class Settings:
             openai_api_key=required("OPENAI_API_KEY"),
             openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
             openai_embedding_model=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
-            user_id=required("USER_ID"),
-            user_name=os.getenv("USER_NAME", "venumi"),
             pinecone_api_key=required("PINECONE_API_KEY"),
             pinecone_service_url=required("PINECONE_SERVICE_URL"),
             pinecone_index_name=os.getenv("PINECONE_INDEX_NAME", "hotel-policies"),

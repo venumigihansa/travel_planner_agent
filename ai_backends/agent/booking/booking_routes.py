@@ -8,6 +8,7 @@ from fastapi import APIRouter, Request
 
 from booking.booking_store import cancel_booking, create_booking, get_booking, get_bookings
 from config import Settings
+from auth import get_optional_user_id
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,9 @@ def _error_response(message: str, code: str) -> dict[str, Any]:
 
 
 def _resolve_user_id(request: Request, payload: dict[str, Any] | None = None) -> str | None:
+    token_user_id = get_optional_user_id(request)
+    if token_user_id:
+        return str(token_user_id)
     if payload and payload.get("userId"):
         return str(payload["userId"])
     header_user = request.headers.get("x-user-id")

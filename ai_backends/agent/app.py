@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import logging
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from langchain_core.messages import HumanMessage
 from pydantic import BaseModel
@@ -15,14 +15,6 @@ from graph import build_graph
 from booking.booking_routes import router as booking_router
 from hotel.hotel_routes import router as hotel_router
 from profile_routes import router as profile_router
-from chat_store import (
-    append_ui_message,
-    get_langchain_messages,
-    get_sessions_for_user,
-    set_langchain_messages,
-    update_title_from_query,
-)
-from request_context import reset_current_user_id, set_current_user_id
 from booking.booking_store import record_booking_summary
 
 _root_logger = logging.getLogger()
@@ -48,28 +40,10 @@ class ChatResponse(BaseModel):
     message: str
 
 
-class ChatMessage(BaseModel):
-    id: str
-    role: Literal["user", "assistant"]
-    content: str
-    createdAt: str | None = None
-
-
-class ChatSession(BaseModel):
-    id: str
-    sessionId: str
-    title: str
-    messages: list[ChatMessage]
-
-
-class ChatSessionsResponse(BaseModel):
-    sessions: list[ChatSession]
-
-
 app = FastAPI(title="Travel Planner Agent")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    allow_origins=["http://localhost:3001"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "Accept", "x-user-id"],
@@ -80,10 +54,10 @@ app.include_router(booking_router)
 app.include_router(hotel_router)
 
 
-def _wrap_user_message(user_message: str, user_id: str | None, user_name: str | None) -> str:
+def _wrap_user_message(user_message: str, user_id: str, user_name: str | None) -> str:
     now = datetime.now(timezone.utc).isoformat()
-    resolved_user_id = user_id or settings.user_id
-    resolved_user_name = user_name or settings.user_name
+    resolved_user_id = user_id
+    resolved_user_name = user_name or "Traveler"
     return (
         f"User Context (non-hotel identifiers): {resolved_user_name} ({resolved_user_id})\n"
         f"UTC Time now:\n{now}\n\n"
@@ -156,36 +130,28 @@ def _parse_booking_summary(message: str) -> dict[str, str | int | list[dict[str,
 @app.post("/travelPlanner/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
     session_id = request.sessionId or "default"
-    user_id = request.userId or settings.user_id
-    token = set_current_user_id(user_id)
-    try:
-        lc_messages = get_langchain_messages(session_id, user_id)
-        lc_messages.append(
-            HumanMessage(
-                content=_wrap_user_message(
-                    request.message,
-                    request.userId,
-                    request.userName,
-                )
-            )
+    if not request.userId:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="userId is required.",
         )
-        append_ui_message(session_id, user_id, "user", request.message)
-        result = agent_graph.invoke({"messages": lc_messages}, config={"recursion_limit": 50}) #add thread id here
+    user_id = request.userId
+    wrapped_message = _wrap_user_message(
+        request.message,
+        user_id,
+        request.userName,
+    )
+    thread_id = f"{user_id}:{session_id}"
+    result = agent_graph.invoke(
+        {"messages": [HumanMessage(content=wrapped_message)]},
+        config={
+            "recursion_limit": 50,
+            "configurable": {"thread_id": thread_id},
+        },
+    )
 
-        last_message = result["messages"][-1]
-        append_ui_message(session_id, user_id, "assistant", last_message.content)
-        set_langchain_messages(session_id, user_id, result["messages"])
-        update_title_from_query(session_id, user_id, request.message)
-        summary = _parse_booking_summary(last_message.content)
-        if summary:
-            record_booking_summary(user_id, summary)
-        return ChatResponse(message=last_message.content)
-    finally:
-        reset_current_user_id(token)
-
-
-@app.get("/travelPlanner/chat/sessions", response_model=ChatSessionsResponse)
-def list_chat_sessions(userId: str | None = None) -> ChatSessionsResponse:
-    user_id = userId or settings.user_id
-    sessions = get_sessions_for_user(user_id)
-    return ChatSessionsResponse(sessions=sessions)
+    last_message = result["messages"][-1]
+    summary = _parse_booking_summary(last_message.content)
+    if summary:
+        record_booking_summary(user_id, summary)
+    return ChatResponse(message=last_message.content)

@@ -2,6 +2,7 @@ import { Navbar } from "components/Navbar";
 import { SearchHero } from "components/SearchHero";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useAsgardeo } from "@asgardeo/react";
 import { Bot, User as UserIcon, Plus, History, MessageSquare } from "lucide-react";
 import { Button } from "components/ui/button";
 import { ChatHotelResults } from "components/ChatHotelResults";
@@ -129,6 +130,7 @@ const buildNewSession = (): ChatSession => {
 };
 
 export default function Home() {
+  const { isSignedIn, getAccessToken, user } = useAsgardeo();
   const [sessions, setSessions] = useState<ChatSession[]>(() => [buildNewSession()]);
   const [activeSessionId, setActiveSessionId] = useState(sessions[0]?.id ?? "");
   const [userId, setUserId] = useState<string | null>(null);
@@ -136,19 +138,42 @@ export default function Home() {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    setUserId(getOrCreateUserId());
-  }, []);
+    let isMounted = true;
+    const loadUserId = async () => {
+      if (!isSignedIn) {
+        return;
+      }
+      try {
+        const resolved = user?.sub || user?.username || getOrCreateUserId();
+        if (isMounted) {
+          setUserId(resolved);
+        }
+      } catch {
+        if (isMounted) {
+          setUserId(getOrCreateUserId());
+        }
+      }
+    };
+    loadUserId();
+    return () => {
+      isMounted = false;
+    };
+  }, [isSignedIn, user]);
 
   useEffect(() => {
     if (!userId) {
       return;
     }
-    const controller = new AbortController();
     const loadSessions = async () => {
       try {
+        const token = isSignedIn ? await getAccessToken() : "";
+        const headers: Record<string, string> = { Accept: "application/json" };
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
         const response = await fetch(
           `${CHAT_SESSIONS_URL}?userId=${encodeURIComponent(userId)}`,
-          { signal: controller.signal }
+          { headers }
         );
         if (!response.ok) {
           return;
@@ -165,8 +190,7 @@ export default function Home() {
       }
     };
     loadSessions();
-    return () => controller.abort();
-  }, [userId]);
+  }, [getAccessToken, isSignedIn, userId]);
 
   const activeSession = sessions.find(s => s.id === activeSessionId) || sessions[0];
   const messages = activeSession.messages;
@@ -200,9 +224,14 @@ export default function Home() {
     ));
 
     try {
+      const token = isSignedIn ? await getAccessToken() : "";
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
       const response = await fetch(CHAT_API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({
           message: query,
           sessionId: activeSession.sessionId,

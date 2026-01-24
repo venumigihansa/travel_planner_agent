@@ -56,4 +56,4 @@ python ingest.py
 ## Notes
 - `.env` files are intentionally excluded from this repo.
 - The agent serves chat at `http://localhost:9090/travelPlanner/chat`.
-- Profile endpoints require Clerk configuration (`CLERK_JWKS_URL`, optional `CLERK_ISSUER`/`CLERK_AUDIENCE`) and Postgres. See `resources/create_tables.sql` for the schema.
+- Profile endpoints require Asgardeo configuration (`ASGARDEO_JWKS_URL`, optional `ASGARDEO_ISSUER`/`ASGARDEO_AUDIENCE`) and Postgres. See `resources/create_tables.sql` for the schema.
