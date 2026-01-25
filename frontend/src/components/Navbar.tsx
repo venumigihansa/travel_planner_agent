@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Compass, Menu } from "lucide-react";
+import { Compass, LogOut, Menu } from "lucide-react";
 import { Button } from "components/ui/button";
 import { SignedIn, SignedOut, SignInButton, SignOutButton, useAsgardeo } from "@asgardeo/react";
 
@@ -51,12 +51,23 @@ export function Navbar() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <span className="hidden sm:inline text-sm text-muted-foreground">
-              {isLoading ? "Hi..." : `Hi, ${displayName || "there"}`}
-            </span>
-            <SignOutButton className="rounded-xl border border-border px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted/40">
-              Sign Out
-            </SignOutButton>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-base font-semibold text-white shadow-sm">
+                  {(displayName || "U").charAt(0).toUpperCase()}
+                </div>
+                <div className="hidden sm:flex flex-col items-start">
+                  <span className="text-xs text-muted-foreground">Welcome back,</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {isLoading ? "..." : displayName || "there"}
+                  </span>
+                </div>
+              </div>
+              <SignOutButton className="flex items-center gap-2 rounded-full border border-border bg-white/10 px-4 py-2 text-sm font-medium text-foreground transition hover:-translate-y-0.5 hover:bg-muted/40">
+                <LogOut className="h-4 w-4" />
+                <span>Sign Out</span>
+              </SignOutButton>
+            </div>
           </SignedIn>
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="w-5 h-5" />

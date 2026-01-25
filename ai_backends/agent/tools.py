@@ -137,7 +137,6 @@ def build_tools(settings: Settings):
         return {
             "userId": resolved_user_id,
             "username": resolved_user_name,
-            "interests": [],
             "source": "request",
         }
 

@@ -93,6 +93,8 @@ const CHAT_API_URL =
   process.env.REACT_APP_CHAT_API_URL || "http://localhost:9090/travelPlanner/chat";
 const CHAT_SESSIONS_URL = `${CHAT_API_URL}/sessions`;
 const USER_ID_STORAGE_KEY = "travelPlannerUserId";
+const SESSION_STORAGE_KEY = "travelPlannerSessions";
+const ACTIVE_SESSION_STORAGE_KEY = "travelPlannerActiveSessionId";
 
 const createSessionId = () =>
   `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
@@ -129,13 +131,59 @@ const buildNewSession = (): ChatSession => {
   };
 };
 
+const loadStoredSessions = (): ChatSession[] | null => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  const raw = localStorage.getItem(SESSION_STORAGE_KEY);
+  if (!raw) {
+    return null;
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as ChatSession[]) : null;
+  } catch {
+    return null;
+  }
+};
+
+const loadStoredActiveSessionId = (): string | null => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  return localStorage.getItem(ACTIVE_SESSION_STORAGE_KEY);
+};
+
 export default function Home() {
   const { isSignedIn, getAccessToken, user } = useAsgardeo();
-  const [sessions, setSessions] = useState<ChatSession[]>(() => [buildNewSession()]);
-  const [activeSessionId, setActiveSessionId] = useState(sessions[0]?.id ?? "");
+  const [sessions, setSessions] = useState<ChatSession[]>(() => {
+    const stored = loadStoredSessions();
+    return stored && stored.length > 0 ? stored : [buildNewSession()];
+  });
+  const [activeSessionId, setActiveSessionId] = useState(() => {
+    const stored = loadStoredActiveSessionId();
+    const initial = stored || sessions[0]?.id;
+    return initial ?? "";
+  });
   const [userId, setUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(sessions));
+  }, [sessions]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    if (activeSessionId) {
+      localStorage.setItem(ACTIVE_SESSION_STORAGE_KEY, activeSessionId);
+    }
+  }, [activeSessionId]);
 
   useEffect(() => {
     let isMounted = true;
@@ -236,6 +284,14 @@ export default function Home() {
           message: query,
           sessionId: activeSession.sessionId,
           userId: effectiveUserId,
+          userName:
+            user?.name ||
+            user?.displayName ||
+            user?.given_name ||
+            user?.preferred_username ||
+            user?.username ||
+            user?.email ||
+            undefined,
         }),
       });
 
@@ -352,6 +408,9 @@ export default function Home() {
                           <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
                             components={{
+                              img: ({ ...props }) => (
+                                <img className="chat-markdown-image" {...props} />
+                              ),
                               a: ({ children, ...props }) => (
                                 <a {...props} target="_blank" rel="noopener noreferrer">
                                   {children}

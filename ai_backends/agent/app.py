@@ -12,9 +12,6 @@ import re
 
 from config import Settings
 from graph import build_graph
-from booking.booking_routes import router as booking_router
-from hotel.hotel_routes import router as hotel_router
-from profile_routes import router as profile_router
 from booking.booking_store import record_booking_summary
 
 _root_logger = logging.getLogger()
@@ -49,9 +46,6 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization", "Accept", "x-user-id"],
     max_age=84900,
 )
-app.include_router(profile_router)
-app.include_router(booking_router)
-app.include_router(hotel_router)
 
 
 def _wrap_user_message(user_message: str, user_id: str, user_name: str | None) -> str:
@@ -59,6 +53,7 @@ def _wrap_user_message(user_message: str, user_id: str, user_name: str | None) -
     resolved_user_id = user_id
     resolved_user_name = user_name or "Traveler"
     return (
+        f"User Name: {resolved_user_name}\n"
         f"User Context (non-hotel identifiers): {resolved_user_name} ({resolved_user_id})\n"
         f"UTC Time now:\n{now}\n\n"
         f"User Query:\n{user_message}"

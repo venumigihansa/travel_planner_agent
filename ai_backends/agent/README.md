@@ -6,7 +6,7 @@ Python LangGraph travel planner agent with hotel search, bookings, and policy re
 - Tool-calling agent for hotel search, booking, and policy queries
 - Pinecone policy retrieval with OpenAI embeddings
 - Chat endpoints at `/travelPlanner/chat` and `/travelPlanner/chat/sessions`
-- Hotel and booking REST endpoints (see `openapi.yaml`)
+- Booking REST endpoints
 
 ## Setup
 
@@ -41,9 +41,6 @@ Defaults if omitted:
 Optional (only if you use profile endpoints):
 
 ```bash
-ASGARDEO_JWKS_URL=...
-ASGARDEO_ISSUER=...
-ASGARDEO_AUDIENCE=...
 ```
 
 ## Run
@@ -56,4 +53,3 @@ uvicorn app:app --host 0.0.0.0 --port 9090
 - `query_hotel_policy_tool` expects Pinecone metadata with a `content` field and `hotelId` filter, matching the ingest pipeline in `ai_backends/ingest/ingest.py`.
 - `SERPER_API_KEY` is required for the web-search fallback when Pinecone has no policy matches.
 - Hotel search and booking run inside the agent service; booking state is stored in `ai_backends/agent/data`.
-- Profile endpoints (`/users`) require Asgardeo verification and Postgres; see `resources/create_tables.sql` for the schema.
