@@ -1,9 +1,8 @@
-import { Navbar } from "components/Navbar";
 import { SearchHero } from "components/SearchHero";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useAsgardeo } from "@asgardeo/react";
-import { Bot, User as UserIcon, Plus, History, MessageSquare } from "lucide-react";
+import { Plus, History, MessageSquare, PanelLeft, Globe } from "lucide-react";
 import { Button } from "components/ui/button";
 import { ChatHotelResults } from "components/ChatHotelResults";
 import ReactMarkdown from "react-markdown";
@@ -167,6 +166,7 @@ export default function Home() {
   });
   const [userId, setUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -248,6 +248,10 @@ export default function Home() {
     newSession.title = `New Trip Planning ${sessions.length + 1}`;
     setSessions(prev => [newSession, ...prev]);
     setActiveSessionId(newSession.id);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev);
   };
 
   const handleSearch = async (query: string) => {
@@ -339,43 +343,80 @@ export default function Home() {
   }, [messages, isLoading]);
 
   return (
-    <div className="min-h-screen flex bg-background">
+    <div className="min-h-screen flex bg-background tp-chat-shell">
       {/* Sidebar */}
-      <aside className="w-80 border-r border-border bg-card hidden md:flex flex-col">
+      <aside
+        className={`tp-chat-sidebar ${isSidebarOpen ? "tp-chat-sidebar--open" : "tp-chat-sidebar--closed"}`}
+        aria-hidden={!isSidebarOpen}
+      >
         <div className="p-4 border-b border-border">
-          <Button onClick={handleNewChat} className="w-full justify-start gap-2 bg-primary hover:bg-primary/90 text-white rounded-xl">
+          <Button onClick={handleNewChat} className="tp-chat-new-trip">
             <Plus className="w-4 h-4" />
-            New Trip
+            New Chat
           </Button>
         </div>
         
-        <div className="flex-grow overflow-y-auto p-2 space-y-1">
-          <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-            <History className="w-3 h-3" />
+        <div className="tp-chat-session-list">
+          <div className="tp-chat-session-heading">
+            <History className="w-4 h-4" />
             Recent Plans
           </div>
           {sessions.map(s => (
             <button
               key={s.id}
               onClick={() => setActiveSessionId(s.id)}
-              className={`w-full text-left px-3 py-3 rounded-xl transition-all flex items-center gap-3 ${
+              className={`tp-chat-session-button ${
                 activeSessionId === s.id 
-                ? 'bg-secondary text-primary font-bold shadow-sm' 
-                : 'hover:bg-muted text-muted-foreground'
+                ? 'tp-chat-session-button--active' 
+                : 'tp-chat-session-button--idle'
               }`}
             >
-              <MessageSquare className="w-4 h-4 shrink-0" />
+              <MessageSquare className="w-5 h-5 shrink-0" />
               <span className="truncate text-sm">{s.title}</span>
             </button>
           ))}
         </div>
       </aside>
 
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
-        <Navbar />
-        
-        <main className="flex-grow overflow-y-auto p-4 flex flex-col">
-          <div className="flex-grow space-y-8 mb-8 container mx-auto max-w-4xl px-2 pt-4">
+      {isSidebarOpen && (
+        <button
+          type="button"
+          className="tp-chat-backdrop"
+          onClick={toggleSidebar}
+          aria-label="Close sessions sidebar"
+        />
+      )}
+
+      <div className="flex-1 flex flex-col h-screen overflow-hidden tp-chat-main">
+        <main className="flex-grow overflow-y-auto flex flex-col">
+          <div className="w-full px-0 pt-0">
+            <motion.div
+              className="tp-chat-header"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="tp-chat-header-left">
+                <button
+                  type="button"
+                  onClick={toggleSidebar}
+                  className="tp-chat-header-button"
+                  aria-label="Toggle sessions sidebar"
+                >
+                  <PanelLeft className="w-4 h-4" />
+                </button>
+                <div className="tp-chat-title">
+                  <span className="tp-chat-title-icon">
+                    <Globe className="w-4 h-4" />
+                  </span>
+                  <span className="tp-chat-title-text">Travel Planner</span>
+                </div>
+              </div>
+              <div className="tp-chat-header-actions" />
+            </motion.div>
+          </div>
+
+          <div className="flex-grow space-y-8 mb-8 container mx-auto max-w-[56rem] px-4 pt-6 tp-chat-messages">
             <AnimatePresence mode="popLayout">
               {messages.map((msg, index) => {
                 const hotelPayload =
@@ -387,19 +428,15 @@ export default function Home() {
                   ref={isLast ? lastMessageRef : undefined}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
+                  className={`tp-chat-message ${msg.role === 'user' ? 'tp-chat-message--user' : 'tp-chat-message--assistant'}`}
                 >
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
-                    msg.role === 'assistant' ? 'bg-primary text-white' : 'bg-accent text-accent-foreground'
-                  }`}>
-                    {msg.role === 'assistant' ? <Bot className="w-5 h-5" /> : <UserIcon className="w-5 h-5" />}
-                  </div>
+                  <div className="tp-chat-avatar-spacer" aria-hidden="true" />
                   
                   <div className={`space-y-4 max-w-[85%] ${msg.role === 'user' ? 'items-end' : ''}`}>
-                    <div className={`p-4 rounded-2xl shadow-sm ${
+                    <div className={`tp-chat-bubble ${
                       msg.role === 'assistant' 
-                        ? 'bg-white border border-border text-foreground rounded-tl-none' 
-                        : 'bg-primary text-white rounded-tr-none'
+                        ? 'tp-chat-bubble--assistant' 
+                        : 'tp-chat-bubble--user'
                     }`}>
                       {hotelPayload ? (
                         <ChatHotelResults payload={hotelPayload} />
@@ -435,13 +472,11 @@ export default function Home() {
                   ref={lastMessageRef}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex gap-4"
+                  className="tp-chat-message tp-chat-message--assistant"
                 >
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-sm bg-primary text-white">
-                    <Bot className="w-5 h-5" />
-                  </div>
+                  <div className="tp-chat-avatar-spacer" aria-hidden="true" />
                   <div className="space-y-4 max-w-[85%]">
-                    <div className="p-4 rounded-2xl shadow-sm bg-white border border-border text-foreground rounded-tl-none">
+                    <div className="tp-chat-bubble tp-chat-bubble--assistant">
                       <div className="typing-dots" aria-label="Assistant is typing">
                         <span />
                         <span />
@@ -454,7 +489,7 @@ export default function Home() {
             </AnimatePresence>
           </div>
 
-          <div className="container mx-auto max-w-4xl sticky bottom-4">
+          <div className="container mx-auto max-w-[56rem] px-4 sticky bottom-4">
             <SearchHero onSearch={handleSearch} compact />
           </div>
         </main>
