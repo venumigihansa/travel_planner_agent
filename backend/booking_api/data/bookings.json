@@ -1,0 +1,119 @@
+[
+  {
+    "bookingId": "BK316E7CAA",
+    "hotelId": "g293962-d14106301",
+    "hotelName": "Marino Beach Colombo",
+    "rooms": [
+      {
+        "roomId": "g293962-d14106301_g293962-d14106301_BookingCom",
+        "numberOfRooms": 1,
+        "pricePerNight": 75.0
+      }
+    ],
+    "userId": "e4b789aa-797f-42b3-8d92-8063098ac1ea",
+    "checkInDate": "2026-01-29",
+    "checkOutDate": "2026-02-02",
+    "numberOfGuests": 2,
+    "primaryGuest": {
+      "firstName": "Venumi",
+      "lastName": "Gunasekara",
+      "email": "venumi@1234.com",
+      "phoneNumber": "+94123456789",
+      "nationality": null
+    },
+    "pricing": [
+      {
+        "roomRate": 75.0,
+        "totalAmount": 300.0,
+        "nights": 4,
+        "currency": "USD"
+      }
+    ],
+    "bookingStatus": "CANCELLED",
+    "bookingDate": "2026-01-26T10:12:25.667676+00:00",
+    "confirmationNumber": "CONF05566ba5-843f-45a4-9466-7ef6c5799e24",
+    "specialRequests": null,
+    "updatedAt": "2026-01-26T10:32:25.674419+00:00",
+    "cancelledAt": "2026-01-26T11:00:14.233440+00:00"
+  },
+  {
+    "bookingId": "BK552FC06F",
+    "hotelId": "g293962-d14106301",
+    "hotelName": "Marino Beach Colombo",
+    "rooms": [
+      {
+        "roomId": "g293962-d14106301_g293962-d14106301_BookingCom",
+        "numberOfRooms": 1,
+        "pricePerNight": 75.0
+      }
+    ],
+    "userId": "e4b789aa-797f-42b3-8d92-8063098ac1ea",
+    "checkInDate": "2026-01-29",
+    "checkOutDate": "2026-02-01",
+    "numberOfGuests": 2,
+    "primaryGuest": {
+      "firstName": "Venumi",
+      "lastName": "Gunasekara",
+      "email": "venumi@1234.com",
+      "phoneNumber": "+94123456789",
+      "nationality": null
+    },
+    "pricing": [
+      {
+        "roomRate": 75.0,
+        "totalAmount": 225.0,
+        "nights": 3,
+        "currency": "USD"
+      }
+    ],
+    "bookingStatus": "CONFIRMED",
+    "bookingDate": "2026-01-26T10:16:00.427100+00:00",
+    "confirmationNumber": "CONFa7b1b4ac-0a4e-414c-b56e-0adbc4ff0710",
+    "specialRequests": null
+  },
+  {
+    "bookingId": "BK30C33C43",
+    "hotelId": "g304138-d32865997",
+    "hotelName": "Kandy Myst By Cinnamon",
+    "rooms": [
+      {
+        "roomId": "g304138-d32865997_g304138-d32865997_CtripTA",
+        "numberOfRooms": 1,
+        "pricePerNight": 140.0
+      }
+    ],
+    "userId": "e4b789aa-797f-42b3-8d92-8063098ac1ea",
+    "checkInDate": "2026-01-28",
+    "checkOutDate": "2026-01-30",
+    "numberOfGuests": 4,
+    "primaryGuest": {
+      "firstName": "Venumi",
+      "lastName": "Gunasekara",
+      "email": "venumi@email.com",
+      "phoneNumber": "2323232323",
+      "nationality": null
+    },
+    "pricing": [
+      {
+        "roomRate": 140.0,
+        "totalAmount": 280.0,
+        "nights": 2,
+        "currency": "USD"
+      }
+    ],
+    "bookingStatus": "CONFIRMED",
+    "bookingDate": "2026-01-26T10:58:55.305324+00:00",
+    "confirmationNumber": "CONF5ce27fd1-a31e-48e9-9bee-2108a3154ef2",
+    "specialRequests": {
+      "dietaryRequirements": null,
+      "accessibilityNeeds": null,
+      "bedPreference": null,
+      "petFriendly": true,
+      "otherRequests": null
+    }
+  }
+]riendly": true,
+      "otherRequests": null
+    }
+  }
+]

@@ -2,9 +2,10 @@
 
 Minimal Python + React stack for the travel planner agent.
 
-- **AI Agent (BFF)**: `ai_backends/agent/`
+- **AI Agent (BFF)**: `backend/agent/`
+- **Booking API**: `backend/booking_api/`
 - **Frontend**: `frontend/`
-- **Policy ingest (optional)**: `ai_backends/ingest/`
+- **Policy ingest (optional)**: `resources/ingest/`
 - **Postgres schema**: `resources/create_tables.sql`
 - **Sample policy PDFs**: `resources/policy_pdfs/`
 
@@ -13,7 +14,7 @@ Minimal Python + React stack for the travel planner agent.
 - Node.js 22+
 - PostgreSQL (optional, for profile personalization)
 - Pinecone index (optional, for hotel policy retrieval)
-- Xotelo API key (for live hotel search/booking)
+- Mock hotel dataset (local file)
 
 ## Quick Start (local)
 
@@ -23,17 +24,26 @@ psql -d travel_planner -f resources/create_tables.sql
 ```
 
 ### 1) Start the AI agent (BFF)
-Create `ai_backends/agent/.env` from `ai_backends/agent/.env.example`, then:
+Create `backend/agent/.env` from `backend/agent/.env.example`, then:
 
 ```bash
-cd ai_backends/agent
+cd backend/agent
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn app:app --host 0.0.0.0 --port 9090
 ```
 
-### 2) Start the frontend
+### 2) Start the booking API
+```bash
+cd backend/booking_api
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn booking_api:app --host 0.0.0.0 --port 9091
+```
+
+### 3) Start the frontend
 Create `frontend/.env` as needed (see `frontend/README.md`), then:
 
 ```bash
@@ -46,7 +56,7 @@ npm start
 Populate Pinecone from the sample policies in `resources/policy_pdfs`:
 
 ```bash
-cd ai_backends/ingest
+cd resources/ingest
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
