@@ -4,6 +4,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def _split_csv(value: str | None, default: list[str]) -> list[str]:
+    if value is None:
+        return default
+    stripped = [item.strip() for item in value.split(",")]
+    return [item for item in stripped if item]
+
 
 @dataclass
 class Settings:
@@ -16,6 +22,8 @@ class Settings:
     weather_api_key: str | None
     weather_api_base_url: str
     booking_api_base_url: str
+    cors_allow_origins: list[str]
+    cors_allow_credentials: bool
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -35,4 +43,9 @@ class Settings:
             weather_api_key=os.getenv("WEATHER_API_KEY"),
             weather_api_base_url=os.getenv("WEATHER_API_BASE_URL", "http://api.weatherapi.com/v1"),
             booking_api_base_url=os.getenv("BOOKING_API_BASE_URL", "http://localhost:9091"),
+            cors_allow_origins=_split_csv(
+                os.getenv("CORS_ALLOW_ORIGINS"),
+                ["http://localhost:3001"],
+            ),
+            cors_allow_credentials=os.getenv("CORS_ALLOW_CREDENTIALS", "true").lower() == "true",
         )

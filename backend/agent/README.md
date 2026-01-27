@@ -29,6 +29,8 @@ PINECONE_INDEX_NAME=hotel-policies
 WEATHER_API_KEY=...
 WEATHER_API_BASE_URL=http://api.weatherapi.com/v1
 BOOKING_API_BASE_URL=http://localhost:9091
+CORS_ALLOW_ORIGINS=http://localhost:3001
+CORS_ALLOW_CREDENTIALS=true
 ```
 
 Defaults if omitted:

@@ -37,10 +37,14 @@ class ChatResponse(BaseModel):
 
 
 app = FastAPI(title="Travel Planner Agent")
+allow_credentials = settings.cors_allow_credentials
+if "*" in settings.cors_allow_origins:
+    # Credentials + wildcard origin is rejected by browsers; force off when using "*".
+    allow_credentials = False
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3001"],
-    allow_credentials=True,
+    allow_origins=settings.cors_allow_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "Accept", "x-user-id"],
     max_age=84900,
