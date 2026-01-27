@@ -2,63 +2,117 @@ openapi: 3.1.0
 info:
   title: Hotel Booking API
   version: 0.1.0
+  description: API for managing hotel bookings with user authentication and pricing calculations
+
+servers:
+  - url: http://localhost:9091
+    description: Local development server
+
+security:
+  - JWTAuth: []
+  - UserIdHeader: []
+
 paths:
-  /auth/profile:
-    get:
-      summary: Get Profile
-      operationId: get_profile_auth_profile_get
-      responses:
-        200:
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
   /health:
     get:
-      summary: Health
+      summary: Health Check
+      description: Returns the health status of the API
       operationId: health_health_get
+      security: []
       responses:
-        200:
+        '200':
           description: Successful Response
-          content:
-            application/json:
-              schema: {}
-  /bookings:
-    get:
-      summary: Get Bookings
-      operationId: get_bookings_bookings_get
-      responses:
-        200:
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
-    post:
-      summary: Create Booking
-      operationId: create_booking_bookings_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: true
-              type: object
-              title: Payload
-        required: true
-      responses:
-        201:
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
-        422:
-          description: Validation Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                required:
+                  - status
+
+  /auth/profile:
+    get:
+      summary: Get User Profile
+      description: Retrieve the authenticated user's profile information
+      operationId: get_profile_auth_profile_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Authentication Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /bookings:
+    get:
+      summary: Get All Bookings
+      description: Retrieve all bookings for the authenticated user
+      operationId: get_bookings_bookings_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        '401':
+          description: Authentication Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Storage Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      summary: Create Booking
+      description: Create a new hotel booking
+      operationId: create_booking_bookings_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookingRequest'
+      responses:
+        '201':
+          description: Booking Created Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBookingResponse'
+        '401':
+          description: Authentication Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Booking Persistence Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /bookings/{booking_id}:
     get:
-      summary: Get Booking
+      summary: Get Booking Details
+      description: Retrieve details of a specific booking
       operationId: get_booking_bookings__booking_id__get
       parameters:
         - name: booking_id
@@ -66,21 +120,38 @@ paths:
           required: true
           schema:
             type: string
-            title: Booking Id
+            pattern: '^BK[A-F0-9]{8}$'
+            example: BK12345678
+          description: The unique booking identifier
       responses:
-        200:
+        '200':
           description: Successful Response
           content:
             application/json:
-              schema: {}
-        422:
-          description: Validation Error
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '401':
+          description: Authentication Required
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Booking Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Storage Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
     put:
       summary: Update Booking
+      description: Update an existing booking
       operationId: update_booking_bookings__booking_id__put
       parameters:
         - name: booking_id
@@ -88,29 +159,44 @@ paths:
           required: true
           schema:
             type: string
-            title: Booking Id
+            pattern: '^BK[A-F0-9]{8}$'
+            example: BK12345678
+          description: The unique booking identifier
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
-              title: Payload
+              $ref: '#/components/schemas/UpdateBookingRequest'
       responses:
-        200:
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
-        422:
-          description: Validation Error
+        '200':
+          description: Booking Updated Successfully
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/UpdateBookingResponse'
+        '401':
+          description: Authentication Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Booking Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Booking Update Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
     delete:
       summary: Cancel Booking
+      description: Cancel an existing booking
       operationId: cancel_booking_bookings__booking_id__delete
       parameters:
         - name: booking_id
@@ -118,48 +204,418 @@ paths:
           required: true
           schema:
             type: string
-            title: Booking Id
+            pattern: '^BK[A-F0-9]{8}$'
+            example: BK12345678
+          description: The unique booking identifier
       responses:
-        200:
-          description: Successful Response
-          content:
-            application/json:
-              schema: {}
-        422:
-          description: Validation Error
+        '200':
+          description: Booking Cancelled Successfully
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HTTPValidationError"
+                $ref: '#/components/schemas/CancelBookingResponse'
+        '401':
+          description: Authentication Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Booking Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Booking Cancel Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
+  securitySchemes:
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: x-jwt-assertion
+      description: JWT token for authentication
+    UserIdHeader:
+      type: apiKey
+      in: header
+      name: x-user-id
+      description: User ID header for authentication (alternative to JWT)
+
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: "#/components/schemas/ValidationError"
-          type: array
-          title: Detail
+    ErrorResponse:
       type: object
-      title: HTTPValidationError
-    ValidationError:
       properties:
-        loc:
-          items:
-            anyOf:
-              - type: string
-              - type: integer
-          type: array
-          title: Location
-        msg:
+        message:
           type: string
-          title: Message
-        type:
+          description: Human-readable error message
+          example: Authentication required
+        errorCode:
           type: string
-          title: Error Type
-      type: object
+          description: Machine-readable error code
+          example: AUTH_REQUIRED
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the error occurred
+          example: '2024-01-27T10:30:00.000Z'
       required:
-        - loc
-        - msg
-        - type
-      title: ValidationError
+        - message
+        - errorCode
+        - timestamp
+
+    UserProfile:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique user identifier
+          example: user123
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: user@example.com
+        firstName:
+          type: string
+          description: User's first name
+          example: John
+        lastName:
+          type: string
+          description: User's last name
+          example: Doe
+        phoneNumber:
+          type: string
+          description: User's phone number
+          example: '+1234567890'
+        profilePicture:
+          type: string
+          format: uri
+          description: URL to user's profile picture
+          example: https://example.com/profile.jpg
+        registrationDate:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of user registration
+          example: '2024-01-01T00:00:00.000Z'
+        userType:
+          type: string
+          enum:
+            - GUEST
+            - PREMIUM
+          description: Type of user account
+          example: PREMIUM
+        authClaims:
+          type: object
+          description: Raw authentication claims from JWT
+          additionalProperties: true
+      required:
+        - userId
+
+    Room:
+      type: object
+      properties:
+        roomType:
+          type: string
+          description: Type of room
+          example: Deluxe Suite
+        numberOfRooms:
+          type: integer
+          minimum: 1
+          description: Number of rooms of this type
+          example: 2
+        pricePerNight:
+          type: number
+          format: float
+          minimum: 0
+          description: Price per night for one room
+          example: 150.00
+      required:
+        - roomType
+        - numberOfRooms
+        - pricePerNight
+
+    PrimaryGuest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Guest's first name
+          example: John
+        lastName:
+          type: string
+          description: Guest's last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          description: Guest's email address
+          example: john.doe@example.com
+        phoneNumber:
+          type: string
+          description: Guest's phone number
+          example: '+1234567890'
+      required:
+        - firstName
+        - lastName
+        - email
+
+    Pricing:
+      type: object
+      properties:
+        roomRate:
+          type: number
+          format: float
+          description: Total room rate per night
+          example: 300.00
+        totalAmount:
+          type: number
+          format: float
+          description: Total amount for entire stay
+          example: 900.00
+        nights:
+          type: integer
+          minimum: 0
+          description: Number of nights
+          example: 3
+        currency:
+          type: string
+          description: Currency code
+          example: USD
+      required:
+        - roomRate
+        - totalAmount
+        - nights
+        - currency
+
+    CreateBookingRequest:
+      type: object
+      properties:
+        hotelId:
+          type: string
+          description: Unique hotel identifier
+          example: hotel_123
+        hotelName:
+          type: string
+          description: Name of the hotel
+          example: Grand Plaza Hotel
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'
+          minItems: 1
+          description: List of rooms to book
+        userId:
+          type: string
+          description: User ID (optional if JWT provided)
+          example: user123
+        checkInDate:
+          type: string
+          format: date
+          description: Check-in date in ISO 8601 format
+          example: '2024-02-01'
+        checkOutDate:
+          type: string
+          format: date
+          description: Check-out date in ISO 8601 format
+          example: '2024-02-04'
+        numberOfGuests:
+          type: integer
+          minimum: 1
+          description: Total number of guests
+          example: 4
+        primaryGuest:
+          $ref: '#/components/schemas/PrimaryGuest'
+        specialRequests:
+          type: string
+          description: Any special requests or notes
+          example: Late check-in requested
+      required:
+        - hotelId
+        - hotelName
+        - rooms
+        - checkInDate
+        - checkOutDate
+        - numberOfGuests
+        - primaryGuest
+
+    UpdateBookingRequest:
+      type: object
+      properties:
+        hotelId:
+          type: string
+          description: Unique hotel identifier
+          example: hotel_123
+        hotelName:
+          type: string
+          description: Name of the hotel
+          example: Grand Plaza Hotel
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'
+          description: List of rooms to book
+        userId:
+          type: string
+          description: User ID (optional if JWT provided)
+          example: user123
+        checkInDate:
+          type: string
+          format: date
+          description: Check-in date in ISO 8601 format
+          example: '2024-02-01'
+        checkOutDate:
+          type: string
+          format: date
+          description: Check-out date in ISO 8601 format
+          example: '2024-02-04'
+        numberOfGuests:
+          type: integer
+          minimum: 1
+          description: Total number of guests
+          example: 4
+        primaryGuest:
+          $ref: '#/components/schemas/PrimaryGuest'
+        specialRequests:
+          type: string
+          description: Any special requests or notes
+          example: Late check-in requested
+
+    Booking:
+      type: object
+      properties:
+        bookingId:
+          type: string
+          pattern: '^BK[A-F0-9]{8}$'
+          description: Unique booking identifier
+          example: BK12345678
+        hotelId:
+          type: string
+          description: Unique hotel identifier
+          example: hotel_123
+        hotelName:
+          type: string
+          description: Name of the hotel
+          example: Grand Plaza Hotel
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'
+          description: List of booked rooms
+        userId:
+          type: string
+          description: User ID who made the booking
+          example: user123
+        checkInDate:
+          type: string
+          format: date
+          description: Check-in date
+          example: '2024-02-01'
+        checkOutDate:
+          type: string
+          format: date
+          description: Check-out date
+          example: '2024-02-04'
+        numberOfGuests:
+          type: integer
+          description: Total number of guests
+          example: 4
+        primaryGuest:
+          $ref: '#/components/schemas/PrimaryGuest'
+        pricing:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pricing'
+          description: Pricing details for the booking
+        bookingStatus:
+          type: string
+          enum:
+            - CONFIRMED
+            - CANCELLED
+          description: Current status of the booking
+          example: CONFIRMED
+        bookingDate:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when booking was created
+          example: '2024-01-27T10:30:00.000Z'
+        confirmationNumber:
+          type: string
+          format: uuid
+          description: Unique confirmation number
+          example: CONFa1b2c3d4-e5f6-7890-abcd-ef1234567890
+        specialRequests:
+          type: string
+          description: Any special requests or notes
+          example: Late check-in requested
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of last update
+          example: '2024-01-27T11:00:00.000Z'
+        cancelledAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when booking was cancelled
+          example: '2024-01-27T12:00:00.000Z'
+      required:
+        - bookingId
+        - userId
+        - bookingStatus
+        - bookingDate
+        - confirmationNumber
+
+    CreateBookingResponse:
+      type: object
+      properties:
+        bookingId:
+          type: string
+          pattern: '^BK[A-F0-9]{8}$'
+          description: Unique booking identifier
+          example: BK12345678
+        confirmationNumber:
+          type: string
+          format: uuid
+          description: Unique confirmation number
+          example: CONFa1b2c3d4-e5f6-7890-abcd-ef1234567890
+        message:
+          type: string
+          description: Success message
+          example: Booking confirmed successfully
+        bookingDetails:
+          $ref: '#/components/schemas/Booking'
+      required:
+        - bookingId
+        - confirmationNumber
+        - message
+        - bookingDetails
+
+    UpdateBookingResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Success message
+          example: Booking updated successfully
+        bookingDetails:
+          $ref: '#/components/schemas/Booking'
+      required:
+        - message
+        - bookingDetails
+
+    CancelBookingResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Success message
+          example: Booking cancelled successfully
+        bookingDetails:
+          $ref: '#/components/schemas/Booking'
+      required:
+        - message
+        - bookingDetails
