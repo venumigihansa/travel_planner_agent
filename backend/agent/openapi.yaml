@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Travel Planner Agent
+  version: 0.1.0
+paths:
+  /travelPlanner/chat:
+    post:
+      summary: Chat
+      operationId: chat_travelPlanner_chat_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatRequest"
+        required: true
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+        422:
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    ChatRequest:
+      properties:
+        message:
+          type: string
+          title: Message
+        sessionId:
+          anyOf:
+            -
+              type: string
+            -
+              type: null
+          title: Sessionid
+        userId:
+          anyOf:
+            -
+              type: string
+            -
+              type: null
+          title: Userid
+        userName:
+          anyOf:
+            -
+              type: string
+            -
+              type: null
+          title: Username
+      type: object
+      required:
+        - message
+      title: ChatRequest
+    ChatResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+        - message
+      title: ChatResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              -
+                type: string
+              -
+                type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
