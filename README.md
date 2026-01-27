@@ -6,22 +6,15 @@ Minimal Python + React stack for the travel planner agent.
 - **Booking API**: `backend/booking_api/`
 - **Frontend**: `frontend/`
 - **Policy ingest (optional)**: `resources/ingest/`
-- **Postgres schema**: `resources/create_tables.sql`
 - **Sample policy PDFs**: `resources/policy_pdfs/`
 
 ## Prerequisites
 - Python 3.10+
 - Node.js 22+
-- PostgreSQL (optional, for profile personalization)
 - Pinecone index (optional, for hotel policy retrieval)
 - Mock hotel dataset (local file)
 
 ## Quick Start (local)
-
-### 0) Optional: Postgres personalization table
-```bash
-psql -d travel_planner -f resources/create_tables.sql
-```
 
 ### 1) Start the AI agent (BFF)
 Create `backend/agent/.env` from `backend/agent/.env.example`, then:
@@ -66,4 +59,3 @@ python ingest.py
 ## Notes
 - `.env` files are intentionally excluded from this repo.
 - The agent serves chat at `http://localhost:9090/travelPlanner/chat`.
-- Profile endpoints require Asgardeo configuration (`ASGARDEO_JWKS_URL`, optional `ASGARDEO_ISSUER`/`ASGARDEO_AUDIENCE`) and Postgres. See `resources/create_tables.sql` for the schema.

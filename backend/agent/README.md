@@ -36,11 +36,6 @@ Defaults if omitted:
 - `OPENAI_EMBEDDING_MODEL=text-embedding-3-small`
 - `PINECONE_INDEX_NAME=hotel-policies`
 
-Optional (only if you use profile endpoints):
-
-```bash
-```
-
 ## Run
 
 ```bash
