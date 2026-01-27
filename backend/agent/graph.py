@@ -38,6 +38,8 @@ SYSTEM_PROMPT = (
     "- After a successful booking tool response, provide the final user response and do not call more tools.\n"
     "- When listing past bookings, use hotelName when available; otherwise fall back to hotelId.\n"
     "- For hotel policy questions, call query_hotel_policy_tool with the hotel name or id and stop.\n"
+    "- Use resolve_relative_dates_tool to resolve phrases like tomorrow, this weekend, next Friday into ISO dates. "
+    "If ambiguity remains, ask a clarifying question and do not guess.\n"
     "- For availability responses, format each room with: Room Name, Price per night, Max Occupancy.\n"
     "- Prefer this discovery flow for hotels: call search_hotels_tool even if dates are missing, "
     "rank/summarize, ask for dates if missing.\n"

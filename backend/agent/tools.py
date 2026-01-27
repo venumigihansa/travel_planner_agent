@@ -5,6 +5,7 @@ from typing import Any
 import json
 
 import requests
+from datetime import datetime, timedelta, timezone
 from pinecone import Pinecone
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.tools import tool
@@ -466,6 +467,61 @@ def build_tools(settings: Settings):
         response.raise_for_status()
         return response.text
 
+    @tool
+    def resolve_relative_dates_tool(text: str) -> dict[str, Any]:
+        """Resolve relative date phrases (UTC) into ISO dates."""
+        now = datetime.now(timezone.utc).date()
+        lowered = text.lower()
+        resolved: list[dict[str, Any]] = []
+
+        def _add(label: str, date_value):
+            resolved.append({"label": label, "date": date_value.isoformat()})
+
+        if "today" in lowered:
+            _add("today", now)
+        if "tomorrow" in lowered:
+            _add("tomorrow", now + timedelta(days=1))
+        if "day after tomorrow" in lowered:
+            _add("day_after_tomorrow", now + timedelta(days=2))
+
+        weekdays = {
+            "monday": 0,
+            "tuesday": 1,
+            "wednesday": 2,
+            "thursday": 3,
+            "friday": 4,
+            "saturday": 5,
+            "sunday": 6,
+        }
+
+        def _next_weekday(target: int, base: datetime.date) -> datetime.date:
+            days_ahead = (target - base.weekday() + 7) % 7
+            if days_ahead == 0:
+                days_ahead = 7
+            return base + timedelta(days=days_ahead)
+
+        for name, idx in weekdays.items():
+            if f"next {name}" in lowered:
+                _add(f"next_{name}", _next_weekday(idx, now))
+            elif f"this {name}" in lowered:
+                # If today is that weekday, keep today; else next occurrence within this week.
+                days_ahead = (idx - now.weekday() + 7) % 7
+                _add(f"this_{name}", now + timedelta(days=days_ahead))
+
+        if "this weekend" in lowered:
+            # Upcoming Saturday/Sunday based on current week.
+            saturday = _next_weekday(5, now) if now.weekday() > 5 else now + timedelta(days=(5 - now.weekday()))
+            sunday = saturday + timedelta(days=1)
+            _add("this_weekend_start", saturday)
+            _add("this_weekend_end", sunday)
+        if "next weekend" in lowered:
+            saturday = _next_weekday(5, now) + timedelta(days=7)
+            sunday = saturday + timedelta(days=1)
+            _add("next_weekend_start", saturday)
+            _add("next_weekend_end", sunday)
+
+        return {"utcToday": now.isoformat(), "resolved": resolved}
+
     return [
         get_user_profile_tool,
         query_hotel_policy_tool,
@@ -475,6 +531,7 @@ def build_tools(settings: Settings):
         edit_booking_tool,
         cancel_booking_tool,
         list_bookings_tool,
+        resolve_relative_dates_tool,
         check_hotel_availability_tool,
         get_weather_forecast_tool,
     ]
