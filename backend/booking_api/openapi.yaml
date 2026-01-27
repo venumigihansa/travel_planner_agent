@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: Hotel Booking API
+  version: 0.1.0
+paths:
+  /auth/profile:
+    get:
+      summary: Get Profile
+      operationId: get_profile_auth_profile_get
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+  /health:
+    get:
+      summary: Health
+      operationId: health_health_get
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+  /bookings:
+    get:
+      summary: Get Bookings
+      operationId: get_bookings_bookings_get
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+    post:
+      summary: Create Booking
+      operationId: create_booking_bookings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              type: object
+              title: Payload
+        required: true
+      responses:
+        201:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+        422:
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+  /bookings/{booking_id}:
+    get:
+      summary: Get Booking
+      operationId: get_booking_bookings__booking_id__get
+      parameters:
+        -
+          name: booking_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Booking Id
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+        422:
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    put:
+      summary: Update Booking
+      operationId: update_booking_bookings__booking_id__put
+      parameters:
+        -
+          name: booking_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Booking Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              title: Payload
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+        422:
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+    delete:
+      summary: Cancel Booking
+      operationId: cancel_booking_bookings__booking_id__delete
+      parameters:
+        -
+          name: booking_id
+          in: path
+          required: true
+          schema:
+            type: string
+            title: Booking Id
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+        422:
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: "#/components/schemas/ValidationError"
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              -
+                type: string
+              -
+                type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
