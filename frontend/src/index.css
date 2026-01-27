@@ -488,6 +488,26 @@
   font-size: 0.95rem;
 }
 
+.tp-chat-session-spacer {
+  flex: 1;
+}
+
+.tp-chat-session-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: #64748b;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tp-chat-session-delete:hover {
+  background: rgba(15, 23, 42, 0.08);
+  color: #1e293b;
+}
+
 .tp-chat-session-button--idle {
   background: #ffffff;
   color: #334155;

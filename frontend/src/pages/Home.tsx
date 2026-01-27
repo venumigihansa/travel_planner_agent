@@ -2,7 +2,7 @@ import { SearchHero } from "components/SearchHero";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useAsgardeo } from "@asgardeo/react";
-import { Plus, History, MessageSquare, PanelLeft, Globe } from "lucide-react";
+import { Plus, History, MessageSquare, PanelLeft, Globe, Trash2 } from "lucide-react";
 import { Button } from "components/ui/button";
 import { ChatHotelResults } from "components/ChatHotelResults";
 import ReactMarkdown from "react-markdown";
@@ -250,6 +250,17 @@ export default function Home() {
     setActiveSessionId(newSession.id);
   };
 
+  const handleDeleteSession = (sessionId: string) => {
+    setSessions(prev => {
+      const next = prev.filter(session => session.id !== sessionId);
+      const fallback = next.length > 0 ? next : [buildNewSession()];
+      const nextActive =
+        activeSessionId === sessionId ? (fallback[0]?.id ?? "") : activeSessionId;
+      setActiveSessionId(nextActive);
+      return fallback;
+    });
+  };
+
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
   };
@@ -373,6 +384,18 @@ export default function Home() {
             >
               <MessageSquare className="w-5 h-5 shrink-0" />
               <span className="truncate text-sm">{s.title}</span>
+              <span className="tp-chat-session-spacer" />
+              <span
+                role="button"
+                aria-label="Delete chat"
+                className="tp-chat-session-delete"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleDeleteSession(s.id);
+                }}
+              >
+                <Trash2 className="w-4 h-4" />
+              </span>
             </button>
           ))}
         </div>

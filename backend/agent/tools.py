@@ -84,6 +84,10 @@ class BookingCancelRequest(BaseModel):
 
 class BookingListRequest(BaseModel):
     userId: str | None = Field(None, description="User ID to list bookings for.")
+    status: str | None = Field(
+        None,
+        description="Optional booking status filter: CONFIRMED, CANCELLED, or ALL.",
+    )
 
 
 def _pinecone_index(settings: Settings):
@@ -436,7 +440,7 @@ def build_tools(settings: Settings):
         return response.json()
 
     @tool(args_schema=BookingListRequest)
-    def list_bookings_tool(userId: str | None = None) -> dict[str, Any]:
+    def list_bookings_tool(userId: str | None = None, status: str | None = None) -> dict[str, Any]:
         """List bookings for a user via the booking API."""
         endpoint = f"{settings.booking_api_base_url.rstrip('/')}/bookings"
         headers = {}
@@ -448,7 +452,23 @@ def build_tools(settings: Settings):
         except requests.RequestException:
             logger.exception("list_bookings_tool failed calling booking API")
             return {"error": "Booking API request failed."}
-        return {"bookings": response.json()}
+        bookings = response.json() or []
+        normalized_status = (status or "").strip().upper()
+        if normalized_status in {"AVAILABLE", "ACTIVE"}:
+            normalized_status = "CONFIRMED"
+        if normalized_status and normalized_status != "ALL":
+            bookings = [
+                booking
+                for booking in bookings
+                if str(booking.get("bookingStatus", "")).upper() == normalized_status
+            ]
+        elif not normalized_status:
+            bookings = [
+                booking
+                for booking in bookings
+                if str(booking.get("bookingStatus", "")).upper() == "CONFIRMED"
+            ]
+        return {"bookings": bookings}
 
     @tool
     def get_weather_forecast_tool(location: str, date: str | None = None) -> str:
