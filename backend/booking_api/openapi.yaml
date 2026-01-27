@@ -61,8 +61,7 @@ paths:
       summary: Get Booking
       operationId: get_booking_bookings__booking_id__get
       parameters:
-        -
-          name: booking_id
+        - name: booking_id
           in: path
           required: true
           schema:
@@ -84,8 +83,7 @@ paths:
       summary: Update Booking
       operationId: update_booking_bookings__booking_id__put
       parameters:
-        -
-          name: booking_id
+        - name: booking_id
           in: path
           required: true
           schema:
@@ -115,8 +113,7 @@ paths:
       summary: Cancel Booking
       operationId: cancel_booking_bookings__booking_id__delete
       parameters:
-        -
-          name: booking_id
+        - name: booking_id
           in: path
           required: true
           schema:
@@ -150,10 +147,8 @@ components:
         loc:
           items:
             anyOf:
-              -
-                type: string
-              -
-                type: integer
+              - type: string
+              - type: integer
           type: array
           title: Location
         msg:
