@@ -39,8 +39,8 @@ if "*" in configs.cors_allow_origins:
     allow_credentials = False
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=configs.cors_allow_origins,
-    allow_credentials=allow_credentials,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "Accept", "x-user-id"],
     max_age=84900,
