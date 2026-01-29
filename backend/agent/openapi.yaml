@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Travel Planner Agent
+  title: Hotel Booking Agent
   version: 0.1.0
   description: AI-powered travel planning agent that provides personalized travel recommendations and itineraries
 
@@ -13,9 +13,11 @@ servers:
 paths:
   /chat:
     post:
-      summary: Send Message to Travel Planner
-      description: Send a chat message to the AI travel planner agent and receive travel recommendations, itineraries, or answers to travel-related questions
+      summary: Send Message to Agent
+      description: Send a chat message to the AI agent and receive travel recommendations, itineraries, or answers to travel-related questions
       operationId: chat_chat_post
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -54,6 +56,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HTTPValidationError"
+        '401':
+          description: Unauthorized - missing or invalid access token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         '500':
           description: Internal server error
           content:
@@ -66,6 +74,11 @@ paths:
                     example: "An unexpected error occurred"
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     ChatRequest:
       type: object
@@ -98,6 +111,14 @@ components:
           description: The AI agent's response with travel recommendations or information
           example: "Here's a suggested 5-day Tokyo itinerary: Day 1: Visit Senso-ji Temple and explore Asakusa..."
       title: ChatResponse
+
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          example: "Invalid access token."
+      title: ErrorResponse
 
     HTTPValidationError:
       type: object

@@ -2,21 +2,31 @@
 
 Minimal Python + React stack for the travel planner agent.
 
-- **AI Agent (BFF)**: `backend/agent/`
+- **AI Agent**: `backend/agent/`
 - **Booking API**: `backend/booking_api/`
 - **Frontend**: `frontend/`
-- **Policy ingest (optional)**: `resources/ingest/`
+- **Policy ingest**: `resources/ingest/`
 - **Sample policy PDFs**: `resources/policy_pdfs/`
 
-## Prerequisites
+## Quick Start (Agent Manager)
+Deploy the agent in your Agent Manager environment (details to be added). The flow below covers the required supporting services:
+
+1) **Booking API**
+   - Runs locally on `http://localhost:9091` when started via `uvicorn`.
+   - You can also deploy it to a cloud host; just point the agent configuration at the deployed base URL.
+
+2) **Pinecone policies (required)**
+   - Create a Pinecone index using your preferred embedding model.
+   - Set the Pinecone and embedding configuration in `resources/ingest/.env`.
+   - Run the ingest to populate the index (see "Seed Pinecone policies" below).
+
+## Local development (optional)
+Local requirements:
 - Python 3.10+
 - Node.js 22+
-- Pinecone index (optional, for hotel policy retrieval)
 - Mock hotel dataset (local file)
 
-## Quick Start (local)
-
-### 1) Start the AI agent (BFF)
+### 1) Start the AI agent
 Create `backend/agent/.env` from `backend/agent/.env.example`, then:
 
 ```bash
@@ -45,8 +55,10 @@ npm install
 npm start
 ```
 
-## Optional: Seed Pinecone policies
-Populate Pinecone from the sample policies in `resources/policy_pdfs`:
+## Seed Pinecone policies (required)
+Populate Pinecone from the sample policies in `resources/policy_pdfs`.
+Make sure you have created a Pinecone index with your preferred embedding model and set these values in `resources/ingest/.env`:
+`PINECONE_SERVICE_URL`, `PINECONE_API_KEY`, `PINECONE_INDEX_NAME`, `OPENAI_API_KEY`, `OPENAI_EMBEDDING_MODEL`, and optional chunk settings.
 
 ```bash
 cd resources/ingest

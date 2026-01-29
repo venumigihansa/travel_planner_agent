@@ -229,7 +229,7 @@ paths:
   /bookings:
     get:
       summary: Get All Bookings
-      description: Retrieve all bookings for the authenticated user
+      description: Retrieve all bookings for the user
       operationId: get_bookings_bookings_get
       responses:
         '200':
@@ -240,12 +240,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Booking'
-        '401':
-          description: Authentication Required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Storage Unavailable
           content:
@@ -270,12 +264,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateBookingResponse'
-        '401':
-          description: Authentication Required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Booking Persistence Failed
           content:
@@ -304,12 +292,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Booking'
-        '401':
-          description: Authentication Required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Booking Not Found
           content:
@@ -349,12 +331,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateBookingResponse'
-        '401':
-          description: Authentication Required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Booking Not Found
           content:
@@ -388,12 +364,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CancelBookingResponse'
-        '401':
-          description: Authentication Required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Booking Not Found
           content:
@@ -408,18 +378,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 
 components:
-  securitySchemes:
-    JWTAuth:
-      type: apiKey
-      in: header
-      name: x-jwt-assertion
-      description: JWT token for authentication
-    UserIdHeader:
-      type: apiKey
-      in: header
-      name: x-user-id
-      description: User ID header for authentication (alternative to JWT)
-
   schemas:
     HotelSummary:
       type: object

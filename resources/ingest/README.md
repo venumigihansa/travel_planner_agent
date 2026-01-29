@@ -19,6 +19,7 @@ Set the following environment variables (you can put them in a local `.env` file
 PINECONE_SERVICE_URL="https://your-index-xxxxxx.svc.your-region.pinecone.io"
 PINECONE_API_KEY="your-pinecone-api-key"
 OPENAI_API_KEY="your-openai-api-key"
+OPENAI_EMBEDDING_MODEL="text-embedding-3-small"
 PINECONE_INDEX_NAME="hotel-policies"
 POLICIES_DIRS="/absolute/path/to/resources/policy_pdfs"
 CHUNK_SIZE=1000

@@ -96,8 +96,9 @@ class PolicyIngestion:
     def generate_embedding(self, text: str) -> List[float]:
         """Generate embeddings using OpenAI"""
         try:
+            model_name = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
             response = self.openai_client.embeddings.create(
-                model="text-embedding-3-small",
+                model=model_name,
                 input=text
             )
             return response.data[0].embedding
