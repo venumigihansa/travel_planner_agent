@@ -13,14 +13,10 @@ import re
 from config import Settings
 from graph import build_graph
 
-_root_logger = logging.getLogger()
-if not _root_logger.handlers:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
-else:
-    _root_logger.setLevel(logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
 
 configs = Settings.from_env()
 agent_graph = build_graph(configs)
@@ -65,7 +61,7 @@ def _wrap_user_message(user_message: str, user_id: str, user_name: str | None) -
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
-    session_id = request.sessionId or "default"
+    session_id = request.sessionId
     if not request.userId:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
