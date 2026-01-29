@@ -618,9 +618,6 @@
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
       "pricePerNight": 371.88,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-001-paris/rooms/junior_suite_03.jpg"
-      ],
       "amenities": [
         "Work Desk",
         "Private Bathroom",
@@ -648,9 +645,6 @@
       "description": "Rate via PreferredHotels1",
       "maxOccupancy": 2,
       "pricePerNight": 184.69,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-002-tokyo/rooms/junior_suite_03.jpg"
-      ],
       "amenities": [
         "Flat-screen TV",
         "Safe",
@@ -677,9 +671,6 @@
       "description": "Rate via Trip.com",
       "maxOccupancy": 2,
       "pricePerNight": 294.13,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-003-newyork/rooms/deluxe_room_03.jpg"
-      ],
       "amenities": [
         "Safe",
         "Minibar",
@@ -707,9 +698,6 @@
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
       "pricePerNight": 531.02,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-004-dubai/rooms/premium_suite_03.jpg"
-      ],
       "amenities": [
         "City View",
         "Separate Living Area",
@@ -738,9 +726,6 @@
       "description": "Rate via Vio",
       "maxOccupancy": 2,
       "pricePerNight": 381.87,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-005-sydney/rooms/junior_suite_03.jpg"
-      ],
       "amenities": [
         "Balcony",
         "Private Bathroom",
@@ -770,9 +755,6 @@
       "description": "Rate via Trip.com",
       "maxOccupancy": 2,
       "pricePerNight": 369.34,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-006-london/rooms/junior_suite_02.jpg"
-      ],
       "amenities": [
         "Work Desk",
         "City View",
@@ -800,9 +782,6 @@
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
       "pricePerNight": 256.75,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-012-tokyo/rooms/standard_room_02.jpg"
-      ],
       "amenities": [
         "Flat-screen TV",
         "Safe",
@@ -828,9 +807,6 @@
       "description": "Rate via Expedia",
       "maxOccupancy": 2,
       "pricePerNight": 244.04,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-013-newyork/rooms/junior_suite_02.jpg"
-      ],
       "amenities": [
         "Work Desk",
         "Tea/Coffee Maker",
@@ -860,9 +836,6 @@
       "description": "Rate via Hotels.com",
       "maxOccupancy": 2,
       "pricePerNight": 733.05,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-014-dubai/rooms/deluxe_room_02.jpg"
-      ],
       "amenities": [
         "Flat-screen TV",
         "Balcony",
@@ -889,9 +862,6 @@
       "description": "Rate via Trip.com",
       "maxOccupancy": 2,
       "pricePerNight": 225.23,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-015-sydney/rooms/deluxe_room_02.jpg"
-      ],
       "amenities": [
         "Tea/Coffee Maker",
         "Air Conditioning",
@@ -919,9 +889,6 @@
       "description": "Rate via Hotels.com",
       "maxOccupancy": 2,
       "pricePerNight": 169.09,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-016-london/rooms/deluxe_room_01.jpg"
-      ],
       "amenities": [
         "Safe",
         "Minibar",
@@ -949,9 +916,6 @@
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
       "pricePerNight": 185.5,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-021-colombo/rooms/deluxe_ocean_view_01.jpg"
-      ],
       "amenities": [
         "Ocean View",
         "Balcony",
@@ -980,9 +944,6 @@
       "description": "Rate via Agoda",
       "maxOccupancy": 2,
       "pricePerNight": 245.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-021-colombo/rooms/premium_suite_01.jpg"
-      ],
       "amenities": [
         "Ocean View",
         "Separate Living Area",
@@ -1012,9 +973,6 @@
       "description": "Rate via Trip.com",
       "maxOccupancy": 2,
       "pricePerNight": 155.75,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-021-colombo/rooms/superior_room_01.jpg"
-      ],
       "amenities": [
         "City View",
         "Air Conditioning",
@@ -1041,9 +999,6 @@
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
       "pricePerNight": 145.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-022-galle/rooms/heritage_suite_01.jpg"
-      ],
       "amenities": [
         "Fort Views",
         "Four-Poster Bed",
@@ -1072,9 +1027,6 @@
       "description": "Rate via Agoda",
       "maxOccupancy": 2,
       "pricePerNight": 125.5,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-022-galle/rooms/deluxe_room_01.jpg"
-      ],
       "amenities": [
         "Courtyard View",
         "Air Conditioning",
@@ -1102,9 +1054,6 @@
       "description": "Rate via Expedia",
       "maxOccupancy": 2,
       "pricePerNight": 105.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/mock-022-galle/rooms/standard_room_01.jpg"
-      ],
       "amenities": [
         "Air Conditioning",
         "Ceiling Fan",

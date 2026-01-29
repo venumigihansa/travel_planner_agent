@@ -115,6 +115,12 @@ def _mock_rates_for_hotel(hotel_id: str) -> list[dict[str, Any]]:
     return rates
 
 
+def _rooms_for_hotel(hotel_id: str) -> list[dict[str, Any]]:
+    data = _load_dataset()
+    rooms = data.get("rooms") or []
+    return [room for room in rooms if room.get("hotelId") == hotel_id]
+
+
 def _build_rooms_from_rates(
     hotel_id: str,
     rates: list[dict[str, Any]],
@@ -299,8 +305,7 @@ def get_hotel_details(
 ) -> dict[str, Any]:
     cached = get_cached_hotel(hotel_id)
     if check_in_date and check_out_date:
-        rates = _mock_rates_for_hotel(hotel_id)
-        rooms_out = _build_rooms_from_rates(hotel_id, rates, guests)
+        rooms_out = _rooms_for_hotel(hotel_id)
         hotel = cached or get_cached_hotel(hotel_id)
         if not hotel:
             data = _load_dataset()
@@ -359,8 +364,7 @@ def check_availability(
     guests: int = 2,
     room_count: int = 1,
 ) -> dict[str, Any]:
-    rates = _mock_rates_for_hotel(hotel_id)
-    rooms_out = _build_rooms_from_rates(hotel_id, rates, guests)
+    rooms_out = _rooms_for_hotel(hotel_id)
     return {
         "hotelId": hotel_id,
         "checkInDate": check_in_date,

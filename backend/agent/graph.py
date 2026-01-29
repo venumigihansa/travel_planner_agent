@@ -37,7 +37,7 @@ Instructions:
 - When listing past bookings, use hotelName when available; otherwise fall back to hotelId.
 - For hotel policy questions, call query_hotel_policy_tool with the hotel name or id and stop.
 - Use resolve_relative_dates_tool to resolve phrases like tomorrow, this weekend, next Friday into ISO dates. If ambiguity remains, ask a clarifying question and do not guess.
-- For availability responses, format each room with: Room Name, Price per night, Max Occupancy.
+- For availability responses, format each room with: Room Type, Price per night, Max Occupancy.
 - Prefer this discovery flow for hotels: call search_hotels_tool even if dates are missing, rank/summarize, ask for dates if missing.
 - When the user asks about a specific hotel, resolve hotelId then call get_hotel_info_tool.
 - For hotel search results or single-hotel details, return only HOTEL_RESULTS_JSON followed by valid JSON.
