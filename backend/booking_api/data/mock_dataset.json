@@ -8,7 +8,7 @@
       "city": "Paris, France",
       "country": "France",
       "images": [
-        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80"
+        "https://i.ibb.co/pjVVCMtJ/1.png"
       ],
       "rating": 5.0,
       "reviewCount": 1,
@@ -55,7 +55,7 @@
       "city": "Tokyo, Japan",
       "country": "Japan",
       "images": [
-        "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&q=80"
+        "https://i.ibb.co/QvG1z1bp/2.png"
       ],
       "rating": 4.5,
       "reviewCount": 1,
@@ -102,7 +102,7 @@
       "city": "New York, USA",
       "country": "United States",
       "images": [
-        "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=1200&q=80"
+        "https://i.ibb.co/DgPbWQkz/3.png"
       ],
       "rating": 4.5,
       "reviewCount": 1,
@@ -149,7 +149,7 @@
       "city": "Dubai, UAE",
       "country": "United Arab Emirates",
       "images": [
-        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80"
+        "https://i.ibb.co/9HXJyf7q/4.png"
       ],
       "rating": 5.0,
       "reviewCount": 1,
@@ -196,7 +196,7 @@
       "city": "Sydney, Australia",
       "country": "Australia",
       "images": [
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80"
+        "https://i.ibb.co/B55nv6BS/5.png"
       ],
       "rating": 4.5,
       "reviewCount": 1,
@@ -243,7 +243,7 @@
       "city": "London, UK",
       "country": "United Kingdom",
       "images": [
-        "https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=1200&q=80"
+        "https://i.ibb.co/qFM7pDmX/6.png"
       ],
       "rating": 5.0,
       "reviewCount": 1,
@@ -290,7 +290,7 @@
       "city": "Tokyo, Japan",
       "country": "Japan",
       "images": [
-        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&q=80"
+        "https://i.ibb.co/VpWXGzyJ/7.png"
       ],
       "rating": 4.5,
       "reviewCount": 1,
@@ -337,7 +337,7 @@
       "city": "New York, USA",
       "country": "United States",
       "images": [
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+        "https://i.ibb.co/4Rxw32YR/8.png"
       ],
       "rating": 3.5,
       "reviewCount": 1,
@@ -383,7 +383,7 @@
       "city": "Dubai, UAE",
       "country": "United Arab Emirates",
       "images": [
-        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80"
+        "https://i.ibb.co/3mhCGd8S/9.png"
       ],
       "rating": 4.5,
       "reviewCount": 1,
@@ -430,7 +430,7 @@
       "city": "Sydney, Australia",
       "country": "Australia",
       "images": [
-        "https://images.unsplash.com/photo-1559508551-44bff1de756b?w=1200&q=80"
+        "https://i.ibb.co/KcXv6Rxg/10.png"
       ],
       "rating": 4.0,
       "reviewCount": 1,
@@ -476,7 +476,7 @@
       "city": "London, UK",
       "country": "United Kingdom",
       "images": [
-        "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=1200&q=80"
+        "https://i.ibb.co/xSYWVRQn/11.png"
       ],
       "rating": 3.5,
       "reviewCount": 1,
@@ -522,7 +522,7 @@
       "city": "Colombo, Sri Lanka",
       "country": "Sri Lanka",
       "images": [
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80"
+        "https://i.ibb.co/XZRRvcS9/12.png"
       ],
       "rating": 4.5,
       "reviewCount": 1,
@@ -569,7 +569,7 @@
       "city": "Galle, Sri Lanka",
       "country": "Sri Lanka",
       "images": [
-        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=80"
+        "https://i.ibb.co/b5n4BsXr/13.png"
       ],
       "rating": 4.0,
       "reviewCount": 1,
@@ -948,7 +948,7 @@
       "roomName": "Booking.com Rate",
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
-      "pricePerNight": 185.50,
+      "pricePerNight": 185.5,
       "images": [
         "https://images.travelplanner.dev/mock/hotels/mock-021-colombo/rooms/deluxe_ocean_view_01.jpg"
       ],
@@ -979,7 +979,7 @@
       "roomName": "Agoda.com Rate",
       "description": "Rate via Agoda",
       "maxOccupancy": 2,
-      "pricePerNight": 245.00,
+      "pricePerNight": 245.0,
       "images": [
         "https://images.travelplanner.dev/mock/hotels/mock-021-colombo/rooms/premium_suite_01.jpg"
       ],
@@ -1040,7 +1040,7 @@
       "roomName": "Booking.com Rate",
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
-      "pricePerNight": 145.00,
+      "pricePerNight": 145.0,
       "images": [
         "https://images.travelplanner.dev/mock/hotels/mock-022-galle/rooms/heritage_suite_01.jpg"
       ],
@@ -1071,7 +1071,7 @@
       "roomName": "Agoda.com Rate",
       "description": "Rate via Agoda",
       "maxOccupancy": 2,
-      "pricePerNight": 125.50,
+      "pricePerNight": 125.5,
       "images": [
         "https://images.travelplanner.dev/mock/hotels/mock-022-galle/rooms/deluxe_room_01.jpg"
       ],
@@ -1101,7 +1101,7 @@
       "roomName": "Expedia Rate",
       "description": "Rate via Expedia",
       "maxOccupancy": 2,
-      "pricePerNight": 105.00,
+      "pricePerNight": 105.0,
       "images": [
         "https://images.travelplanner.dev/mock/hotels/mock-022-galle/rooms/standard_room_01.jpg"
       ],
