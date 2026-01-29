@@ -258,6 +258,11 @@
   text-decoration: underline;
 }
 
+.chat-markdown {
+  display: flex;
+  flex-direction: column;
+}
+
 .chat-markdown-image,
 .chat-markdown img {
   max-width: 100%;
@@ -265,10 +270,16 @@
   border-radius: 12px;
   display: block;
   margin: 0.75rem 0;
+  order: -1;
 }
 
 .chat-markdown p {
   margin: 0.5rem 0;
+}
+
+.chat-markdown > p:has(img) {
+  order: -1;
+  margin-top: 0;
 }
 
 .chat-markdown h1 {

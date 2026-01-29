@@ -297,15 +297,6 @@ export default function Home() {
         body: JSON.stringify({
           message: query,
           sessionId: activeSession.sessionId,
-          userId: effectiveUserId,
-          userName:
-            user?.name ||
-            user?.displayName ||
-            user?.given_name ||
-            user?.preferred_username ||
-            user?.username ||
-            user?.email ||
-            undefined,
         }),
       });
 

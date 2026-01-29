@@ -27,14 +27,11 @@ paths:
                 summary: Simple travel query
                 value:
                   message: "Plan a 5-day trip to Tokyo"
-                  userId: "user123"
               with_session:
                 summary: Continuing conversation
                 value:
                   message: "What about hotels near Shibuya?"
                   sessionId: "session_abc123"
-                  userId: "user123"
-                  userName: "John Doe"
       responses:
         '200':
           description: Successfully processed the message and generated a response
@@ -88,20 +85,6 @@ components:
           title: SessionId
           description: Optional session identifier for maintaining conversation context
           example: "session_abc123"
-        userId:
-          anyOf:
-            - type: string
-            - type: null
-          title: UserId
-          description: Optional user identifier for personalization and tracking
-          example: "user456"
-        userName:
-          anyOf:
-            - type: string
-            - type: null
-          title: UserName
-          description: Optional user's display name for personalized responses
-          example: "John Doe"
       title: ChatRequest
 
     ChatResponse:

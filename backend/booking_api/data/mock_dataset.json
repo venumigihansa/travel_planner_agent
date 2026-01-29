@@ -1,303 +1,121 @@
 {
   "hotels": [
     {
-      "hotelId": "g293962-d14106301",
-      "hotelName": "Marino Beach Colombo",
-      "description": "It boasts of 300 spacious and luxurious rooms, designed with true urban elegance. BOOK A ROOM. No pre payment required ...",
-      "address": "Marino Beach Colombo, 590 Marine Drive, Bambalapitiya, Colombo 00300, Sri Lanka",
-      "city": "Colombo, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-001-paris",
+      "hotelName": "Azure Bay Resort Paris",
+      "description": "A luxury resort in the heart of Paris offering stunning Seine River views, world-class dining, and elegant accommodations. Perfect for romantic getaways and business travelers alike.",
+      "address": "Azure Bay Resort Paris, 45 Rue de Rivoli, Paris 75001, France",
+      "city": "Paris, France",
+      "country": "France",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/19/bb/d7/hotel-image.jpg"
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80"
       ],
       "rating": 5.0,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Infinity Pool",
-        "Rooftop Lounge",
-        "Fitness Center",
+        "Seine River View",
+        "Rooftop Restaurant",
         "Spa & Wellness Center",
-        "Free Parking",
+        "Fitness Center",
+        "Concierge Service",
         "Airport Shuttle (Paid)",
         "24-hour Front Desk",
-        "Restaurant",
+        "Bar/Lounge",
         "Room Service"
       ],
       "propertyType": [
-        "Hotel"
+        "Luxury Hotel",
+        "Resort"
       ],
       "location": {
-        "latitude": 6.8999171,
-        "longitude": 79.8514974,
-        "landmark": "590 Marine Drive, Bambalapitiya, Colombo 00300, Sri Lanka",
-        "distanceFromCenter": 3.6
+        "latitude": 48.8606,
+        "longitude": 2.3376,
+        "landmark": "45 Rue de Rivoli, Paris 75001, France",
+        "distanceFromCenter": 0.5
       },
       "contactInfo": {
-        "phone": "+94 11 201 2345",
-        "email": "reservations@marinobeach.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g293962-d14106301-Reviews-Marino_Beach_Colombo-Colombo_Western_Province.html"
+        "phone": "+33 1 4261 5000",
+        "email": "reservations@azurebay-paris.com",
+        "website": "https://www.example-hotels.com/azure-bay-paris"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "15:00",
+        "checkOutTime": "12:00",
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 285.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-002-tokyo",
+      "hotelName": "The Crimson Tower Tokyo",
+      "description": "Ultra-modern high-rise hotel in Shibuya offering panoramic city views, innovative Japanese cuisine, and cutting-edge technology in every room.",
+      "address": "The Crimson Tower, 2-24-1 Dogenzaka, Shibuya-ku, Tokyo 150-0043, Japan",
+      "city": "Tokyo, Japan",
+      "country": "Japan",
+      "images": [
+        "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&q=80"
+      ],
+      "rating": 4.5,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Panoramic City Views",
+        "Rooftop Bar",
+        "Japanese Restaurant",
+        "Fitness Center",
+        "Business Center",
+        "Meeting Rooms",
+        "Laundry Service",
+        "Airport Shuttle (Paid)",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Luxury Hotel",
+        "Business Hotel"
+      ],
+      "location": {
+        "latitude": 35.658,
+        "longitude": 139.6982,
+        "landmark": "Shibuya-ku, Tokyo 150-0043, Japan",
+        "distanceFromCenter": 1.2
+      },
+      "contactInfo": {
+        "phone": "+81 3 5458 1234",
+        "email": "info@crimsontower-tokyo.jp",
+        "website": "https://www.example-hotels.com/crimson-tower-tokyo"
       },
       "checkInOutPolicy": {
         "checkInTime": "15:00",
         "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
+        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 75.0,
+      "lowestPrice": 195.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g293962-d12720953",
-      "hotelName": "Shangri-La Colombo",
-      "description": "Our well-situated luxury Shangri-La Colombo offers exquisite rooms, suites and extensive dining choices with heartfelt and thoughtful service.",
-      "address": "Shangri-La Colombo, 1 Galle Face, Colombo 00200, Sri Lanka",
-      "city": "Colombo, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-003-newyork",
+      "hotelName": "Manhattan Heritage Inn",
+      "description": "Historic boutique hotel in the heart of Manhattan's Financial District, featuring classic architecture with modern amenities and personalized service.",
+      "address": "Manhattan Heritage Inn, 88 Wall Street, New York, NY 10005, USA",
+      "city": "New York, USA",
+      "country": "United States",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/d5/1f/06/swimming-pool.jpg"
+        "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=1200&q=80"
       ],
       "rating": 4.5,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Outdoor Pool",
-        "Spa & Wellness Center",
-        "Fitness Center",
-        "Multiple Restaurants",
-        "Bar/Lounge",
-        "Free Parking",
-        "Concierge",
-        "Business Center",
-        "Airport Shuttle (Paid)"
-      ],
-      "propertyType": [
-        "Luxury Hotel"
-      ],
-      "location": {
-        "latitude": 6.9284136,
-        "longitude": 79.8444518,
-        "landmark": "1 Galle Face, Colombo 00200, Sri Lanka",
-        "distanceFromCenter": 1.2
-      },
-      "contactInfo": {
-        "phone": "+94 11 788 8288",
-        "email": "slcb.reservations@shangri-la.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g293962-d12720953-Reviews-Shangri_La_Colombo-Colombo_Western_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 159.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g293962-d597086",
-      "hotelName": "Cinnamon Grand Colombo",
-      "description": "One of the elegant 5-star Colombo hotels located in the heart of the city, Cinnamon Grand is perfectly suited for business and leisure travellers seeking a ...",
-      "address": "Cinnamon Grand Colombo, 77 Galle Road, Colombo 00300, Sri Lanka",
-      "city": "Colombo, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/88/85/fd/caption.jpg"
-      ],
-      "rating": 4.0,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Outdoor Pool",
-        "Spa & Wellness Center",
-        "Fitness Center",
-        "Multiple Restaurants",
-        "Bar/Lounge",
-        "Free Parking",
-        "Business Center",
-        "Concierge",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Hotel"
-      ],
-      "location": {
-        "latitude": 6.9180899,
-        "longitude": 79.8484918,
-        "landmark": "77 Galle Road, Colombo 00300, Sri Lanka",
-        "distanceFromCenter": 2.0
-      },
-      "contactInfo": {
-        "phone": "+94 11 249 1000",
-        "email": "reservations@cinnamonhotels.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g293962-d597086-Reviews-Cinnamon_Grand_Colombo-Colombo_Western_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 122.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g293962-d306379",
-      "hotelName": "Hilton Colombo",
-      "description": "Located in the center of Colombo's Business District, Hilton Colombo hotel features ten speciality restaurants and bars. Plan your stay at Hilton Colombo ...",
-      "address": "Hilton Colombo, 2 Sir Chittampalam A. Gardiner Mawatha, Colombo 00200, Sri Lanka",
-      "city": "Colombo, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/1b/55/1d/caption.jpg"
-      ],
-      "rating": 3.5,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Outdoor Pool",
-        "Fitness Center",
-        "Spa Services",
-        "Multiple Restaurants",
-        "Bar/Lounge",
-        "Free Parking",
-        "Business Center",
-        "Concierge",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Hotel"
-      ],
-      "location": {
-        "latitude": 6.9206513,
-        "longitude": 79.8562814,
-        "landmark": "2 Sir Chittampalam A. Gardiner Mawatha, Colombo 00200, Sri Lanka",
-        "distanceFromCenter": 1.1
-      },
-      "contactInfo": {
-        "phone": "+94 11 249 2492",
-        "email": "cmbhi.reservations@hilton.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g293962-d306379-Reviews-Hilton_Colombo-Colombo_Western_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 127.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g293962-d5279732",
-      "hotelName": "Radisson Hotel Colombo",
-      "description": "No information is available for this page.",
-      "address": "Radisson Hotel Colombo, 36-38 Clifford Place, Colombo 00400, Sri Lanka",
-      "city": "Colombo, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/f2/16/85/exterior.jpg"
-      ],
-      "rating": 3.0,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Rooftop Pool",
-        "Fitness Center",
+        "Heritage Building",
+        "Boutique Experience",
         "Restaurant",
         "Bar/Lounge",
-        "Free Parking",
-        "Airport Shuttle (Paid)",
-        "24-hour Front Desk",
+        "Fitness Center",
+        "Business Center",
+        "Concierge",
         "Laundry Service",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Hotel"
-      ],
-      "location": {
-        "latitude": 6.8825129,
-        "longitude": 79.855923,
-        "landmark": "36-38 Clifford Place, Colombo 00400, Sri Lanka",
-        "distanceFromCenter": 4.9
-      },
-      "contactInfo": {
-        "phone": "+94 11 255 5570",
-        "email": "reservations.colombo@radisson.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g293962-d5279732-Reviews-Radisson_Hotel_Colombo-Colombo_Western_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 103.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g297896-d10954536",
-      "hotelName": "Radisson Blu Resort, Galle",
-      "description": "Radisson Blu Resort, Galle is located at 523C, Colombo Road, Gintota, Galle, Sri Lanka. Is Radisson Blu Resort, Galle a smoke-free ...",
-      "address": "523C Colombo Road, Gintota, Galle 80000, Sri Lanka",
-      "city": "Galle, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/ca/e1/c4/amari-galle-sri-lanka.jpg"
-      ],
-      "rating": 5.0,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Beachfront",
-        "Outdoor Pool",
-        "Spa & Wellness Center",
-        "Fitness Center",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
-        "Kids' Club",
-        "Airport Shuttle (Paid)"
-      ],
-      "propertyType": [
-        "Resort"
-      ],
-      "location": {
-        "latitude": 6.0559,
-        "longitude": 80.1893,
-        "landmark": "Gintota, Galle 80000, Sri Lanka",
-        "distanceFromCenter": 3.2
-      },
-      "contactInfo": {
-        "phone": "+94 91 221 9000",
-        "email": "reservations.galle@radissonblu.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g297896-d10954536-Reviews-Radisson_Blu_Resort_Galle-Galle_Galle_District_Southern_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 297.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g297896-d556080",
-      "hotelName": "Galle Fort Hotel",
-      "description": "Located inside the UNESCO World Heritage Galle Fort, the historic Galle Fort Hotel is housed in a Dutch mansion that dates back 300 years.",
-      "address": "Galle Fort Hotel, 28 Church Street, Galle Fort, Galle 80000, Sri Lanka",
-      "city": "Galle, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/21/e4/50/cover-image.jpg"
-      ],
-      "rating": 4.5,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Boutique Heritage Property",
-        "Outdoor Pool",
-        "Restaurant",
-        "Bar/Lounge",
-        "Concierge",
-        "Airport Shuttle (Paid)",
-        "Laundry Service",
-        "Air Conditioning",
         "Room Service"
       ],
       "propertyType": [
@@ -305,132 +123,181 @@
         "Heritage Hotel"
       ],
       "location": {
-        "latitude": 6.0266218,
-        "longitude": 80.2176886,
-        "landmark": "Galle Fort, Galle 80000, Sri Lanka",
-        "distanceFromCenter": 0.4
+        "latitude": 40.7074,
+        "longitude": -74.0113,
+        "landmark": "Wall Street, New York, NY 10005, USA",
+        "distanceFromCenter": 0.8
       },
       "contactInfo": {
-        "phone": "+94 91 223 2274",
-        "email": "reservations@galleforthotel.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g297896-d556080-Reviews-Galle_Fort_Hotel-Galle_Galle_District_Southern_Province.html"
+        "phone": "+1 212 555 7890",
+        "email": "reservations@manhattan-heritage.com",
+        "website": "https://www.example-hotels.com/manhattan-heritage"
       },
       "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 0.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g293962-d2038179",
-      "hotelName": "Galle Face Hotel",
-      "description": "Sri Lanka's iconic landmark, The Galle Face Hotel, is situated in the heart of Colombo, along the seafront and facing the famous Galle Face Green.",
-      "address": "Galle Face Hotel, 2 Galle Road, Colombo 00300, Sri Lanka",
-      "city": "Colombo, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/0c/0c/e9/hotel-exterior.jpg"
-      ],
-      "rating": 4.0,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Beachfront",
-        "Outdoor Pool",
-        "Spa Services",
-        "Fitness Center",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
-        "Concierge",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Heritage Hotel"
-      ],
-      "location": {
-        "latitude": 6.9201212,
-        "longitude": 79.8461345,
-        "landmark": "2 Galle Road, Colombo 00300, Sri Lanka",
-        "distanceFromCenter": 1.8
-      },
-      "contactInfo": {
-        "phone": "+94 11 254 1010",
-        "email": "reservations@gallefacehotel.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g293962-d2038179-Reviews-Galle_Face_Hotel-Colombo_Western_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
+        "checkInTime": "15:00",
         "checkOutTime": "12:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 117.0,
+      "lowestPrice": 320.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g297896-d14033359",
-      "hotelName": "Le Grand Galle",
-      "description": "Nestled on Sri Lanka's southern coast, Le Grand Galle brings together the attentive care of Japanese tradition and the warmth of Sri Lankan hospitality.",
-      "address": "Le Grand Galle, 30 Park Road, Kaluwella, Galle 80000, Sri Lanka",
-      "city": "Galle, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-004-dubai",
+      "hotelName": "Golden Sands Palace Dubai",
+      "description": "Opulent beachfront resort on the Palm Jumeirah offering world-class luxury, private beach access, and stunning Arabian Gulf views.",
+      "address": "Golden Sands Palace, Palm Jumeirah Crescent, Dubai, UAE",
+      "city": "Dubai, UAE",
+      "country": "United Arab Emirates",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/b2/af/d1/imag1589-largejpg.jpg"
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80"
       ],
-      "rating": 3.5,
+      "rating": 5.0,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Ocean View Rooms",
-        "Outdoor Pool",
+        "Private Beach",
+        "Infinity Pool",
         "Spa & Wellness Center",
+        "Multiple Restaurants",
+        "Kids' Club",
+        "Water Sports",
         "Fitness Center",
-        "Restaurant",
-        "Bar/Lounge",
         "Free Parking",
-        "Airport Shuttle (Paid)",
-        "24-hour Front Desk"
+        "Airport Shuttle (Paid)"
       ],
       "propertyType": [
-        "Hotel"
+        "Luxury Resort",
+        "Beach Hotel"
       ],
       "location": {
-        "latitude": 6.0315874,
-        "longitude": 80.2123199,
-        "landmark": "Kaluwella, Galle 80000, Sri Lanka",
-        "distanceFromCenter": 1.6
+        "latitude": 25.1124,
+        "longitude": 55.139,
+        "landmark": "Palm Jumeirah, Dubai, UAE",
+        "distanceFromCenter": 8.5
       },
       "contactInfo": {
-        "phone": "+94 91 222 4000",
-        "email": "reservations@legrandgalle.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g297896-d14033359-Reviews-Le_Grand_Galle-Galle_Galle_District_Southern_Province.html"
+        "phone": "+971 4 555 1234",
+        "email": "info@goldensands-dubai.ae",
+        "website": "https://www.example-hotels.com/golden-sands-dubai"
       },
       "checkInOutPolicy": {
         "checkInTime": "15:00",
         "checkOutTime": "12:00",
         "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 0.0,
+      "lowestPrice": 425.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g297896-d11789132",
-      "hotelName": "The Bartizan Galle Fort",
-      "description": "The Bartizan is a Colonial building, renovated into a modern, stylish boutique hotel located in the UNESCO site Galle Fort, Sri Lanka.",
-      "address": "The Bartizan, 77 Pedlar Street, Galle Fort, Galle 80000, Sri Lanka",
-      "city": "Galle, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-005-sydney",
+      "hotelName": "Harbour View Suites Sydney",
+      "description": "Contemporary hotel with spectacular Sydney Harbour and Opera House views, featuring spacious suites and a rooftop infinity pool.",
+      "address": "Harbour View Suites, 102 George Street, The Rocks, Sydney NSW 2000, Australia",
+      "city": "Sydney, Australia",
+      "country": "Australia",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/81/10/f2/the-bartizan-galle-fort.jpg"
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80"
       ],
-      "rating": 3.0,
+      "rating": 4.5,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Boutique Property",
+        "Harbour Views",
+        "Rooftop Infinity Pool",
         "Restaurant",
+        "Bar/Lounge",
+        "Fitness Center",
+        "Concierge",
+        "Laundry Service",
+        "Airport Shuttle (Paid)",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Hotel",
+        "Suite Hotel"
+      ],
+      "location": {
+        "latitude": -33.8599,
+        "longitude": 151.209,
+        "landmark": "The Rocks, Sydney NSW 2000, Australia",
+        "distanceFromCenter": 0.3
+      },
+      "contactInfo": {
+        "phone": "+61 2 9247 5555",
+        "email": "reservations@harbourview-sydney.com.au",
+        "website": "https://www.example-hotels.com/harbour-view-sydney"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "14:00",
+        "checkOutTime": "11:00",
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 275.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-006-london",
+      "hotelName": "The Westminster Grand",
+      "description": "Elegant five-star hotel in Westminster offering British heritage charm, fine dining, and proximity to London's iconic landmarks.",
+      "address": "The Westminster Grand, 45 Whitehall Place, London SW1A 2BD, UK",
+      "city": "London, UK",
+      "country": "United Kingdom",
+      "images": [
+        "https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=1200&q=80"
+      ],
+      "rating": 5.0,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Heritage Property",
+        "Michelin-Star Restaurant",
+        "Afternoon Tea Service",
+        "Spa & Wellness Center",
+        "Fitness Center",
+        "Business Center",
+        "Concierge",
+        "Valet Parking",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Luxury Hotel",
+        "Heritage Hotel"
+      ],
+      "location": {
+        "latitude": 51.5049,
+        "longitude": -0.1245,
+        "landmark": "Whitehall Place, London SW1A 2BD, UK",
+        "distanceFromCenter": 0.4
+      },
+      "contactInfo": {
+        "phone": "+44 20 7930 8888",
+        "email": "info@westminster-grand.co.uk",
+        "website": "https://www.example-hotels.com/westminster-grand"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "15:00",
+        "checkOutTime": "12:00",
+        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 395.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-007-rome",
+      "hotelName": "Villa Romana Boutique",
+      "description": "Charming boutique hotel near the Colosseum featuring Italian Renaissance decor, rooftop terrace with ancient city views, and authentic Roman cuisine.",
+      "address": "Villa Romana Boutique, Via dei Fori Imperiali 12, Rome 00186, Italy",
+      "city": "Rome, Italy",
+      "country": "Italy",
+      "images": [
+        "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=1200&q=80"
+      ],
+      "rating": 4.0,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Rooftop Terrace",
+        "Italian Restaurant",
         "Bar/Lounge",
         "Concierge",
         "Airport Shuttle (Paid)",
@@ -443,510 +310,733 @@
         "Boutique Hotel"
       ],
       "location": {
-        "latitude": 6.0242,
-        "longitude": 80.2168,
-        "landmark": "Galle Fort, Galle 80000, Sri Lanka",
-        "distanceFromCenter": 0.2
+        "latitude": 41.8919,
+        "longitude": 12.4923,
+        "landmark": "Via dei Fori Imperiali, Rome 00186, Italy",
+        "distanceFromCenter": 0.6
       },
       "contactInfo": {
-        "phone": "+94 91 222 1077",
-        "email": "reservations@bartizan.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g297896-d11789132-Reviews-The_Bartizan_Galle_Fort-Galle_Galle_District_Southern_Province.html"
+        "phone": "+39 06 6780 1234",
+        "email": "info@villaromana-boutique.it",
+        "website": "https://www.example-hotels.com/villa-romana"
       },
       "checkInOutPolicy": {
         "checkInTime": "14:00",
         "checkOutTime": "11:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 0.0,
+      "lowestPrice": 210.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g304138-d797403",
-      "hotelName": "Cinnamon Citadel Kandy",
-      "description": "Each of our 115 rooms is designed with your comfort in mind. Wake up to stunning views of the Mahaweli river and the rolling green hills of Kandy.",
-      "address": "Cinnamon Citadel Kandy, 124 Srimath Kudaratwatte Mawatha, Kandy 20000, Sri Lanka",
-      "city": "Kandy, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-008-singapore",
+      "hotelName": "Marina Gardens Hotel",
+      "description": "Contemporary luxury hotel in Marina Bay featuring stunning skyline views, infinity pool, and award-winning Asian fusion cuisine.",
+      "address": "Marina Gardens Hotel, 10 Bayfront Avenue, Singapore 018956",
+      "city": "Singapore",
+      "country": "Singapore",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/0b/66/39/terrace-dinning.jpg"
-      ],
-      "rating": 5.0,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "River View",
-        "Outdoor Pool",
-        "Spa Services",
-        "Fitness Center",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
-        "Airport Shuttle (Paid)",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Hotel"
-      ],
-      "location": {
-        "latitude": 7.3057606,
-        "longitude": 80.623794,
-        "landmark": "124 Srimath Kudaratwatte Mawatha, Kandy 20000, Sri Lanka",
-        "distanceFromCenter": 5.4
-      },
-      "contactInfo": {
-        "phone": "+94 81 223 4367",
-        "email": "reservations@cinnamonhotels.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g304138-d797403-Reviews-Cinnamon_Citadel_Kandy-Kandy_Kandy_District_Central_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 150.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g304138-d32865997",
-      "hotelName": "Kandy Myst By Cinnamon",
-      "description": "Enjoy an unforgettable stay at Kandy Myst by Cinnamon, one of the Upscale hotels in Kandy, Sri Lanka. Enjoy modern amenities and warm hospitality.",
-      "address": "Kandy Myst by Cinnamon, Katugastota Road, Kandy 20000, Sri Lanka",
-      "city": "Kandy, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/10/dd/ec/by-day-kandy-myst-by.jpg"
+        "https://images.unsplash.com/photo-1520483691742-bada60a1edd6?w=1200&q=80"
       ],
       "rating": 4.5,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Outdoor Pool",
+        "Infinity Pool",
+        "Skyline Views",
+        "Multiple Restaurants",
+        "Spa & Wellness Center",
         "Fitness Center",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
+        "Business Center",
+        "Airport Shuttle (Paid)",
         "Concierge",
-        "Laundry Service",
-        "Air Conditioning",
         "Room Service"
       ],
       "propertyType": [
-        "Upscale Hotel"
+        "Luxury Hotel"
       ],
       "location": {
-        "latitude": 7.2945,
-        "longitude": 80.6369,
-        "landmark": "Kandy 20000, Sri Lanka",
-        "distanceFromCenter": 3.1
+        "latitude": 1.2839,
+        "longitude": 103.8607,
+        "landmark": "Bayfront Avenue, Singapore 018956",
+        "distanceFromCenter": 1.0
       },
       "contactInfo": {
-        "phone": "+94 81 203 0400",
-        "email": "reservations@cinnamonhotels.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g304138-d32865997-Reviews-Kandy_Myst_By_Cinnamon-Kandy_Kandy_District_Central_Province.html"
+        "phone": "+65 6688 8888",
+        "email": "reservations@marina-gardens.sg",
+        "website": "https://www.example-hotels.com/marina-gardens"
       },
       "checkInOutPolicy": {
-        "checkInTime": "14:00",
+        "checkInTime": "15:00",
         "checkOutTime": "12:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 140.0,
+      "lowestPrice": 245.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g12239236-d10521858",
-      "hotelName": "Santani Wellness Kandy",
-      "description": "Experience superior relaxation and rejuvenation at Santani Wellness Kandy, the best wellness retreat in the world. Book now and unwind in luxury!",
-      "address": "Santani Wellness Kandy, Aratenna Estate Road, Werapitiya 20908, Sri Lanka",
-      "city": "Werapitiya, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-009-barcelona",
+      "hotelName": "Casa Gaudi Residence",
+      "description": "Modernist-inspired boutique hotel near Sagrada Familia offering Catalan design, tapas bar, and rooftop pool with Barcelona views.",
+      "address": "Casa Gaudi Residence, Carrer de Proven\u00e7a 450, Barcelona 08025, Spain",
+      "city": "Barcelona, Spain",
+      "country": "Spain",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/51/5a/5b/santani-wellness-resort.jpg"
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1200&q=80"
       ],
       "rating": 4.0,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Wellness Retreat",
-        "Spa & Hydrotherapy",
-        "Yoga Pavilion",
-        "Infinity Pool",
-        "Organic Cuisine",
-        "Airport Transfers (Paid)",
-        "Meditation Spaces",
-        "Hiking Trails",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Wellness Resort",
-        "Retreat"
-      ],
-      "location": {
-        "latitude": 7.3052,
-        "longitude": 80.7538,
-        "landmark": "Werapitiya 20908, Sri Lanka",
-        "distanceFromCenter": 26.0
-      },
-      "contactInfo": {
-        "phone": "+94 81 203 1800",
-        "email": "reservations@santani.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g12239236-d10521858-Reviews-Santani_Wellness_Kandy-Werapitiya_Kandy_District_Central_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 7 days before check-in; thereafter charges may apply."
-      },
-      "lowestPrice": 571.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g304138-d7729062",
-      "hotelName": "Radisson Hotel Kandy",
-      "description": "No information is available for this page.",
-      "address": "Radisson Hotel Kandy, 31 Saranankara Road, Kandy 20000, Sri Lanka",
-      "city": "Kandy, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/f4/cb/18/exterior.jpg"
-      ],
-      "rating": 3.5,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
         "Rooftop Pool",
-        "Fitness Center",
+        "Tapas Bar",
         "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
+        "Fitness Center",
+        "Concierge",
         "Airport Shuttle (Paid)",
-        "24-hour Front Desk",
         "Laundry Service",
+        "Air Conditioning",
         "Room Service"
       ],
       "propertyType": [
-        "Hotel"
+        "Boutique Hotel"
       ],
       "location": {
-        "latitude": 7.2883057,
-        "longitude": 80.6427629,
-        "landmark": "31 Saranankara Road, Kandy 20000, Sri Lanka",
-        "distanceFromCenter": 1.6
+        "latitude": 41.4036,
+        "longitude": 2.1744,
+        "landmark": "Carrer de Proven\u00e7a, Barcelona 08025, Spain",
+        "distanceFromCenter": 2.3
       },
       "contactInfo": {
-        "phone": "+94 81 203 0700",
-        "email": "reservations.kandy@radisson.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g304138-d7729062-Reviews-Radisson_Hotel_Kandy-Kandy_Kandy_District_Central_Province.html"
+        "phone": "+34 93 456 7890",
+        "email": "info@casagaudi-residence.es",
+        "website": "https://www.example-hotels.com/casa-gaudi"
       },
       "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 262.0,
+      "lowestPrice": 175.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g12220047-d480276",
-      "hotelName": "Amaya Hills Kandy",
-      "description": "Immerse yourself in luxury at Amaya Hills, one of the best 5-star luxury hotels in Kandy. Enjoy stunning mountain views, world-class amenities, ...",
-      "address": "Amaya Hills Kandy, Heerassagala Road, Kandy 20000, Sri Lanka",
-      "city": "Heerassagala, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-010-bangkok",
+      "hotelName": "Siam Riverfront Resort",
+      "description": "Luxurious riverside resort offering traditional Thai hospitality, riverside dining pavilions, and a world-class spa overlooking the Chao Phraya River.",
+      "address": "Siam Riverfront Resort, 257/1-3 Charoennakorn Road, Bangkok 10600, Thailand",
+      "city": "Bangkok, Thailand",
+      "country": "Thailand",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-s/03/35/e0/95/amaya-hills.jpg"
+        "https://images.unsplash.com/photo-1562790351-d273a961e0e9?w=1200&q=80"
       ],
-      "rating": 3.0,
+      "rating": 5.0,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Mountain Views",
-        "Outdoor Pool",
-        "Spa & Wellness Center",
+        "River Views",
+        "Riverside Pool",
+        "Thai Spa",
+        "Multiple Restaurants",
         "Fitness Center",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
+        "River Shuttle",
+        "Cooking Classes",
         "Airport Shuttle (Paid)",
         "Room Service"
       ],
       "propertyType": [
-        "Resort",
-        "Hotel"
+        "Luxury Resort"
       ],
       "location": {
-        "latitude": 7.258972,
-        "longitude": 80.6191176,
-        "landmark": "Heerassagala Road, Kandy 20000, Sri Lanka",
-        "distanceFromCenter": 7.8
+        "latitude": 13.722,
+        "longitude": 100.4927,
+        "landmark": "Charoennakorn Road, Bangkok 10600, Thailand",
+        "distanceFromCenter": 4.2
       },
       "contactInfo": {
-        "phone": "+94 81 447 4022",
-        "email": "reservations@amayaresorts.com",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g12220047-d480276-Reviews-Amaya_Hills_Kandy-Heerassagala_Kandy_Kandy_District_Central_Province.html"
+        "phone": "+66 2 476 0022",
+        "email": "reservations@siam-riverfront.th",
+        "website": "https://www.example-hotels.com/siam-riverfront"
       },
       "checkInOutPolicy": {
         "checkInTime": "14:00",
         "checkOutTime": "12:00",
         "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 106.0,
+      "lowestPrice": 155.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g608524-d1568245",
-      "hotelName": "Nuwara Eliya Golf Club",
-      "description": "The Nuwara Eliya Golf Club, founded in 1889, is one of the oldest golf clubs in Asia and probably the world. It is an institution, rich in tradition, history ...",
-      "address": "Nuwara Eliya Golf Club, Golf Club Road, Nuwara Eliya 22200, Sri Lanka",
-      "city": "Nuwara Eliya, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-011-paris",
+      "hotelName": "Le Petit Marais Hotel",
+      "description": "Cozy boutique hotel in Le Marais district featuring Parisian charm, intimate courtyard, and locally-sourced breakfast cafe.",
+      "address": "Le Petit Marais Hotel, 12 Rue des Rosiers, Paris 75004, France",
+      "city": "Paris, France",
+      "country": "France",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/b9/06/62/golf-course.jpg"
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=80"
       ],
-      "rating": 5.0,
+      "rating": 4.0,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Golf Course Access",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
-        "Gardens",
-        "Heritage Property",
-        "Meeting Rooms",
+        "Courtyard",
+        "Cafe",
+        "Concierge",
+        "Laundry Service",
+        "Air Conditioning",
         "Daily Housekeeping",
+        "Bicycle Rental",
+        "Airport Shuttle (Paid)",
         "Room Service"
       ],
       "propertyType": [
-        "Club",
-        "Heritage Property"
+        "Boutique Hotel"
       ],
       "location": {
-        "latitude": 6.9711367,
-        "longitude": 80.7666695,
-        "landmark": "Golf Club Road, Nuwara Eliya 22200, Sri Lanka",
-        "distanceFromCenter": 1.0
+        "latitude": 48.8568,
+        "longitude": 2.3588,
+        "landmark": "Le Marais, Paris 75004, France",
+        "distanceFromCenter": 1.8
       },
       "contactInfo": {
-        "phone": "+94 52 222 2270",
-        "email": "reservations@nuwaraeliyagolfclub.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g608524-d1568245-Reviews-Nuwara_Eliya_Golf_Club-Nuwara_Eliya_Central_Province.html"
+        "phone": "+33 1 4278 6789",
+        "email": "contact@petitmarais-paris.fr",
+        "website": "https://www.example-hotels.com/petit-marais"
       },
       "checkInOutPolicy": {
-        "checkInTime": "14:00",
+        "checkInTime": "15:00",
         "checkOutTime": "11:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 52.0,
+      "lowestPrice": 165.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g608524-d579206",
-      "hotelName": "The Grand Hotel Nuwara Eliya - Heritage Grand",
-      "description": "An excellent stay at a grand hotel.\" The Grand Hotel, Grand Hotel Road, Nuwara Eliya, Sri Lanka. Telephone: +94522222881. Email: reservations@grandhotel.lk ...",
-      "address": "The Grand Hotel, Grand Hotel Road, Nuwara Eliya 22200, Sri Lanka",
-      "city": "Nuwara Eliya, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-012-tokyo",
+      "hotelName": "Zen Garden Inn Kyoto-Tokyo",
+      "description": "Traditional Japanese ryokan-style hotel blending minimalist design with modern comfort, featuring onsen baths and kaiseki dining.",
+      "address": "Zen Garden Inn, 5-7-1 Ginza, Chuo-ku, Tokyo 104-0061, Japan",
+      "city": "Tokyo, Japan",
+      "country": "Japan",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/58/77/95/grand-hotel-nuwara-eliya.jpg"
+        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&q=80"
       ],
       "rating": 4.5,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Heritage Hotel",
-        "Restaurant",
-        "Bar/Lounge",
-        "Spa Services",
-        "Fitness Center",
-        "Free Parking",
-        "Tea Lounge",
+        "Onsen Baths",
+        "Kaiseki Restaurant",
+        "Tea Ceremony Room",
         "Garden",
+        "Traditional Tatami Rooms",
+        "Zen Meditation Space",
+        "Concierge",
+        "Airport Shuttle (Paid)",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Ryokan",
+        "Boutique Hotel"
+      ],
+      "location": {
+        "latitude": 35.6717,
+        "longitude": 139.7645,
+        "landmark": "Ginza, Tokyo 104-0061, Japan",
+        "distanceFromCenter": 2.1
+      },
+      "contactInfo": {
+        "phone": "+81 3 3571 2468",
+        "email": "info@zengarden-tokyo.jp",
+        "website": "https://www.example-hotels.com/zen-garden-tokyo"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "15:00",
+        "checkOutTime": "10:00",
+        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 220.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-013-newyork",
+      "hotelName": "Brooklyn Heights Loft Hotel",
+      "description": "Industrial-chic hotel in Brooklyn Heights offering loft-style rooms, rooftop bar with Manhattan skyline views, and artisan coffee lounge.",
+      "address": "Brooklyn Heights Loft, 75 Henry Street, Brooklyn, NY 11201, USA",
+      "city": "New York, USA",
+      "country": "United States",
+      "images": [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80"
+      ],
+      "rating": 3.5,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Rooftop Bar",
+        "Coffee Lounge",
+        "Fitness Center",
+        "Business Center",
+        "Bike Rental",
+        "Laundry Service",
+        "Pet-Friendly",
+        "Airport Shuttle (Paid)",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Boutique Hotel"
+      ],
+      "location": {
+        "latitude": 40.6938,
+        "longitude": -73.995,
+        "landmark": "Brooklyn Heights, NY 11201, USA",
+        "distanceFromCenter": 3.2
+      },
+      "contactInfo": {
+        "phone": "+1 718 555 3456",
+        "email": "reservations@brooklynheights-loft.com",
+        "website": "https://www.example-hotels.com/brooklyn-loft"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 185.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-014-dubai",
+      "hotelName": "Desert Oasis Retreat",
+      "description": "Exclusive desert resort offering luxury tented accommodations, camel treks, traditional Bedouin dining, and stunning dune views.",
+      "address": "Desert Oasis Retreat, Dubai Desert Conservation Reserve, Dubai, UAE",
+      "city": "Dubai, UAE",
+      "country": "United Arab Emirates",
+      "images": [
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80"
+      ],
+      "rating": 4.5,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Luxury Tents",
+        "Desert Safari",
+        "Camel Riding",
+        "Bedouin Restaurant",
+        "Spa",
+        "Pool",
+        "Stargazing Tours",
+        "Airport Transfer (Included)",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Resort",
+        "Glamping"
+      ],
+      "location": {
+        "latitude": 24.8607,
+        "longitude": 55.6131,
+        "landmark": "Dubai Desert Conservation Reserve, Dubai, UAE",
+        "distanceFromCenter": 45.0
+      },
+      "contactInfo": {
+        "phone": "+971 4 832 9900",
+        "email": "info@desertoasis-dubai.ae",
+        "website": "https://www.example-hotels.com/desert-oasis"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "14:00",
+        "checkOutTime": "11:00",
+        "cancellationPolicy": "Free cancellation up to 7 days before check-in; thereafter charges may apply."
+      },
+      "lowestPrice": 520.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-015-sydney",
+      "hotelName": "Bondi Beach Retreat",
+      "description": "Beachfront hotel on iconic Bondi Beach featuring ocean-view rooms, surf school, and fresh seafood restaurant with sunset views.",
+      "address": "Bondi Beach Retreat, 178 Campbell Parade, Bondi Beach NSW 2026, Australia",
+      "city": "Sydney, Australia",
+      "country": "Australia",
+      "images": [
+        "https://images.unsplash.com/photo-1559508551-44bff1de756b?w=1200&q=80"
+      ],
+      "rating": 4.0,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Beachfront",
+        "Ocean Views",
+        "Surf School",
+        "Seafood Restaurant",
+        "Bar/Lounge",
+        "Pool",
+        "Fitness Center",
+        "Beach Equipment",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Beach Hotel"
+      ],
+      "location": {
+        "latitude": -33.8915,
+        "longitude": 151.2767,
+        "landmark": "Campbell Parade, Bondi Beach NSW 2026, Australia",
+        "distanceFromCenter": 7.0
+      },
+      "contactInfo": {
+        "phone": "+61 2 9130 5555",
+        "email": "info@bondibeach-retreat.com.au",
+        "website": "https://www.example-hotels.com/bondi-retreat"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "14:00",
+        "checkOutTime": "10:00",
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 195.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-016-london",
+      "hotelName": "Shoreditch Art House",
+      "description": "Hip boutique hotel in trendy Shoreditch featuring street art decor, craft cocktail bar, and contemporary British restaurant.",
+      "address": "Shoreditch Art House, 88 Redchurch Street, London E2 7DP, UK",
+      "city": "London, UK",
+      "country": "United Kingdom",
+      "images": [
+        "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=1200&q=80"
+      ],
+      "rating": 3.5,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Street Art Gallery",
+        "Craft Cocktail Bar",
+        "Restaurant",
+        "Vinyl Record Library",
+        "Bike Rental",
+        "Co-working Space",
+        "Laundry Service",
+        "Airport Shuttle (Paid)",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Boutique Hotel"
+      ],
+      "location": {
+        "latitude": 51.5241,
+        "longitude": -0.0715,
+        "landmark": "Shoreditch, London E2 7DP, UK",
+        "distanceFromCenter": 3.5
+      },
+      "contactInfo": {
+        "phone": "+44 20 7729 8888",
+        "email": "hello@shoreditch-arthouse.co.uk",
+        "website": "https://www.example-hotels.com/shoreditch-art"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 145.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-017-rome",
+      "hotelName": "Trastevere Palazzo Inn",
+      "description": "Historic palazzo-style hotel in charming Trastevere neighborhood offering authentic Roman experience with cobblestone courtyard and wine cellar.",
+      "address": "Trastevere Palazzo Inn, Via della Lungaretta 45, Rome 00153, Italy",
+      "city": "Rome, Italy",
+      "country": "Italy",
+      "images": [
+        "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=1200&q=80"
+      ],
+      "rating": 3.5,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Historic Building",
+        "Courtyard",
+        "Wine Cellar",
+        "Italian Restaurant",
+        "Concierge",
+        "Laundry Service",
+        "Air Conditioning",
+        "Airport Shuttle (Paid)",
         "Room Service"
       ],
       "propertyType": [
         "Heritage Hotel"
       ],
       "location": {
-        "latitude": 6.9694,
-        "longitude": 80.7686,
-        "landmark": "Grand Hotel Road, Nuwara Eliya 22200, Sri Lanka",
-        "distanceFromCenter": 0.8
+        "latitude": 41.8895,
+        "longitude": 12.4686,
+        "landmark": "Trastevere, Rome 00153, Italy",
+        "distanceFromCenter": 2.1
       },
       "contactInfo": {
-        "phone": "+94 52 222 2281",
-        "email": "reservations@grandhotel.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g608524-d579206-Reviews-The_Grand_Hotel_Nuwara_Eliya_Heritage_Grand-Nuwara_Eliya_Central_Province.html"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
-      },
-      "lowestPrice": 184.0,
-      "isAvailable": true
-    },
-    {
-      "hotelId": "g608524-d3459790",
-      "hotelName": "Heaven Seven Hotel Nuwara Eliya",
-      "description": "Surrounded by lush greenery, Heaven Seven Hotels is located in the peaceful Nuwara Eliya. Free WiFi is available at all areas and guestrooms come fitted with a ...",
-      "address": "Heaven Seven Hotel, Haddon Hill Road, Nuwara Eliya 22200, Sri Lanka",
-      "city": "Nuwara Eliya, Sri Lanka",
-      "country": "Sri Lanka",
-      "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/e8/31/heaven-seven-hotel-nuwara.jpg"
-      ],
-      "rating": 4.0,
-      "reviewCount": 1,
-      "amenities": [
-        "Free WiFi",
-        "Free Parking",
-        "Restaurant",
-        "Bar/Lounge",
-        "Airport Shuttle (Paid)",
-        "Family Rooms",
-        "Daily Housekeeping",
-        "Laundry Service",
-        "Garden",
-        "Room Service"
-      ],
-      "propertyType": [
-        "Hotel"
-      ],
-      "location": {
-        "latitude": 6.9613657,
-        "longitude": 80.7649538,
-        "landmark": "Haddon Hill Road, Nuwara Eliya 22200, Sri Lanka",
-        "distanceFromCenter": 1.3
-      },
-      "contactInfo": {
-        "phone": "+94 52 223 1933",
-        "email": "reservations@heavenseven.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g608524-d3459790-Reviews-Heaven_Seven_Hotel_Nuwara_Eliya-Nuwara_Eliya_Central_Province.html"
+        "phone": "+39 06 5833 4567",
+        "email": "info@trastevere-palazzo.it",
+        "website": "https://www.example-hotels.com/trastevere-palazzo"
       },
       "checkInOutPolicy": {
         "checkInTime": "14:00",
         "checkOutTime": "11:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 61.0,
+      "lowestPrice": 125.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g608524-d24088600",
-      "hotelName": "W15 Lake Gregory Nuwara Eliya",
-      "description": "Set beside the gentle waters of Gregory Lake, W15 Lake Gregory is a quiet hill country retreat shaped by mist, water and surrounding forest.",
-      "address": "W15 Lake Gregory, Lake Gregory Road, Nuwara Eliya 22200, Sri Lanka",
-      "city": "Nuwara Eliya, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-018-singapore",
+      "hotelName": "Sentosa Island Resort & Spa",
+      "description": "Tropical island resort on Sentosa offering beachfront villas, championship golf course, and world-class spa facilities.",
+      "address": "Sentosa Island Resort, 2 Bukit Manis Road, Sentosa Island 099891, Singapore",
+      "city": "Singapore",
+      "country": "Singapore",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/a1/ba/19/w15-lake-gregory.jpg"
+        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80"
+      ],
+      "rating": 5.0,
+      "reviewCount": 1,
+      "amenities": [
+        "Free WiFi",
+        "Private Beach",
+        "Beach Villas",
+        "Golf Course",
+        "Spa & Wellness Center",
+        "Multiple Restaurants",
+        "Infinity Pool",
+        "Kids' Club",
+        "Water Sports",
+        "Room Service"
+      ],
+      "propertyType": [
+        "Luxury Resort"
+      ],
+      "location": {
+        "latitude": 1.2494,
+        "longitude": 103.8303,
+        "landmark": "Sentosa Island, Singapore 099891",
+        "distanceFromCenter": 7.5
+      },
+      "contactInfo": {
+        "phone": "+65 6275 0331",
+        "email": "reservations@sentosa-resort.sg",
+        "website": "https://www.example-hotels.com/sentosa-resort"
+      },
+      "checkInOutPolicy": {
+        "checkInTime": "15:00",
+        "checkOutTime": "12:00",
+        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
+      },
+      "lowestPrice": 385.0,
+      "isAvailable": true
+    },
+    {
+      "hotelId": "mock-019-barcelona",
+      "hotelName": "Gothic Quarter Suites",
+      "description": "Medieval-inspired boutique hotel in the Gothic Quarter featuring exposed stone walls, rooftop terrace with cathedral views, and tapas wine bar.",
+      "address": "Gothic Quarter Suites, Carrer del Bisbe 8, Barcelona 08002, Spain",
+      "city": "Barcelona, Spain",
+      "country": "Spain",
+      "images": [
+        "https://images.unsplash.com/photo-1455587734955-081b22074882?w=1200&q=80"
       ],
       "rating": 3.5,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Lakefront",
-        "Restaurant",
-        "Bar/Lounge",
-        "Free Parking",
+        "Rooftop Terrace",
+        "Cathedral Views",
+        "Wine Bar",
+        "Historic Architecture",
+        "Concierge",
+        "Laundry Service",
+        "Air Conditioning",
         "Airport Shuttle (Paid)",
-        "Daily Housekeeping",
-        "Garden",
-        "Fireplace Lounge",
         "Room Service"
       ],
       "propertyType": [
-        "Boutique Hotel"
+        "Boutique Hotel",
+        "Heritage Hotel"
       ],
       "location": {
-        "latitude": 6.9498,
-        "longitude": 80.7854,
-        "landmark": "Lake Gregory, Nuwara Eliya 22200, Sri Lanka",
-        "distanceFromCenter": 2.1
+        "latitude": 41.3839,
+        "longitude": 2.1769,
+        "landmark": "Gothic Quarter, Barcelona 08002, Spain",
+        "distanceFromCenter": 0.4
       },
       "contactInfo": {
-        "phone": "+94 52 222 8787",
-        "email": "reservations@w15.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g608524-d24088600-Reviews-W15_Lake_Gregory_Nuwara_Eliya-Nuwara_Eliya_Central_Province.html"
+        "phone": "+34 93 268 9012",
+        "email": "info@gothicquarter-suites.es",
+        "website": "https://www.example-hotels.com/gothic-quarter"
       },
       "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 230.0,
+      "lowestPrice": 135.0,
       "isAvailable": true
     },
     {
-      "hotelId": "g608524-d7649280",
-      "hotelName": "Hill Cottage Nuwara Eliya",
-      "description": "Property amenities ... Free parking ... Free High Speed Internet (WiFi) ... Restaurant ... Hiking ... Horseback riding ... Babysitting ... Children's television networks.",
-      "address": "Hill Cottage, 19/23 Grand Hotel Road, Nuwara Eliya 22200, Sri Lanka",
-      "city": "Nuwara Eliya, Sri Lanka",
-      "country": "Sri Lanka",
+      "hotelId": "mock-020-bangkok",
+      "hotelName": "Sukhumvit Urban Loft",
+      "description": "Modern city hotel in vibrant Sukhumvit area offering sleek loft apartments, rooftop infinity pool, and 24-hour gym with city views.",
+      "address": "Sukhumvit Urban Loft, 55 Sukhumvit Road Soi 11, Bangkok 10110, Thailand",
+      "city": "Bangkok, Thailand",
+      "country": "Thailand",
       "images": [
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/e0/35/5a/hill-cottage.jpg"
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80"
       ],
       "rating": 3.0,
       "reviewCount": 1,
       "amenities": [
         "Free WiFi",
-        "Free Parking",
+        "Rooftop Infinity Pool",
+        "Loft Apartments",
+        "24-hour Fitness Center",
         "Restaurant",
-        "Hiking",
-        "Horseback Riding (Nearby)",
-        "Family Rooms",
-        "Babysitting (Paid)",
-        "Daily Housekeeping",
-        "Garden",
+        "Bar/Lounge",
+        "Co-working Space",
+        "Laundry Service",
+        "Airport Shuttle (Paid)",
         "Room Service"
       ],
       "propertyType": [
-        "Cottage",
-        "Guesthouse"
+        "Apartment Hotel"
       ],
       "location": {
-        "latitude": 6.9905919,
-        "longitude": 80.7484737,
-        "landmark": "Grand Hotel Road, Nuwara Eliya 22200, Sri Lanka",
-        "distanceFromCenter": 1.7
+        "latitude": 13.7443,
+        "longitude": 100.5571,
+        "landmark": "Sukhumvit Road, Bangkok 10110, Thailand",
+        "distanceFromCenter": 5.8
       },
       "contactInfo": {
-        "phone": "+94 52 223 4590",
-        "email": "reservations@hillcottage.lk",
-        "website": "https://www.tripadvisor.com/Hotel_Review-g608524-d7649280-Reviews-Hill_Cottage_Nuwara_Eliya-Nuwara_Eliya_Central_Province.html"
+        "phone": "+66 2 253 0088",
+        "email": "info@sukhumvit-loft.th",
+        "website": "https://www.example-hotels.com/sukhumvit-loft"
       },
       "checkInOutPolicy": {
         "checkInTime": "14:00",
-        "checkOutTime": "11:00",
+        "checkOutTime": "12:00",
         "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
-      "lowestPrice": 71.0,
+      "lowestPrice": 95.0,
       "isAvailable": true
     }
   ],
   "rooms": [
     {
-      "roomId": "g293962-d14106301_BookingCom",
-      "hotelId": "g293962-d14106301",
-      "roomType": "Standard Room",
+      "roomId": "mock-001-paris_BookingCom_1",
+      "hotelId": "mock-001-paris",
+      "roomType": "Junior Suite",
       "roomName": "Booking.com Rate",
       "description": "Rate via Booking.com",
       "maxOccupancy": 2,
-      "pricePerNight": 75.0,
+      "pricePerNight": 371.88,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d14106301/rooms/standard_king_01.jpg",
-        "https://images.travelplanner.dev/mock/hotels/g293962-d14106301/rooms/standard_bath_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-001-paris/rooms/junior_suite_03.jpg"
       ],
       "amenities": [
-        "Air Conditioning",
+        "Work Desk",
         "Private Bathroom",
-        "City View",
+        "Premium Toiletries",
+        "Air Conditioning",
+        "Tea/Coffee Maker",
         "Flat-screen TV",
-        "Minibar",
         "Safe",
+        "Nespresso Machine"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 45,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-001-paris_HotelsComUS_2",
+      "hotelId": "mock-001-paris",
+      "roomType": "Premium Suite",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 337.22,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-001-paris/rooms/premium_suite_03.jpg"
+      ],
+      "amenities": [
+        "Balcony",
+        "Nespresso Machine",
+        "Air Conditioning",
+        "Work Desk",
+        "City View",
+        "Minibar",
+        "Premium Toiletries"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 45,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-001-paris_CtripTA_3",
+      "hotelId": "mock-001-paris",
+      "roomType": "Superior Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 346.37,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-001-paris/rooms/superior_room_03.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Flat-screen TV",
+        "Private Bathroom",
+        "Air Conditioning",
+        "Balcony",
         "Tea/Coffee Maker"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-002-tokyo_PreferredHotels1_1",
+      "hotelId": "mock-002-tokyo",
+      "roomType": "Junior Suite",
+      "roomName": "Official Site Rate",
+      "description": "Rate via PreferredHotels1",
+      "maxOccupancy": 2,
+      "pricePerNight": 184.69,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-002-tokyo/rooms/junior_suite_03.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Safe",
+        "Tea/Coffee Maker",
+        "Air Conditioning",
+        "Nespresso Machine",
+        "Work Desk",
+        "Separate Living Area"
       ],
       "bedConfiguration": {
         "singleBeds": 0,
@@ -954,27 +1044,60 @@
         "kingBeds": 1,
         "queenBeds": 0
       },
-      "roomSize": 30,
+      "roomSize": 50,
       "availableCount": 1
     },
     {
-      "roomId": "g293962-d14106301_Vio",
-      "hotelId": "g293962-d14106301",
-      "roomType": "Standard Room",
-      "roomName": "Vio.com Rate",
-      "description": "Rate via Vio.com",
+      "roomId": "mock-002-tokyo_CtripTA_2",
+      "hotelId": "mock-002-tokyo",
+      "roomType": "Junior Suite",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
       "maxOccupancy": 2,
-      "pricePerNight": 85.0,
+      "pricePerNight": 264.06,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d14106301/rooms/standard_twin_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-002-tokyo/rooms/junior_suite_01.jpg"
       ],
       "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Minibar",
+        "Work Desk",
+        "Separate Living Area",
+        "Tea/Coffee Maker",
         "Safe",
-        "Tea/Coffee Maker"
+        "City View",
+        "Balcony",
+        "Flat-screen TV",
+        "Premium Toiletries",
+        "Air Conditioning",
+        "Private Bathroom"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-002-tokyo_CtripTA_3",
+      "hotelId": "mock-002-tokyo",
+      "roomType": "Deluxe Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 201.51,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-002-tokyo/rooms/deluxe_room_02.jpg"
+      ],
+      "amenities": [
+        "Private Bathroom",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Minibar",
+        "Balcony",
+        "Flat-screen TV",
+        "Air Conditioning"
       ],
       "bedConfiguration": {
         "singleBeds": 2,
@@ -982,533 +1105,58 @@
         "kingBeds": 0,
         "queenBeds": 0
       },
-      "roomSize": 30,
+      "roomSize": 35,
       "availableCount": 1
     },
     {
-      "roomId": "g293962-d14106301_Agoda",
-      "hotelId": "g293962-d14106301",
-      "roomType": "Standard Room",
+      "roomId": "mock-002-tokyo_Agoda_4",
+      "hotelId": "mock-002-tokyo",
+      "roomType": "Deluxe Room",
       "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
+      "description": "Rate via Agoda",
       "maxOccupancy": 2,
-      "pricePerNight": 85.0,
+      "pricePerNight": 258.21,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d14106301/rooms/standard_king_02.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-002-tokyo/rooms/deluxe_room_01.jpg"
       ],
       "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
+        "Minibar",
         "City View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 30,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d14106301_PreferredHotels1",
-      "hotelId": "g293962-d14106301",
-      "roomType": "Standard Room",
-      "roomName": "Preferred Hotels Rate",
-      "description": "Rate via Preferred Hotels",
-      "maxOccupancy": 2,
-      "pricePerNight": 95.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d14106301/rooms/standard_corner_01.jpg"
-      ],
-      "amenities": [
         "Air Conditioning",
-        "Private Bathroom",
-        "Ocean Glimpse",
-        "Flat-screen TV",
-        "Minibar",
         "Safe",
-        "Tea/Coffee Maker"
+        "Private Bathroom",
+        "Balcony",
+        "Flat-screen TV"
       ],
       "bedConfiguration": {
         "singleBeds": 0,
         "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
+        "kingBeds": 0,
+        "queenBeds": 1
       },
       "roomSize": 32,
       "availableCount": 1
     },
     {
-      "roomId": "g293962-d14106301_CtripTA",
-      "hotelId": "g293962-d14106301",
-      "roomType": "Standard Room",
-      "roomName": "Trip.com Rate",
-      "description": "Rate via Trip.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 97.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d14106301/rooms/standard_king_03.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 30,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d12720953_BookingCom",
-      "hotelId": "g293962-d12720953",
-      "roomType": "Deluxe Room",
-      "roomName": "Booking.com Rate",
-      "description": "Rate via Booking.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 159.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d12720953/rooms/deluxe_king_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Sea View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 40,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d12720953_Agoda",
-      "hotelId": "g293962-d12720953",
-      "roomType": "Deluxe Room",
-      "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 159.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d12720953/rooms/deluxe_twin_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "City View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 2,
-        "doubleBeds": 0,
-        "kingBeds": 0,
-        "queenBeds": 0
-      },
-      "roomSize": 40,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d12720953_Vio",
-      "hotelId": "g293962-d12720953",
-      "roomType": "Deluxe Room",
-      "roomName": "Vio.com Rate",
-      "description": "Rate via Vio.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 203.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d12720953/rooms/deluxe_king_02.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Sea View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 42,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d12720953_CtripTA",
-      "hotelId": "g293962-d12720953",
+      "roomId": "mock-003-newyork_CtripTA_1",
+      "hotelId": "mock-003-newyork",
       "roomType": "Deluxe Room",
       "roomName": "Trip.com Rate",
       "description": "Rate via Trip.com",
       "maxOccupancy": 2,
-      "pricePerNight": 159.0,
+      "pricePerNight": 294.13,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d12720953/rooms/deluxe_king_03.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-003-newyork/rooms/deluxe_room_03.jpg"
       ],
       "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "City View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 40,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d597086_BookingCom",
-      "hotelId": "g293962-d597086",
-      "roomType": "Superior Room",
-      "roomName": "Booking.com Rate",
-      "description": "Rate via Booking.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 134.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d597086/rooms/superior_king_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Minibar",
         "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 34,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d597086_SabreHotels",
-      "hotelId": "g293962-d597086",
-      "roomType": "Superior Room",
-      "roomName": "Official Site Rate",
-      "description": "Rate via Official Site",
-      "maxOccupancy": 2,
-      "pricePerNight": 138.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d597086/rooms/superior_twin_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
         "Minibar",
-        "Safe"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 2,
-        "doubleBeds": 0,
-        "kingBeds": 0,
-        "queenBeds": 0
-      },
-      "roomSize": 34,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d597086_Vio",
-      "hotelId": "g293962-d597086",
-      "roomType": "Superior Room",
-      "roomName": "Vio.com Rate",
-      "description": "Rate via Vio.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 122.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d597086/rooms/superior_king_02.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
         "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 34,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d597086_Agoda",
-      "hotelId": "g293962-d597086",
-      "roomType": "Superior Room",
-      "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 154.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d597086/rooms/superior_king_03.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 34,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d597086_CtripTA",
-      "hotelId": "g293962-d597086",
-      "roomType": "Superior Room",
-      "roomName": "Trip.com Rate",
-      "description": "Rate via Trip.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 140.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d597086/rooms/superior_twin_02.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 2,
-        "doubleBeds": 0,
-        "kingBeds": 0,
-        "queenBeds": 0
-      },
-      "roomSize": 34,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d306379_BookingCom",
-      "hotelId": "g293962-d306379",
-      "roomType": "Executive Room",
-      "roomName": "Booking.com Rate",
-      "description": "Rate via Booking.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 140.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d306379/rooms/executive_king_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "City View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Work Desk"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 38,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d306379_Vio",
-      "hotelId": "g293962-d306379",
-      "roomType": "Executive Room",
-      "roomName": "Vio.com Rate",
-      "description": "Rate via Vio.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 127.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d306379/rooms/executive_twin_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "City View",
-        "Flat-screen TV",
-        "Safe",
-        "Work Desk"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 2,
-        "doubleBeds": 0,
-        "kingBeds": 0,
-        "queenBeds": 0
-      },
-      "roomSize": 38,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d306379_HiltonAPAC",
-      "hotelId": "g293962-d306379",
-      "roomType": "Executive Room",
-      "roomName": "Hilton Rate",
-      "description": "Rate via Hilton",
-      "maxOccupancy": 2,
-      "pricePerNight": 140.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d306379/rooms/executive_king_02.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "City View",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe",
-        "Work Desk"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 40,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d306379_Agoda",
-      "hotelId": "g293962-d306379",
-      "roomType": "Executive Room",
-      "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 140.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d306379/rooms/executive_king_03.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Safe",
-        "Work Desk"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 38,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d306379_CtripTA",
-      "hotelId": "g293962-d306379",
-      "roomType": "Executive Room",
-      "roomName": "Trip.com Rate",
-      "description": "Rate via Trip.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 140.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d306379/rooms/executive_twin_02.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Flat-screen TV",
-        "Safe",
-        "Work Desk"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 2,
-        "doubleBeds": 0,
-        "kingBeds": 0,
-        "queenBeds": 0
-      },
-      "roomSize": 38,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g293962-d5279732_BookingCom",
-      "hotelId": "g293962-d5279732",
-      "roomType": "Standard Room",
-      "roomName": "Booking.com Rate",
-      "description": "Rate via Booking.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 103.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d5279732/rooms/standard_king_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "City View",
-        "Flat-screen TV",
-        "Safe",
-        "Work Desk"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
-        "queenBeds": 0
-      },
-      "roomSize": 28,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g297896-d10954536_BookingCom",
-      "hotelId": "g297896-d10954536",
-      "roomType": "Superior Room",
-      "roomName": "Booking.com Rate",
-      "description": "Rate via Booking.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 297.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g297896-d10954536/rooms/superior_ocean_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Ocean View",
         "Balcony",
-        "Flat-screen TV",
-        "Minibar",
-        "Safe"
+        "Work Desk",
+        "Air Conditioning",
+        "City View",
+        "Tea/Coffee Maker"
       ],
       "bedConfiguration": {
         "singleBeds": 0,
@@ -1520,50 +1168,23 @@
       "availableCount": 1
     },
     {
-      "roomId": "g293962-d2038179_Agoda",
-      "hotelId": "g293962-d2038179",
-      "roomType": "Classic Room",
-      "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
+      "roomId": "mock-003-newyork_CtripTA_2",
+      "hotelId": "mock-003-newyork",
+      "roomType": "Deluxe Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
       "maxOccupancy": 2,
-      "pricePerNight": 117.0,
+      "pricePerNight": 453.95,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g293962-d2038179/rooms/classic_heritage_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-003-newyork/rooms/deluxe_room_03.jpg"
       ],
       "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "Heritage Decor",
-        "Flat-screen TV",
-        "Safe",
-        "Tea/Coffee Maker"
-      ],
-      "bedConfiguration": {
-        "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 0,
-        "queenBeds": 1
-      },
-      "roomSize": 32,
-      "availableCount": 1
-    },
-    {
-      "roomId": "g304138-d797403_BookingCom",
-      "hotelId": "g304138-d797403",
-      "roomType": "Superior Room",
-      "roomName": "Booking.com Rate",
-      "description": "Rate via Booking.com",
-      "maxOccupancy": 2,
-      "pricePerNight": 150.0,
-      "images": [
-        "https://images.travelplanner.dev/mock/hotels/g304138-d797403/rooms/superior_river_01.jpg"
-      ],
-      "amenities": [
-        "Air Conditioning",
-        "Private Bathroom",
-        "River View",
-        "Flat-screen TV",
         "Minibar",
+        "Air Conditioning",
+        "Balcony",
+        "City View",
+        "Work Desk",
+        "Flat-screen TV",
         "Safe"
       ],
       "bedConfiguration": {
@@ -1572,54 +1193,177 @@
         "kingBeds": 0,
         "queenBeds": 1
       },
-      "roomSize": 36,
+      "roomSize": 50,
       "availableCount": 1
     },
     {
-      "roomId": "g304138-d32865997_CtripTA",
-      "hotelId": "g304138-d32865997",
-      "roomType": "Standard Room",
-      "roomName": "Trip.com Rate",
-      "description": "Rate via Trip.com",
+      "roomId": "mock-004-dubai_BookingCom_1",
+      "hotelId": "mock-004-dubai",
+      "roomType": "Premium Suite",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
       "maxOccupancy": 2,
-      "pricePerNight": 140.0,
+      "pricePerNight": 531.02,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g304138-d32865997/rooms/standard_king_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-004-dubai/rooms/premium_suite_03.jpg"
       ],
       "amenities": [
-        "Air Conditioning",
+        "City View",
+        "Separate Living Area",
+        "Premium Toiletries",
+        "Tea/Coffee Maker",
+        "Minibar",
         "Private Bathroom",
         "Flat-screen TV",
-        "Safe",
-        "Work Desk"
+        "Balcony",
+        "Nespresso Machine"
       ],
       "bedConfiguration": {
         "singleBeds": 0,
-        "doubleBeds": 0,
-        "kingBeds": 1,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-004-dubai_Agoda_2",
+      "hotelId": "mock-004-dubai",
+      "roomType": "Premium Suite",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 551.67,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-004-dubai/rooms/premium_suite_02.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "City View",
+        "Safe",
+        "Minibar",
+        "Private Bathroom",
+        "Work Desk",
+        "Premium Toiletries",
+        "Flat-screen TV"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
         "queenBeds": 0
       },
       "roomSize": 30,
       "availableCount": 1
     },
     {
-      "roomId": "g12239236-d10521858_CtripTA",
-      "hotelId": "g12239236-d10521858",
-      "roomType": "Wellness Chalet",
+      "roomId": "mock-004-dubai_CtripTA_3",
+      "hotelId": "mock-004-dubai",
+      "roomType": "Executive Room",
       "roomName": "Trip.com Rate",
       "description": "Rate via Trip.com",
       "maxOccupancy": 2,
-      "pricePerNight": 571.0,
+      "pricePerNight": 623.9,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g12239236-d10521858/rooms/wellness_chalet_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-004-dubai/rooms/executive_room_03.jpg"
       ],
       "amenities": [
+        "Nespresso Machine",
+        "Safe",
+        "Flat-screen TV",
+        "Work Desk",
         "Air Conditioning",
+        "Premium Toiletries",
+        "Separate Living Area"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 45,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-004-dubai_Expedia_4",
+      "hotelId": "mock-004-dubai",
+      "roomType": "Standard Room",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 387.5,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-004-dubai/rooms/standard_room_02.jpg"
+      ],
+      "amenities": [
+        "Tea/Coffee Maker",
+        "Safe",
+        "Work Desk",
         "Private Bathroom",
-        "Valley View",
-        "Wellness Amenities",
-        "In-room Safe",
-        "Yoga Mats",
+        "Flat-screen TV"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 32,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-004-dubai_Vio_5",
+      "hotelId": "mock-004-dubai",
+      "roomType": "Executive Room",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 529.78,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-004-dubai/rooms/executive_room_03.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Separate Living Area",
+        "Minibar",
+        "Air Conditioning",
+        "Safe",
+        "Private Bathroom",
+        "Balcony",
+        "Tea/Coffee Maker"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-005-sydney_Vio_1",
+      "hotelId": "mock-005-sydney",
+      "roomType": "Junior Suite",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 381.87,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-005-sydney/rooms/junior_suite_03.jpg"
+      ],
+      "amenities": [
+        "Balcony",
+        "Private Bathroom",
+        "Safe",
+        "Nespresso Machine",
+        "Minibar",
+        "Work Desk",
+        "Flat-screen TV",
+        "Premium Toiletries",
+        "City View",
         "Tea/Coffee Maker"
       ],
       "bedConfiguration": {
@@ -1632,50 +1376,52 @@
       "availableCount": 1
     },
     {
-      "roomId": "g608524-d1568245_Vio",
-      "hotelId": "g608524-d1568245",
+      "roomId": "mock-005-sydney_BookingCom_2",
+      "hotelId": "mock-005-sydney",
       "roomType": "Standard Room",
-      "roomName": "Vio.com Rate",
-      "description": "Rate via Vio.com",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
       "maxOccupancy": 2,
-      "pricePerNight": 52.0,
+      "pricePerNight": 400.49,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g608524-d1568245/rooms/standard_classic_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-005-sydney/rooms/standard_room_03.jpg"
       ],
       "amenities": [
-        "Private Bathroom",
-        "Garden View",
-        "Daily Housekeeping",
-        "Wardrobe/Closet",
-        "Free Toiletries"
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Air Conditioning",
+        "Private Bathroom"
       ],
       "bedConfiguration": {
-        "singleBeds": 2,
+        "singleBeds": 0,
         "doubleBeds": 0,
-        "kingBeds": 0,
+        "kingBeds": 1,
         "queenBeds": 0
       },
-      "roomSize": 24,
+      "roomSize": 50,
       "availableCount": 1
     },
     {
-      "roomId": "g608524-d24088600_Agoda",
-      "hotelId": "g608524-d24088600",
-      "roomType": "Lake View Room",
+      "roomId": "mock-005-sydney_Agoda_3",
+      "hotelId": "mock-005-sydney",
+      "roomType": "Premium Suite",
       "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
+      "description": "Rate via Agoda",
       "maxOccupancy": 2,
-      "pricePerNight": 230.0,
+      "pricePerNight": 378.82,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g608524-d24088600/rooms/lakeview_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-005-sydney/rooms/premium_suite_03.jpg"
       ],
       "amenities": [
-        "Private Bathroom",
-        "Lake View",
-        "Heating (Cool Climate)",
-        "Flat-screen TV",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Premium Toiletries",
         "Safe",
-        "Tea/Coffee Maker"
+        "City View",
+        "Nespresso Machine",
+        "Minibar",
+        "Private Bathroom",
+        "Separate Living Area"
       ],
       "bedConfiguration": {
         "singleBeds": 0,
@@ -1687,22 +1433,286 @@
       "availableCount": 1
     },
     {
-      "roomId": "g608524-d7649280_Agoda",
-      "hotelId": "g608524-d7649280",
-      "roomType": "Standard Room",
-      "roomName": "Agoda.com Rate",
-      "description": "Rate via Agoda.com",
+      "roomId": "mock-005-sydney_BookingCom_4",
+      "hotelId": "mock-005-sydney",
+      "roomType": "Superior Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
       "maxOccupancy": 2,
-      "pricePerNight": 71.0,
+      "pricePerNight": 406.49,
       "images": [
-        "https://images.travelplanner.dev/mock/hotels/g608524-d7649280/rooms/standard_cozy_01.jpg"
+        "https://images.travelplanner.dev/mock/hotels/mock-005-sydney/rooms/superior_room_02.jpg"
+      ],
+      "amenities": [
+        "Balcony",
+        "City View",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Private Bathroom",
+        "Flat-screen TV"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 30,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-005-sydney_Expedia_5",
+      "hotelId": "mock-005-sydney",
+      "roomType": "Superior Room",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 367.02,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-005-sydney/rooms/superior_room_01.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "Private Bathroom",
+        "Safe",
+        "Tea/Coffee Maker",
+        "Flat-screen TV",
+        "Minibar",
+        "City View",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 40,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-006-london_CtripTA_1",
+      "hotelId": "mock-006-london",
+      "roomType": "Junior Suite",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 369.34,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-006-london/rooms/junior_suite_02.jpg"
+      ],
+      "amenities": [
+        "Work Desk",
+        "City View",
+        "Premium Toiletries",
+        "Separate Living Area",
+        "Tea/Coffee Maker",
+        "Flat-screen TV",
+        "Air Conditioning",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 30,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-007-rome_Agoda_1",
+      "hotelId": "mock-007-rome",
+      "roomType": "Premium Suite",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 301.83,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-007-rome/rooms/premium_suite_01.jpg"
+      ],
+      "amenities": [
+        "Tea/Coffee Maker",
+        "Minibar",
+        "Safe",
+        "Nespresso Machine",
+        "Balcony",
+        "Premium Toiletries",
+        "Flat-screen TV"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 30,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-007-rome_Vio_2",
+      "hotelId": "mock-007-rome",
+      "roomType": "Standard Room",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 257.07,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-007-rome/rooms/standard_room_01.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Tea/Coffee Maker",
+        "Private Bathroom",
+        "Work Desk",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-007-rome_Vio_3",
+      "hotelId": "mock-007-rome",
+      "roomType": "Junior Suite",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 298.87,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-007-rome/rooms/junior_suite_03.jpg"
+      ],
+      "amenities": [
+        "Nespresso Machine",
+        "Flat-screen TV",
+        "Tea/Coffee Maker",
+        "Separate Living Area",
+        "City View",
+        "Work Desk",
+        "Minibar",
+        "Safe",
+        "Air Conditioning",
+        "Premium Toiletries"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-007-rome_HotelsComUS_4",
+      "hotelId": "mock-007-rome",
+      "roomType": "Premium Suite",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 247.57,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-007-rome/rooms/premium_suite_02.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Tea/Coffee Maker",
+        "Premium Toiletries",
+        "Minibar",
+        "Balcony",
+        "Flat-screen TV",
+        "Separate Living Area",
+        "Air Conditioning"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-007-rome_HotelsComUS_5",
+      "hotelId": "mock-007-rome",
+      "roomType": "Deluxe Room",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 198.33,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-007-rome/rooms/deluxe_room_03.jpg"
       ],
       "amenities": [
         "Private Bathroom",
-        "Heating (Cool Climate)",
+        "Flat-screen TV",
+        "Balcony",
+        "City View",
+        "Air Conditioning",
+        "Minibar"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 28,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-008-singapore_Agoda_1",
+      "hotelId": "mock-008-singapore",
+      "roomType": "Standard Room",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 290.66,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-008-singapore/rooms/standard_room_03.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Air Conditioning",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Flat-screen TV"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-009-barcelona_BookingCom_1",
+      "hotelId": "mock-009-barcelona",
+      "roomType": "Deluxe Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 206.6,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-009-barcelona/rooms/deluxe_room_03.jpg"
+      ],
+      "amenities": [
+        "Work Desk",
+        "Tea/Coffee Maker",
         "Flat-screen TV",
         "Safe",
-        "Wardrobe/Closet"
+        "Air Conditioning",
+        "Balcony",
+        "Minibar",
+        "Private Bathroom"
       ],
       "bedConfiguration": {
         "singleBeds": 2,
@@ -1710,44 +1720,1192 @@
         "kingBeds": 0,
         "queenBeds": 0
       },
-      "roomSize": 22,
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-009-barcelona_Vio_2",
+      "hotelId": "mock-009-barcelona",
+      "roomType": "Junior Suite",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 203.24,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-009-barcelona/rooms/junior_suite_01.jpg"
+      ],
+      "amenities": [
+        "Balcony",
+        "City View",
+        "Flat-screen TV",
+        "Private Bathroom",
+        "Safe",
+        "Nespresso Machine",
+        "Minibar"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-009-barcelona_Expedia_3",
+      "hotelId": "mock-009-barcelona",
+      "roomType": "Junior Suite",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 220.16,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-009-barcelona/rooms/junior_suite_01.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Premium Toiletries",
+        "Work Desk",
+        "Air Conditioning",
+        "Balcony",
+        "City View",
+        "Tea/Coffee Maker"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 28,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-009-barcelona_PreferredHotels1_4",
+      "hotelId": "mock-009-barcelona",
+      "roomType": "Deluxe Room",
+      "roomName": "Official Site Rate",
+      "description": "Rate via PreferredHotels1",
+      "maxOccupancy": 2,
+      "pricePerNight": 197.15,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-009-barcelona/rooms/deluxe_room_01.jpg"
+      ],
+      "amenities": [
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "City View",
+        "Balcony",
+        "Minibar",
+        "Flat-screen TV",
+        "Safe",
+        "Air Conditioning"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-010-bangkok_BookingCom_1",
+      "hotelId": "mock-010-bangkok",
+      "roomType": "Executive Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 159.9,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-010-bangkok/rooms/executive_room_02.jpg"
+      ],
+      "amenities": [
+        "Private Bathroom",
+        "Tea/Coffee Maker",
+        "Flat-screen TV",
+        "Safe",
+        "Premium Toiletries",
+        "City View",
+        "Balcony"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-011-paris_BookingCom_1",
+      "hotelId": "mock-011-paris",
+      "roomType": "Deluxe Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 178.16,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-011-paris/rooms/deluxe_room_03.jpg"
+      ],
+      "amenities": [
+        "City View",
+        "Private Bathroom",
+        "Flat-screen TV",
+        "Work Desk",
+        "Balcony",
+        "Minibar",
+        "Tea/Coffee Maker"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-012-tokyo_BookingCom_1",
+      "hotelId": "mock-012-tokyo",
+      "roomType": "Standard Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 256.75,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-012-tokyo/rooms/standard_room_02.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Safe",
+        "Air Conditioning",
+        "Private Bathroom",
+        "Tea/Coffee Maker",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 45,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-012-tokyo_Vio_2",
+      "hotelId": "mock-012-tokyo",
+      "roomType": "Standard Room",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 281.79,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-012-tokyo/rooms/standard_room_02.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Tea/Coffee Maker",
+        "Private Bathroom",
+        "Air Conditioning"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 30,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-012-tokyo_Agoda_3",
+      "hotelId": "mock-012-tokyo",
+      "roomType": "Junior Suite",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 260.0,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-012-tokyo/rooms/junior_suite_02.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "Minibar",
+        "Safe",
+        "Private Bathroom",
+        "City View",
+        "Nespresso Machine",
+        "Separate Living Area",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-012-tokyo_Agoda_4",
+      "hotelId": "mock-012-tokyo",
+      "roomType": "Superior Room",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 257.97,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-012-tokyo/rooms/superior_room_03.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Work Desk",
+        "Safe",
+        "Minibar",
+        "Balcony",
+        "Tea/Coffee Maker",
+        "Private Bathroom"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 38,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-013-newyork_Expedia_1",
+      "hotelId": "mock-013-newyork",
+      "roomType": "Junior Suite",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 244.04,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-013-newyork/rooms/junior_suite_02.jpg"
+      ],
+      "amenities": [
+        "Work Desk",
+        "Tea/Coffee Maker",
+        "Balcony",
+        "Flat-screen TV",
+        "Private Bathroom",
+        "City View",
+        "Minibar",
+        "Air Conditioning",
+        "Separate Living Area",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 28,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-014-dubai_HotelsComUS_1",
+      "hotelId": "mock-014-dubai",
+      "roomType": "Deluxe Room",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 733.05,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-014-dubai/rooms/deluxe_room_02.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Balcony",
+        "Minibar",
+        "Safe",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "City View"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 32,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-015-sydney_CtripTA_1",
+      "hotelId": "mock-015-sydney",
+      "roomType": "Deluxe Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 225.23,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-015-sydney/rooms/deluxe_room_02.jpg"
+      ],
+      "amenities": [
+        "Tea/Coffee Maker",
+        "Air Conditioning",
+        "Safe",
+        "Private Bathroom",
+        "Minibar",
+        "Flat-screen TV",
+        "Work Desk",
+        "Balcony"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-015-sydney_CtripTA_2",
+      "hotelId": "mock-015-sydney",
+      "roomType": "Executive Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 212.17,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-015-sydney/rooms/executive_room_02.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Tea/Coffee Maker",
+        "Premium Toiletries",
+        "Balcony",
+        "Air Conditioning",
+        "Work Desk",
+        "Separate Living Area"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-015-sydney_BookingCom_3",
+      "hotelId": "mock-015-sydney",
+      "roomType": "Deluxe Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 194.47,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-015-sydney/rooms/deluxe_room_03.jpg"
+      ],
+      "amenities": [
+        "Work Desk",
+        "Balcony",
+        "City View",
+        "Private Bathroom",
+        "Flat-screen TV",
+        "Air Conditioning",
+        "Tea/Coffee Maker",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-015-sydney_Expedia_4",
+      "hotelId": "mock-015-sydney",
+      "roomType": "Premium Suite",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 265.9,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-015-sydney/rooms/premium_suite_01.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "City View",
+        "Balcony",
+        "Air Conditioning",
+        "Work Desk",
+        "Safe",
+        "Nespresso Machine",
+        "Tea/Coffee Maker",
+        "Minibar"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-015-sydney_Vio_5",
+      "hotelId": "mock-015-sydney",
+      "roomType": "Executive Room",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 227.6,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-015-sydney/rooms/executive_room_01.jpg"
+      ],
+      "amenities": [
+        "Premium Toiletries",
+        "Tea/Coffee Maker",
+        "Flat-screen TV",
+        "Minibar",
+        "City View",
+        "Air Conditioning",
+        "Nespresso Machine",
+        "Balcony",
+        "Private Bathroom",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-016-london_HotelsComUS_1",
+      "hotelId": "mock-016-london",
+      "roomType": "Deluxe Room",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 169.09,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-016-london/rooms/deluxe_room_01.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Minibar",
+        "Tea/Coffee Maker",
+        "Private Bathroom",
+        "Work Desk",
+        "Air Conditioning",
+        "City View",
+        "Balcony"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-016-london_HotelsComUS_2",
+      "hotelId": "mock-016-london",
+      "roomType": "Premium Suite",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 135.02,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-016-london/rooms/premium_suite_02.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Air Conditioning",
+        "Tea/Coffee Maker",
+        "Separate Living Area",
+        "Work Desk",
+        "Minibar",
+        "Balcony",
+        "Nespresso Machine",
+        "Private Bathroom"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-016-london_Agoda_3",
+      "hotelId": "mock-016-london",
+      "roomType": "Deluxe Room",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 141.86,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-016-london/rooms/deluxe_room_03.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Tea/Coffee Maker",
+        "Air Conditioning",
+        "Balcony",
+        "Private Bathroom",
+        "City View"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 28,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-017-rome_HotelsComUS_1",
+      "hotelId": "mock-017-rome",
+      "roomType": "Superior Room",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 165.22,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-017-rome/rooms/superior_room_02.jpg"
+      ],
+      "amenities": [
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "City View",
+        "Balcony",
+        "Safe",
+        "Minibar"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 28,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-017-rome_CtripTA_2",
+      "hotelId": "mock-017-rome",
+      "roomType": "Standard Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 124.82,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-017-rome/rooms/standard_room_03.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Tea/Coffee Maker",
+        "Private Bathroom",
+        "Work Desk",
+        "Air Conditioning"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-018-singapore_CtripTA_1",
+      "hotelId": "mock-018-singapore",
+      "roomType": "Junior Suite",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 531.47,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-018-singapore/rooms/junior_suite_01.jpg"
+      ],
+      "amenities": [
+        "Flat-screen TV",
+        "Minibar",
+        "Work Desk",
+        "Premium Toiletries",
+        "Air Conditioning",
+        "Balcony",
+        "Separate Living Area",
+        "Private Bathroom",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 30,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-018-singapore_BookingCom_2",
+      "hotelId": "mock-018-singapore",
+      "roomType": "Deluxe Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 457.94,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-018-singapore/rooms/deluxe_room_02.jpg"
+      ],
+      "amenities": [
+        "Minibar",
+        "Tea/Coffee Maker",
+        "City View",
+        "Private Bathroom",
+        "Balcony",
+        "Flat-screen TV",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 32,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-018-singapore_Expedia_3",
+      "hotelId": "mock-018-singapore",
+      "roomType": "Executive Room",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 491.04,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-018-singapore/rooms/executive_room_02.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "Tea/Coffee Maker",
+        "Separate Living Area",
+        "Private Bathroom",
+        "City View",
+        "Minibar",
+        "Nespresso Machine",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-018-singapore_Agoda_4",
+      "hotelId": "mock-018-singapore",
+      "roomType": "Deluxe Room",
+      "roomName": "Agoda.com Rate",
+      "description": "Rate via Agoda",
+      "maxOccupancy": 2,
+      "pricePerNight": 520.56,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-018-singapore/rooms/deluxe_room_03.jpg"
+      ],
+      "amenities": [
+        "Private Bathroom",
+        "Minibar",
+        "Balcony",
+        "Tea/Coffee Maker",
+        "Safe",
+        "City View",
+        "Air Conditioning"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 45,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-018-singapore_BookingCom_5",
+      "hotelId": "mock-018-singapore",
+      "roomType": "Deluxe Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 369.65,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-018-singapore/rooms/deluxe_room_02.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Flat-screen TV",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Minibar",
+        "Private Bathroom",
+        "City View"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 45,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-019-barcelona_BookingCom_1",
+      "hotelId": "mock-019-barcelona",
+      "roomType": "Junior Suite",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 182.01,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-019-barcelona/rooms/junior_suite_03.jpg"
+      ],
+      "amenities": [
+        "Tea/Coffee Maker",
+        "Air Conditioning",
+        "Minibar",
+        "Premium Toiletries",
+        "Nespresso Machine",
+        "City View",
+        "Balcony",
+        "Work Desk",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 35,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-019-barcelona_HotelsComUS_2",
+      "hotelId": "mock-019-barcelona",
+      "roomType": "Premium Suite",
+      "roomName": "Hotels.com Rate",
+      "description": "Rate via Hotels.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 185.87,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-019-barcelona/rooms/premium_suite_02.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "Safe",
+        "Tea/Coffee Maker",
+        "Separate Living Area",
+        "Premium Toiletries",
+        "Work Desk",
+        "Flat-screen TV",
+        "Nespresso Machine"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 32,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-019-barcelona_CtripTA_3",
+      "hotelId": "mock-019-barcelona",
+      "roomType": "Deluxe Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 177.12,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-019-barcelona/rooms/deluxe_room_03.jpg"
+      ],
+      "amenities": [
+        "Work Desk",
+        "Flat-screen TV",
+        "Safe",
+        "Minibar",
+        "Air Conditioning",
+        "Balcony"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 32,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-020-bangkok_CtripTA_1",
+      "hotelId": "mock-020-bangkok",
+      "roomType": "Superior Room",
+      "roomName": "Trip.com Rate",
+      "description": "Rate via Trip.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 117.1,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-020-bangkok/rooms/superior_room_01.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "Tea/Coffee Maker",
+        "Flat-screen TV",
+        "City View",
+        "Safe",
+        "Private Bathroom",
+        "Balcony",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 1,
+        "queenBeds": 0
+      },
+      "roomSize": 30,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-020-bangkok_Expedia_2",
+      "hotelId": "mock-020-bangkok",
+      "roomType": "Junior Suite",
+      "roomName": "Expedia Rate",
+      "description": "Rate via Expedia",
+      "maxOccupancy": 2,
+      "pricePerNight": 96.3,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-020-bangkok/rooms/junior_suite_01.jpg"
+      ],
+      "amenities": [
+        "Work Desk",
+        "Private Bathroom",
+        "Tea/Coffee Maker",
+        "Air Conditioning",
+        "Safe",
+        "Nespresso Machine",
+        "Separate Living Area",
+        "Minibar"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 2,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 40,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-020-bangkok_Vio_3",
+      "hotelId": "mock-020-bangkok",
+      "roomType": "Standard Room",
+      "roomName": "Vio.com Rate",
+      "description": "Rate via Vio",
+      "maxOccupancy": 2,
+      "pricePerNight": 91.02,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-020-bangkok/rooms/standard_room_03.jpg"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Tea/Coffee Maker",
+        "Private Bathroom",
+        "Safe"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 0,
+        "kingBeds": 0,
+        "queenBeds": 1
+      },
+      "roomSize": 28,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-020-bangkok_PreferredHotels1_4",
+      "hotelId": "mock-020-bangkok",
+      "roomType": "Standard Room",
+      "roomName": "Official Site Rate",
+      "description": "Rate via PreferredHotels1",
+      "maxOccupancy": 2,
+      "pricePerNight": 98.06,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-020-bangkok/rooms/standard_room_02.jpg"
+      ],
+      "amenities": [
+        "Safe",
+        "Tea/Coffee Maker",
+        "Air Conditioning",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 50,
+      "availableCount": 1
+    },
+    {
+      "roomId": "mock-020-bangkok_BookingCom_5",
+      "hotelId": "mock-020-bangkok",
+      "roomType": "Executive Room",
+      "roomName": "Booking.com Rate",
+      "description": "Rate via Booking.com",
+      "maxOccupancy": 2,
+      "pricePerNight": 139.89,
+      "images": [
+        "https://images.travelplanner.dev/mock/hotels/mock-020-bangkok/rooms/executive_room_01.jpg"
+      ],
+      "amenities": [
+        "Minibar",
+        "Private Bathroom",
+        "Safe",
+        "Premium Toiletries",
+        "Flat-screen TV",
+        "Nespresso Machine",
+        "Air Conditioning",
+        "Work Desk"
+      ],
+      "bedConfiguration": {
+        "singleBeds": 0,
+        "doubleBeds": 1,
+        "kingBeds": 0,
+        "queenBeds": 0
+      },
+      "roomSize": 40,
       "availableCount": 1
     }
   ],
   "nearby_attractions": [
     {
-      "hotelId": "g293962-d14106301",
+      "hotelId": "mock-001-paris",
       "attractions": [
         {
-          "name": "Marino Mall",
+          "name": "Louvre Museum",
+          "category": "Museum",
+          "distance": 0.8,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Louvre Museum, Paris, France",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Notre-Dame Cathedral",
+          "category": "Cultural Landmark",
+          "distance": 1.2,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Notre-Dame Cathedral, Paris, France",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Tuileries Garden",
+          "category": "Park",
+          "distance": 0.3,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Tuileries Garden, Paris, France",
+            "distanceFromCenter": null
+          }
+        }
+      ]
+    },
+    {
+      "hotelId": "mock-003-newyork",
+      "attractions": [
+        {
+          "name": "Wall Street",
+          "category": "Financial District",
+          "distance": 0.2,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Wall Street, New York, USA",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "9/11 Memorial",
+          "category": "Memorial",
+          "distance": 0.5,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "9/11 Memorial, New York, USA",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Brooklyn Bridge",
+          "category": "Landmark",
+          "distance": 1.0,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Brooklyn Bridge, New York, USA",
+            "distanceFromCenter": null
+          }
+        }
+      ]
+    },
+    {
+      "hotelId": "mock-004-dubai",
+      "attractions": [
+        {
+          "name": "Atlantis The Palm",
+          "category": "Entertainment",
+          "distance": 2.0,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Atlantis The Palm, Dubai, UAE",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "The Lost Chambers Aquarium",
+          "category": "Attraction",
+          "distance": 2.2,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "The Lost Chambers Aquarium, Dubai, UAE",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Aquaventure Waterpark",
+          "category": "Water Park",
+          "distance": 2.5,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Aquaventure Waterpark, Dubai, UAE",
+            "distanceFromCenter": null
+          }
+        }
+      ]
+    },
+    {
+      "hotelId": "mock-006-london",
+      "attractions": [
+        {
+          "name": "Big Ben",
+          "category": "Landmark",
+          "distance": 0.3,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Big Ben, London, UK",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Westminster Abbey",
+          "category": "Cultural Landmark",
+          "distance": 0.4,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Westminster Abbey, London, UK",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Houses of Parliament",
+          "category": "Government Building",
+          "distance": 0.2,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Houses of Parliament, London, UK",
+            "distanceFromCenter": null
+          }
+        }
+      ]
+    },
+    {
+      "hotelId": "mock-010-bangkok",
+      "attractions": [
+        {
+          "name": "Grand Palace",
+          "category": "Cultural Landmark",
+          "distance": 3.5,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Grand Palace, Bangkok, Thailand",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Wat Arun",
+          "category": "Temple",
+          "distance": 1.8,
+          "location": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Wat Arun, Bangkok, Thailand",
+            "distanceFromCenter": null
+          }
+        },
+        {
+          "name": "Asiatique The Riverfront",
           "category": "Shopping",
-          "distance": 0.1,
+          "distance": 0.8,
           "location": {
-            "latitude": 6.8997,
-            "longitude": 79.8516,
-            "landmark": "Marino Mall, Marine Drive, Colombo 00300, Sri Lanka",
-            "distanceFromCenter": null
-          }
-        },
-        {
-          "name": "Gangaramaya Temple",
-          "category": "Cultural Landmark",
-          "distance": 3.7,
-          "location": {
-            "latitude": 6.9167,
-            "longitude": 79.857,
-            "landmark": "Gangaramaya Temple, Colombo 00200, Sri Lanka",
-            "distanceFromCenter": null
-          }
-        },
-        {
-          "name": "Independence Memorial Hall",
-          "category": "Cultural Landmark",
-          "distance": 4.2,
-          "location": {
-            "latitude": 6.9022,
-            "longitude": 79.869,
-            "landmark": "Independence Square, Colombo 00700, Sri Lanka",
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "landmark": "Asiatique The Riverfront, Bangkok, Thailand",
             "distanceFromCenter": null
           }
         }
@@ -1756,22 +2914,49 @@
   ],
   "reviews": [
     {
-      "hotelId": "g293962-d14106301",
-      "reviewId": "mock_rev_0001",
-      "author": "Nimal P.",
-      "rating": 4,
-      "title": "Excellent rooftop views and great location",
-      "comment": "Clean rooms, solid breakfast, and the rooftop pool had a great sunset view. Check-in was smooth.",
-      "createdAt": "2025-12-14"
+      "hotelId": "mock-001-paris",
+      "reviewId": "mock_rev_paris_001",
+      "author": "Sophie M.",
+      "rating": 5,
+      "title": "Perfect Parisian experience!",
+      "comment": "Stunning views of the Seine, impeccable service, and the breakfast was exceptional. Highly recommend!",
+      "createdAt": "2025-11-15"
     },
     {
-      "hotelId": "g293962-d2038179",
-      "reviewId": "mock_rev_0002",
-      "author": "Samantha J.",
+      "hotelId": "mock-002-tokyo",
+      "reviewId": "mock_rev_tokyo_001",
+      "author": "James T.",
+      "rating": 4,
+      "title": "Modern and efficient",
+      "comment": "Great location in Shibuya. Rooms are sleek and modern with amazing tech features. The rooftop bar is a must-visit!",
+      "createdAt": "2025-10-22"
+    },
+    {
+      "hotelId": "mock-003-newyork",
+      "reviewId": "mock_rev_ny_001",
+      "author": "Emily R.",
       "rating": 5,
-      "title": "Classic Colombo experience",
-      "comment": "Heritage charm, oceanfront vibes, and a memorable evening at the terrace. Rooms were comfortable and staff were attentive.",
-      "createdAt": "2025-11-03"
+      "title": "Historic charm meets modern comfort",
+      "comment": "Loved the boutique feel and historic architecture. Walking distance to everything in the Financial District.",
+      "createdAt": "2025-12-01"
+    },
+    {
+      "hotelId": "mock-004-dubai",
+      "reviewId": "mock_rev_dubai_001",
+      "author": "Ahmed K.",
+      "rating": 5,
+      "title": "Absolute luxury",
+      "comment": "The private beach is pristine, staff are incredibly attentive, and the infinity pool has breathtaking views.",
+      "createdAt": "2025-11-08"
+    },
+    {
+      "hotelId": "mock-005-sydney",
+      "reviewId": "mock_rev_sydney_001",
+      "author": "Rachel W.",
+      "rating": 4,
+      "title": "Amazing harbour views",
+      "comment": "The Opera House view from our room was spectacular! Pool area is fantastic.",
+      "createdAt": "2025-10-30"
     }
   ],
   "bookings": []
