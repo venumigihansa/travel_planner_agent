@@ -27,7 +27,7 @@ export default function SignIn() {
             Create an Account
           </SignUpButton>
           <p className="text-xs text-muted-foreground">
-            We use Asgardeo to keep your trips and bookings secure.
+            We use Asgardeo to keep your account secure.
           </p>
         </div>
       </div>

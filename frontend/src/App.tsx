@@ -8,16 +8,13 @@ import NotFound from "pages/not-found";
 import Home from "pages/Home";
 import Landing from "pages/Landing";
 import HotelDetails from "pages/HotelDetails";
-import BookingSummary from "pages/BookingSummary";
 import SignIn from "pages/SignIn";
 
 function Router() {
   const { isSignedIn, isLoading } = useAsgardeo();
   const [location] = useLocation();
   const requiresAuth =
-    location.startsWith("/assistant") ||
-    location.startsWith("/bookings") ||
-    location.startsWith("/book/");
+    location.startsWith("/assistant");
 
   if (isLoading) {
     return (
@@ -35,9 +32,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/assistant" component={Home} />
-      <Route path="/bookings" component={BookingSummary} />
       <Route path="/hotels/:id" component={HotelDetails} />
-      <Route path="/book/:hotelId" component={BookingSummary} />
       <Route path="/signin" component={SignIn} />
       <Route component={NotFound} />
     </Switch>

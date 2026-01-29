@@ -76,14 +76,6 @@ export function Navbar({ variant = "default" }: NavbarProps) {
           >
             Explore
           </Link>
-          <Link
-            href="/bookings"
-            className={`text-sm font-medium transition-colors ${
-              isThemed ? "hover:text-white" : "hover:text-primary"
-            } ${location === "/bookings" ? (isThemed ? "text-white" : "text-primary") : isThemed ? "text-white/80" : "text-muted-foreground"}`}
-          >
-            My Bookings
-          </Link>
         </div>
 
         <div className="flex items-center gap-3">
@@ -115,9 +107,9 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                   {(displayName || "U").charAt(0).toUpperCase()}
                 </div>
                 <div className="hidden sm:flex flex-col items-start">
-                  <span className={isThemed ? "text-xs text-white/70" : "text-xs text-muted-foreground"}>Welcome back,</span>
+                  <span className={isThemed ? "text-xs text-white/70" : "text-xs text-muted-foreground"}>Welcome back</span>
                   <span className={isThemed ? "text-sm font-semibold text-white" : "text-sm font-semibold text-foreground"}>
-                    {isLoading ? "..." : displayName || "there"}
+                    {isLoading ? "..." : displayName || ""}
                   </span>
                 </div>
               </div>
