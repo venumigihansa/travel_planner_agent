@@ -32,7 +32,6 @@ Required:
 Optional (defaults are applied if unset):
 - `OPENAI_MODEL` (default: `gpt-4o-mini`)
 - `OPENAI_EMBEDDING_MODEL` (default: `text-embedding-3-small`)
-- `ASGARDEO_ISSUER` (default: `{ASGARDEO_BASE_URL}/oauth2/token`)
 - `WEATHER_API_KEY`
 - `WEATHER_API_BASE_URL` (default: `http://api.weatherapi.com/v1`)
 - `BOOKING_API_BASE_URL` (default: `http://localhost:9091`)

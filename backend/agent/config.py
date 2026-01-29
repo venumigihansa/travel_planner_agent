@@ -18,8 +18,6 @@ class Settings:
     openai_embedding_model: str
     asgardeo_base_url: str
     asgardeo_client_id: str
-    asgardeo_issuer: str
-    asgardeo_jwks_url: str
     pinecone_api_key: str
     pinecone_service_url: str
     pinecone_index_name: str
@@ -38,21 +36,12 @@ class Settings:
             return value
         asgardeo_base_url = required("ASGARDEO_BASE_URL")
         asgardeo_client_id = required("ASGARDEO_CLIENT_ID")
-        asgardeo_issuer = os.getenv("ASGARDEO_ISSUER")
-        asgardeo_jwks_url = os.getenv("ASGARDEO_JWKS_URL")
-        if not asgardeo_issuer:
-            asgardeo_issuer = f"{asgardeo_base_url}/oauth2/token"
-        if not asgardeo_jwks_url:
-            asgardeo_jwks_url = f"{asgardeo_base_url}/oauth2/jwks"
-
         return cls(
             openai_api_key=required("OPENAI_API_KEY"),
             openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
             openai_embedding_model=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
             asgardeo_base_url=asgardeo_base_url,
             asgardeo_client_id=asgardeo_client_id,
-            asgardeo_issuer=asgardeo_issuer,
-            asgardeo_jwks_url=asgardeo_jwks_url,
             pinecone_api_key=required("PINECONE_API_KEY"),
             pinecone_service_url=required("PINECONE_SERVICE_URL"),
             pinecone_index_name=os.getenv("PINECONE_INDEX_NAME", "hotel-policies"),
