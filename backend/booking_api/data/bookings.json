@@ -140,5 +140,34 @@
     "confirmationNumber": "CONF12e5dc1a-7518-48a3-95a7-c5ce281cb731",
     "specialRequests": null,
     "updatedAt": "2026-01-29T09:03:01.091234+00:00"
+  },
+  {
+    "bookingId": "BK65A31981",
+    "hotelId": "g304138-d797403",
+    "hotelName": "Cinnamon Citadel Kandy",
+    "rooms": [
+      {
+        "roomId": "room1",
+        "numberOfRooms": 1,
+        "pricePerNight": 150.0
+      }
+    ],
+    "userId": "e4b789aa-797f-42b3-8d92-8063098ac1ea",
+    "checkInDate": "2026-01-31",
+    "checkOutDate": "2026-02-01",
+    "numberOfGuests": 1,
+    "primaryGuest": {
+      "firstName": "Venumi",
+      "lastName": "123",
+      "email": "venumi123",
+      "phoneNumber": "12345",
+      "nationality": null
+    },
+    "pricing": [],
+    "bookingStatus": "CANCELLED",
+    "bookingDate": "2026-01-29T17:47:10.703376+00:00",
+    "confirmationNumber": "CONF663a3663-f352-42bf-a269-8fad7384b16e",
+    "specialRequests": null,
+    "cancelledAt": "2026-01-29T17:47:33.439319+00:00"
   }
 ]

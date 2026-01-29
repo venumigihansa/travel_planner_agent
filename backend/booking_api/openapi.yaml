@@ -226,25 +226,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /auth/profile:
-    get:
-      summary: Get User Profile
-      description: Retrieve the authenticated user's profile information
-      operationId: get_profile_auth_profile_get
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserProfile'
-        '401':
-          description: Authentication Required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
   /bookings:
     get:
       summary: Get All Bookings
