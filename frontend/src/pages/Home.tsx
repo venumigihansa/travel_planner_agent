@@ -88,8 +88,7 @@ const parseHotelResults = (content: string): HotelResultsPayload | null => {
   return null;
 };
 
-const CHAT_API_URL =
-  process.env.REACT_APP_CHAT_API_URL || "http://localhost:9090/chat";
+const CHAT_API_URL = "http://localhost:9090/chat";
 const CHAT_SESSIONS_URL = `${CHAT_API_URL}/sessions`;
 const USER_ID_STORAGE_KEY = "travelPlannerUserId";
 const SESSION_STORAGE_KEY = "travelPlannerSessions";
