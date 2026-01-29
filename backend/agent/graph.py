@@ -54,11 +54,11 @@ class AgentState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
 
 
-def build_graph(settings: Settings):
-    tools = build_tools(settings)
+def build_graph(configs: Settings):
+    tools = build_tools(configs)
     llm = ChatOpenAI(
-        model=settings.openai_model,
-        api_key=settings.openai_api_key,
+        model=configs.openai_model,
+        api_key=configs.openai_api_key,
     ).bind_tools(tools)
 
     def agent_node(state: AgentState) -> AgentState:

@@ -22,8 +22,8 @@ if not _root_logger.handlers:
 else:
     _root_logger.setLevel(logging.INFO)
 
-settings = Settings.from_env()
-agent_graph = build_graph(settings)
+configs = Settings.from_env()
+agent_graph = build_graph(configs)
 
 class ChatRequest(BaseModel):
     message: str
@@ -37,13 +37,13 @@ class ChatResponse(BaseModel):
 
 
 app = FastAPI(title="Travel Planner Agent")
-allow_credentials = settings.cors_allow_credentials
-if "*" in settings.cors_allow_origins:
+allow_credentials = configs.cors_allow_credentials
+if "*" in configs.cors_allow_origins:
     # Credentials + wildcard origin is rejected by browsers; force off when using "*".
     allow_credentials = False
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_allow_origins,
+    allow_origins=configs.cors_allow_origins,
     allow_credentials=allow_credentials,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "Accept", "x-user-id"],
