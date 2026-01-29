@@ -89,7 +89,7 @@ const parseHotelResults = (content: string): HotelResultsPayload | null => {
 };
 
 const CHAT_API_URL =
-  process.env.REACT_APP_CHAT_API_URL || "http://localhost:9090/travelPlanner/chat";
+  process.env.REACT_APP_CHAT_API_URL || "http://localhost:9090/chat";
 const CHAT_SESSIONS_URL = `${CHAT_API_URL}/sessions`;
 const USER_ID_STORAGE_KEY = "travelPlannerUserId";
 const SESSION_STORAGE_KEY = "travelPlannerSessions";
@@ -433,7 +433,7 @@ export default function Home() {
                   <span className="tp-chat-title-icon">
                     <Globe className="w-4 h-4" />
                   </span>
-                  <span className="tp-chat-title-text">Travel Planner</span>
+                  <span className="tp-chat-title-text">Hotel Booking Agent</span>
                 </div>
               </div>
               <div className="tp-chat-header-actions" />

@@ -36,7 +36,7 @@ class ChatResponse(BaseModel):
     message: str
 
 
-app = FastAPI(title="Travel Planner Agent")
+app = FastAPI(title="Hotel Booking Agent")
 allow_credentials = configs.cors_allow_credentials
 if "*" in configs.cors_allow_origins:
     # Credentials + wildcard origin is rejected by browsers; force off when using "*".
@@ -63,7 +63,7 @@ def _wrap_user_message(user_message: str, user_id: str, user_name: str | None) -
     )
 
 
-@app.post("/travelPlanner/chat", response_model=ChatResponse)
+@app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
     session_id = request.sessionId or "default"
     if not request.userId:

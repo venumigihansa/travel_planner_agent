@@ -11,7 +11,7 @@ export function Footer() {
                 <Compass className="w-5 h-5" />
               </div>
               <span className="font-display font-bold text-xl tracking-tight text-white">
-                Travel Planner
+                Hotel Booking Agent
               </span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed max-w-xs">
@@ -21,7 +21,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-white/10 mt-12 pt-8 text-center text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} Travel Planner Inc. All rights reserved.
+          © {new Date().getFullYear()} Hotel Booking Agent Inc. All rights reserved.
         </div>
       </div>
     </footer>

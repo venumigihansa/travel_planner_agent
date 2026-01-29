@@ -63,7 +63,7 @@ export function Navbar({ variant = "default" }: NavbarProps) {
                 : "font-display font-bold text-xl text-primary tracking-tight"
             }
           >
-            Travel Planner
+            Hotel Booking Agent
           </span>
         </Link>
 
