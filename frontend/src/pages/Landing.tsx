@@ -31,7 +31,7 @@ export default function Landing() {
               <Button
                 size="lg"
                 onClick={() => setLocation("/assistant")}
-                className="mt-10 bg-[#4da3ff] hover:bg-[#2f86f0] text-white font-semibold text-base md:text-lg px-8 py-4 rounded-full h-auto shadow-lg relative"
+                className="mt-10 bg-white hover:bg-[#2f86f0] text-blue-400 font-semibold text-base md:text-lg px-8 py-4 rounded-full h-auto shadow-lg relative"
               >
                 Start Planning Now
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

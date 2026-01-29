@@ -111,5 +111,34 @@
       "petFriendly": true,
       "otherRequests": null
     }
+  },
+  {
+    "bookingId": "BK91B2F7E7",
+    "hotelId": "g297896-d10954536",
+    "hotelName": "Radisson Blu Resort, Galle",
+    "rooms": [
+      {
+        "roomId": "g297896-d10954536_g297896-d10954536_BookingCom",
+        "numberOfRooms": 1,
+        "pricePerNight": 297.0
+      }
+    ],
+    "userId": "e4b789aa-797f-42b3-8d92-8063098ac1ea",
+    "checkInDate": "2026-02-02",
+    "checkOutDate": "2026-02-03",
+    "numberOfGuests": 1,
+    "primaryGuest": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@123",
+      "phoneNumber": "12345",
+      "nationality": null
+    },
+    "pricing": [],
+    "bookingStatus": "CONFIRMED",
+    "bookingDate": "2026-01-29T09:02:33.266518+00:00",
+    "confirmationNumber": "CONF12e5dc1a-7518-48a3-95a7-c5ce281cb731",
+    "specialRequests": null,
+    "updatedAt": "2026-01-29T09:03:01.091234+00:00"
   }
 ]

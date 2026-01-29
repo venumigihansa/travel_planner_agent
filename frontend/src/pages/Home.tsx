@@ -326,7 +326,7 @@ export default function Home() {
           ? {
               ...s,
               messages: [...s.messages, assistantMessage],
-              title: s.title.startsWith('New Trip') ? query.slice(0, 20) + '...' : s.title
+              title: s.title.startsWith('New Trip') ? query.slice(0, 20) : s.title
             }
           : s
       ));
@@ -376,14 +376,15 @@ export default function Home() {
             <button
               key={s.id}
               onClick={() => setActiveSessionId(s.id)}
-              className={`tp-chat-session-button ${
+              className={`tp-chat-session-button flex ${
                 activeSessionId === s.id 
                 ? 'tp-chat-session-button--active' 
                 : 'tp-chat-session-button--idle'
               }`}
             >
               <MessageSquare className="w-5 h-5 shrink-0" />
-              <span className="truncate text-sm">{s.title}</span>
+              <span className="flex-1 min-w-0 truncate text-sm">{s.title}</span>
+
               <span className="tp-chat-session-spacer" />
               <span
                 role="button"

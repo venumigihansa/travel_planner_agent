@@ -13,13 +13,6 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from pydantic import BaseModel, Field
 
 from config import Settings
-from hotel.hotel_search import (
-    HotelSearchError,
-    check_availability,
-    get_hotel_details,
-    resolve_hotel_id_by_name,
-    search_hotels,
-)
 
 logger = logging.getLogger(__name__)
 
@@ -111,6 +104,25 @@ def _policy_llm(settings: Settings) -> ChatOpenAI:
 
 
 def build_tools(settings: Settings):
+    def _booking_api_url(path: str) -> str:
+        return f"{settings.booking_api_base_url.rstrip('/')}{path}"
+
+    def _call_booking_api(method: str, path: str, *, params: dict[str, Any] | None = None, json_body: dict[str, Any] | None = None) -> dict[str, Any]:
+        url = _booking_api_url(path)
+        try:
+            response = requests.request(method, url, params=params, json=json_body, timeout=30)
+            response.raise_for_status()
+        except requests.RequestException:
+            logger.exception("Booking API request failed: %s %s", method, url)
+            return {"error": "Booking API request failed."}
+        try:
+            payload = response.json()
+        except ValueError:
+            return {"error": "Booking API returned non-JSON response."}
+        if isinstance(payload, dict) and payload.get("errorCode"):
+            return {"error": payload.get("message") or "Booking API error.", "details": payload}
+        return payload
+
     def _resolve_hotel_id(hotel_id: str | None, hotel_name: str | None) -> str | None:
         candidate_name = hotel_name or hotel_id
         if hotel_id and hotel_id.strip() and " " not in hotel_id:
@@ -118,17 +130,12 @@ def build_tools(settings: Settings):
         if not candidate_name:
             return None
         logger.info("Resolving hotel id from name: %s", candidate_name)
-        try:
-            payload = search_hotels(
-                None,
-                destination=candidate_name,
-                page=1,
-                page_size=10,
-            )
-        except HotelSearchError:
-            logger.exception("Failed to resolve hotel id from name")
-            return resolve_hotel_id_by_name(candidate_name)
-        hotels = (payload or {}).get("hotels", [])
+        payload = _call_booking_api(
+            "GET",
+            "/hotels/search",
+            params={"destination": candidate_name, "page": 1, "pageSize": 10},
+        )
+        hotels = (payload or {}).get("hotels", []) if isinstance(payload, dict) else []
         match = next(
             (
                 hotel
@@ -139,7 +146,15 @@ def build_tools(settings: Settings):
         )
         if match:
             return match.get("hotelId")
-        return resolve_hotel_id_by_name(candidate_name)
+        resolve_payload = _call_booking_api(
+            "GET",
+            "/hotels/resolve",
+            params={"name": candidate_name},
+        )
+        if isinstance(resolve_payload, dict):
+            resolved_id = resolve_payload.get("hotelId")
+            return resolved_id if resolved_id else None
+        return None
 
     @tool
     def get_user_profile_tool(user_id: str | None = None, user_name: str | None = None) -> dict[str, Any]:
@@ -252,25 +267,10 @@ def build_tools(settings: Settings):
             "sortBy": sort_by,
         }
         params = {k: v for k, v in params.items() if v is not None}
-        try:
-            return search_hotels(
-                None,
-                destination=params.get("destination"),
-                check_in_date=params.get("checkInDate"),
-                check_out_date=params.get("checkOutDate"),
-                guests=params.get("guests", 1),
-                rooms=params.get("rooms", 1),
-                min_price=params.get("minPrice"),
-                max_price=params.get("maxPrice"),
-                min_rating=params.get("minRating"),
-                amenities=params.get("amenities"),
-                sort_by=params.get("sortBy"),
-                page=params.get("page", 1),
-                page_size=params.get("pageSize", 10),
-            )
-        except HotelSearchError:
-            logger.exception("search_hotels_tool failed")
-            return {"error": "Hotel search failed."}
+        response = _call_booking_api("GET", "/hotels/search", params=params)
+        if isinstance(response, dict) and response.get("error"):
+            return response
+        return response
 
     @tool
     def get_hotel_info_tool(hotel_id: str | None = None, hotel_name: str | None = None) -> dict[str, Any]:
@@ -282,11 +282,10 @@ def build_tools(settings: Settings):
         if not resolved_id:
             return {"error": "Hotel not found. Provide a valid hotel_id or hotel_name."}
         logger.info("get_hotel_info_tool called: hotel_id=%s", resolved_id)
-        try:
-            return get_hotel_details(None, hotel_id=resolved_id)
-        except HotelSearchError:
-            logger.exception("get_hotel_info_tool failed")
-            return {"error": "Hotel details unavailable."}
+        response = _call_booking_api("GET", f"/hotels/{resolved_id}")
+        if isinstance(response, dict) and response.get("error"):
+            return response
+        return response
 
     @tool
     def check_hotel_availability_tool(
@@ -318,19 +317,14 @@ def build_tools(settings: Settings):
             "guests": guests,
             "roomCount": room_count,
         }
-        try:
-            availability = check_availability(
-                None,
-                hotel_id=resolved_id,
-                check_in_date=params["checkInDate"],
-                check_out_date=params["checkOutDate"],
-                guests=params["guests"],
-                room_count=params["roomCount"],
-            )
-            return availability
-        except HotelSearchError:
-            logger.exception("check_hotel_availability_tool failed")
-            return {"error": "Hotel availability unavailable."}
+        response = _call_booking_api(
+            "GET",
+            f"/hotels/{resolved_id}/availability",
+            params=params,
+        )
+        if isinstance(response, dict) and response.get("error"):
+            return response
+        return response
 
     @tool(args_schema=BookingRequest)
     def create_booking_tool(

@@ -33,6 +33,199 @@ paths:
                 required:
                   - status
 
+  /hotels/search:
+    get:
+      summary: Search Hotels
+      description: Search mock hotels with optional filters
+      operationId: search_hotels_hotels_search_get
+      security: []
+      parameters:
+        - name: destination
+          in: query
+          schema:
+            type: string
+        - name: checkInDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: checkOutDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: guests
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: rooms
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: minPrice
+          in: query
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          schema:
+            type: number
+        - name: minRating
+          in: query
+          schema:
+            type: number
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+            enum: [price_low, price_high, rating]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelSearchResponse'
+        '500':
+          description: Hotel search failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /hotels/resolve:
+    get:
+      summary: Resolve Hotel Id
+      description: Resolve a hotel id from a name
+      operationId: resolve_hotel_id_hotels_resolve_get
+      security: []
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hotelId:
+                    type: string
+                    nullable: true
+                required:
+                  - hotelId
+        '500':
+          description: Hotel resolve failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /hotels/{hotel_id}:
+    get:
+      summary: Get Hotel Details
+      description: Retrieve hotel details and optional room data
+      operationId: get_hotel_details_hotels__hotel_id__get
+      security: []
+      parameters:
+        - name: hotel_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: checkInDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: checkOutDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: guests
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelDetailsResponse'
+        '500':
+          description: Hotel details failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /hotels/{hotel_id}/availability:
+    get:
+      summary: Check Hotel Availability
+      description: Retrieve availability for a hotel
+      operationId: get_hotel_availability_hotels__hotel_id__availability_get
+      security: []
+      parameters:
+        - name: hotel_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: checkInDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: checkOutDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: guests
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: roomCount
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelAvailabilityResponse'
+        '500':
+          description: Hotel availability failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /auth/profile:
     get:
       summary: Get User Profile
@@ -247,6 +440,91 @@ components:
       description: User ID header for authentication (alternative to JWT)
 
   schemas:
+    HotelSummary:
+      type: object
+      description: Summary hotel data from mock dataset
+      additionalProperties: true
+
+    HotelSearchMetadata:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        dataSource:
+          type: string
+      required:
+        - totalResults
+        - page
+        - pageSize
+        - dataSource
+
+    HotelSearchResponse:
+      type: object
+      properties:
+        hotels:
+          type: array
+          items:
+            $ref: '#/components/schemas/HotelSummary'
+        metadata:
+          $ref: '#/components/schemas/HotelSearchMetadata'
+      required:
+        - hotels
+        - metadata
+
+    HotelDetailsResponse:
+      type: object
+      properties:
+        hotel:
+          $ref: '#/components/schemas/HotelSummary'
+        rooms:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        recentReviews:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        nearbyAttractions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required:
+        - hotel
+        - rooms
+        - recentReviews
+        - nearbyAttractions
+
+    HotelAvailabilityResponse:
+      type: object
+      properties:
+        hotelId:
+          type: string
+        checkInDate:
+          type: string
+          format: date
+        checkOutDate:
+          type: string
+          format: date
+        availableRooms:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        totalAvailable:
+          type: integer
+      required:
+        - hotelId
+        - checkInDate
+        - checkOutDate
+        - availableRooms
+        - totalAvailable
     ErrorResponse:
       type: object
       properties:

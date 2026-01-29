@@ -1,14 +1,12 @@
 from __future__ import annotations
 
 import json
-import logging
 import re
 import threading
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger(__name__)
 
 class HotelSearchError(RuntimeError):
     pass
@@ -22,7 +20,7 @@ _hotel_cache_lock = threading.Lock()
 _hotel_cache: dict[str, dict[str, Any]] = {}
 _dataset_lock = threading.Lock()
 _dataset_cache: dict[str, Any] | None = None
-_dataset_path = Path(__file__).resolve().parent / "mock_dataset.json"
+_dataset_path = Path(__file__).resolve().parent / "data" / "mock_dataset.json"
 
 
 def _parse_float(value: Any) -> float:
@@ -146,25 +144,19 @@ def _build_rooms_from_rates(
 
 
 def _sort_hotels_by_price(items: list[dict[str, Any]], ascending: bool) -> list[dict[str, Any]]:
-    sorted_hotels = items[:]
-    n = len(sorted_hotels)
-    for i in range(n - 1):
-        for j in range(n - i - 1):
-            left = sorted_hotels[j].get("lowestPrice", 0)
-            right = sorted_hotels[j + 1].get("lowestPrice", 0)
-            if (left > right and ascending) or (left < right and not ascending):
-                sorted_hotels[j], sorted_hotels[j + 1] = sorted_hotels[j + 1], sorted_hotels[j]
-    return sorted_hotels
+    return sorted(
+        items,
+        key=lambda hotel: hotel.get("lowestPrice", 0),
+        reverse=not ascending,
+    )
 
 
 def _sort_hotels_by_rating(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    sorted_hotels = items[:]
-    n = len(sorted_hotels)
-    for i in range(n - 1):
-        for j in range(n - i - 1):
-            if sorted_hotels[j].get("rating", 0) < sorted_hotels[j + 1].get("rating", 0):
-                sorted_hotels[j], sorted_hotels[j + 1] = sorted_hotels[j + 1], sorted_hotels[j]
-    return sorted_hotels
+    return sorted(
+        items,
+        key=lambda hotel: hotel.get("rating", 0),
+        reverse=True,
+    )
 
 
 def _paginate(items: list[dict[str, Any]], page: int, page_size: int) -> list[dict[str, Any]]:
@@ -337,6 +329,20 @@ def get_hotel_details(
     if cached:
         return {
             "hotel": cached,
+            "rooms": [],
+            "recentReviews": [],
+            "nearbyAttractions": [],
+        }
+    data = _load_dataset()
+    match = next(
+        (item for item in data.get("hotels", []) if item.get("hotelId") == hotel_id),
+        None,
+    )
+    if match:
+        hotel = _normalize_hotel(match)
+        _cache_hotels([hotel])
+        return {
+            "hotel": hotel,
             "rooms": [],
             "recentReviews": [],
             "nearbyAttractions": [],
