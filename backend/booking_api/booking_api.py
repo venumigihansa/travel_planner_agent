@@ -6,8 +6,6 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-
-from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from hotel_search import (
@@ -19,8 +17,6 @@ from hotel_search import (
 )
 
 logger = logging.getLogger(__name__)
-
-load_dotenv()
 
 DATA_PATH = Path(__file__).resolve().parent / "data" / "bookings.json"
 DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
