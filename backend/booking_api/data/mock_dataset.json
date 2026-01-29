@@ -39,11 +39,6 @@
         "email": "reservations@azurebay-paris.com",
         "website": "https://www.example-hotels.com/azure-bay-paris"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
       "lowestPrice": 285.0,
       "isAvailable": true
     },
@@ -85,11 +80,6 @@
         "phone": "+81 3 5458 1234",
         "email": "info@crimsontower-tokyo.jp",
         "website": "https://www.example-hotels.com/crimson-tower-tokyo"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
       },
       "lowestPrice": 195.0,
       "isAvailable": true
@@ -133,11 +123,6 @@
         "email": "reservations@manhattan-heritage.com",
         "website": "https://www.example-hotels.com/manhattan-heritage"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
       "lowestPrice": 320.0,
       "isAvailable": true
     },
@@ -179,11 +164,6 @@
         "phone": "+971 4 555 1234",
         "email": "info@goldensands-dubai.ae",
         "website": "https://www.example-hotels.com/golden-sands-dubai"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
       },
       "lowestPrice": 425.0,
       "isAvailable": true
@@ -227,11 +207,6 @@
         "email": "reservations@harbourview-sydney.com.au",
         "website": "https://www.example-hotels.com/harbour-view-sydney"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
       "lowestPrice": 275.0,
       "isAvailable": true
     },
@@ -273,11 +248,6 @@
         "phone": "+44 20 7930 8888",
         "email": "info@westminster-grand.co.uk",
         "website": "https://www.example-hotels.com/westminster-grand"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
       },
       "lowestPrice": 395.0,
       "isAvailable": true
@@ -321,11 +291,6 @@
         "email": "info@zengarden-tokyo.jp",
         "website": "https://www.example-hotels.com/zen-garden-tokyo"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "10:00",
-        "cancellationPolicy": "Free cancellation up to 72 hours before check-in; thereafter one night may be charged."
-      },
       "lowestPrice": 220.0,
       "isAvailable": true
     },
@@ -366,11 +331,6 @@
         "phone": "+1 718 555 3456",
         "email": "reservations@brooklynheights-loft.com",
         "website": "https://www.example-hotels.com/brooklyn-loft"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
       "lowestPrice": 185.0,
       "isAvailable": true
@@ -414,11 +374,6 @@
         "email": "info@desertoasis-dubai.ae",
         "website": "https://www.example-hotels.com/desert-oasis"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 7 days before check-in; thereafter charges may apply."
-      },
       "lowestPrice": 520.0,
       "isAvailable": true
     },
@@ -460,11 +415,6 @@
         "email": "info@bondibeach-retreat.com.au",
         "website": "https://www.example-hotels.com/bondi-retreat"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "10:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
       "lowestPrice": 195.0,
       "isAvailable": true
     },
@@ -505,11 +455,6 @@
         "phone": "+44 20 7729 8888",
         "email": "hello@shoreditch-arthouse.co.uk",
         "website": "https://www.example-hotels.com/shoreditch-art"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "15:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
       "lowestPrice": 145.0,
       "isAvailable": true
@@ -553,11 +498,6 @@
         "email": "reservations@cinnamon-colombo.lk",
         "website": "https://www.example-hotels.com/cinnamon-colombo"
       },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "12:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
-      },
       "lowestPrice": 165.0,
       "isAvailable": true
     },
@@ -599,11 +539,6 @@
         "phone": "+94 91 222 4567",
         "email": "info@fortheritagehotel.lk",
         "website": "https://www.example-hotels.com/fort-heritage-galle"
-      },
-      "checkInOutPolicy": {
-        "checkInTime": "14:00",
-        "checkOutTime": "11:00",
-        "cancellationPolicy": "Free cancellation up to 48 hours before check-in; thereafter one night may be charged."
       },
       "lowestPrice": 125.0,
       "isAvailable": true
