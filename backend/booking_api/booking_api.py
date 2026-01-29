@@ -67,11 +67,13 @@ def _resolve_user_id(request: Request, payload_user_id: str | None = None) -> tu
 
 def _load_bookings() -> list[dict[str, Any]]:
     if not DATA_PATH.exists():
+        DATA_PATH.write_text("[]")
         return []
     try:
         return json.loads(DATA_PATH.read_text())
     except json.JSONDecodeError:
         logger.warning("booking data corrupted; starting fresh")
+        DATA_PATH.write_text("[]")
         return []
 
 

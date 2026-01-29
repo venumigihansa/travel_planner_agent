@@ -11,3 +11,6 @@ node_modules/
 
 # OS
 .DS_Store
+
+# Booking API
+backend/booking_api/data/bookings.json
