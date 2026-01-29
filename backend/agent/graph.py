@@ -59,7 +59,6 @@ def build_graph(settings: Settings):
     llm = ChatOpenAI(
         model=settings.openai_model,
         api_key=settings.openai_api_key,
-        temperature=0.3,
     ).bind_tools(tools)
 
     def agent_node(state: AgentState) -> AgentState:
@@ -68,9 +67,9 @@ def build_graph(settings: Settings):
         tool_calls = getattr(response, "tool_calls", None) or []
         if tool_calls:
             tool_names = [call.get("name") for call in tool_calls if isinstance(call, dict)]
-            logger.info("agent_node decided to call tools: %s", tool_names)
+            logger.debug("agent_node decided to call tools: %s", tool_names)
         else:
-            logger.info("agent_node returned a final response (no tool calls).")
+            logger.debug("agent_node returned a final response (no tool calls).")
         return {"messages": [response]}
 
     graph = StateGraph(AgentState) #add in memory server
